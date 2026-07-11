@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Way Back Home · Level 1 — constrained multimodal generation + keeping one identity consistent across a chat session.",
+  "description": "Multimodal Levels · Level 1 — constrained multimodal generation + keeping one identity consistent across a chat session.",
   "scripts": {
     "prompt": "tsx src/run.ts --prompt",
     "naive": "tsx src/run.ts --naive",

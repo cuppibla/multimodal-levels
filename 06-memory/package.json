@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Way Back Home · Level 6 — durable cross-session memory: extract facts (write) + recall by meaning (read).",
+  "description": "Multimodal Levels · Level 6 — durable cross-session memory: extract facts (write) + recall by meaning (read).",
   "scripts": {
     "remember": "tsx src/run.ts remember",
     "recall": "tsx src/run.ts recall",

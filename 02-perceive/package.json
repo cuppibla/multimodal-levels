@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Way Back Home · Level 2 — how one specialist perceives: READ (multimodal) + MEASURE (embedding).",
+  "description": "Multimodal Levels · Level 2 — how one specialist perceives: READ (multimodal) + MEASURE (embedding).",
   "scripts": {
     "samples": "tsx src/samples.ts",
     "perceive": "tsx src/run.ts",

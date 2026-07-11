@@ -1,8 +1,8 @@
-# Way Back Home — Levels
+# Multimodal Levels
 
-The concepts behind the [Way Back Home](https://github.com/cuppibla/multimodal-production-system) app, pulled out one per folder as **small, standalone, runnable** code you can read, run, deploy, and lift straight into a talk.
+Hands-on building blocks for **multimodal + agentic apps on Gemini** — one concept per folder, as small, standalone, **runnable** code you can read, run, deploy, and lift straight into a talk.
 
-The app is the *experience*. These folders are the *substance* — each one is the real mechanism with the demo scaffolding stripped away, so there's nothing flashy hiding the ten lines that actually matter.
+Each folder is the real mechanism with the demo scaffolding stripped away, so there's nothing flashy hiding the ten lines that actually matter. (Distilled from the [Way Back Home](https://github.com/cuppibla/multimodal-production-system) teaching app — the folders below map to its realms.)
 
 ## Levels
 

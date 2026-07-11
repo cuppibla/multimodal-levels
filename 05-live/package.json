@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Way Back Home · Level 5 — a bidirectional Gemini Live session: streamed audio out + a live tool call.",
+  "description": "Multimodal Levels · Level 5 — a bidirectional Gemini Live session: streamed audio out + a live tool call.",
   "scripts": {
     "live": "tsx src/run.ts",
     "typecheck": "tsc --noEmit"
