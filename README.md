@@ -9,7 +9,7 @@ Each folder is the real mechanism with the demo scaffolding stripped away, so th
 | Folder | App realm | The one idea | Runs |
 |--------|-----------|--------------|------|
 | [`01-beacon/`](01-beacon/) | Realm 01 · The Beacon | a prompt has 4 layers (only 1 is the user's); identity consistency is a **session**, not a seed | ✅ |
-| [`02-perceive/`](02-perceive/) | Realm 02 · The Crew | a specialist = one model + one lens + one modality; it sees two ways (read + measure); specialists fan out in parallel | ✅ |
+| [`02-perceive/`](02-perceive/) | Realm 02 · The Crew | a specialist = one model + one lens + one modality; it sees two ways (read + measure); specialists fan out in parallel — with the same fan-out+vote in **real ADK** under [`02-perceive/adk/`](02-perceive/adk/) | ✅ |
 | [`05-live/`](05-live/) | Realm 05 · Going Live | "Live" = an open session streaming events both ways — audio out, transcript, a live tool call | ✅ |
 | [`06-memory/`](06-memory/) | Realm 06 · Remember Me | durable memory = a write/read loop (extract facts → recall by meaning) around a plain store | ✅ |
 

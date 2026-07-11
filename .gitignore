@@ -6,3 +6,8 @@ out/
 memory.json
 *.tsbuildinfo
 .DS_Store
+
+# python / uv (ADK modules)
+.venv/
+__pycache__/
+*.pyc

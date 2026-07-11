@@ -53,6 +53,10 @@ return { readings, vote: consensus(readings) };                                 
 
 That `Promise.all(map(perceive))` **is** the "parallel" pattern. Everything fancier (ADK's `ParallelAgent`) is a wrapper over exactly this shape.
 
+## The same thing in real ADK → [`adk/`](adk/)
+
+`src/` above is the raw mechanism. [`adk/`](adk/) is the framework: three lens `LlmAgent`s → a real `ParallelAgent` → a custom `BaseAgent` that tallies the vote — runnable with `uv run python run.py` or `adk web`. Read them side by side: *here's the 2-line primitive, here's the framework that wraps it.*
+
 ## Run it
 
 ```bash
