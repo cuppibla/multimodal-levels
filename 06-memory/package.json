@@ -1,0 +1,23 @@
+{
+  "name": "level-06-memory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Way Back Home · Level 6 — durable cross-session memory: extract facts (write) + recall by meaning (read).",
+  "scripts": {
+    "remember": "tsx src/run.ts remember",
+    "recall": "tsx src/run.ts recall",
+    "demo": "tsx src/run.ts demo",
+    "forget": "tsx src/run.ts forget",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.10.0",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  }
+}

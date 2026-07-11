@@ -8,8 +8,12 @@ The app is the *experience*. These folders are the *substance* — each one is t
 
 | Folder | App realm | The one idea | Runs |
 |--------|-----------|--------------|------|
-| [`02-perceive/`](02-perceive/) | Realm 02 · Perceive | a specialist = one model + one lens + one modality; it sees two ways (read + measure); many specialists fan out in parallel | ✅ |
-| `03-…` | _(next)_ | — | — |
+| [`01-beacon/`](01-beacon/) | Realm 01 · The Beacon | a prompt has 4 layers (only 1 is the user's); identity consistency is a **session**, not a seed | ✅ |
+| [`02-perceive/`](02-perceive/) | Realm 02 · The Crew | a specialist = one model + one lens + one modality; it sees two ways (read + measure); specialists fan out in parallel | ✅ |
+| [`05-live/`](05-live/) | Realm 05 · Going Live | "Live" = an open session streaming events both ways — audio out, transcript, a live tool call | ✅ |
+| [`06-memory/`](06-memory/) | Realm 06 · Remember Me | durable memory = a write/read loop (extract facts → recall by meaning) around a plain store | ✅ |
+
+_(Realms 3, 4, 7, 8 are the NVIDIA-owned stack — not part of this teaching cut.)_
 
 Each folder is its own package: `cd` in, `npm install`, run. No shared build, no monorepo tooling — copy a folder out and it still works.
 

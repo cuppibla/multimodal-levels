@@ -1,0 +1,22 @@
+{
+  "name": "level-05-live",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Way Back Home · Level 5 — a bidirectional Gemini Live session: streamed audio out + a live tool call.",
+  "scripts": {
+    "live": "tsx src/run.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.10.0",
+    "dotenv": "^17.2.3",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  }
+}
