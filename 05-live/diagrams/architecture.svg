@@ -1,74 +1,80 @@
-<svg viewBox="0 0 880 520" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,Menlo,monospace">
-  <defs>
-    <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#8a8578"/>
-    </marker>
-    <marker id="cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/>
-    </marker>
-    <marker id="cc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#7cc7ff"/>
-    </marker>
-  </defs>
-  <rect width="880" height="520" rx="16" fill="#0d0a18"/>
-  <text x="30" y="40" fill="#efe9dc" font-size="17" font-weight="bold">Level 5 · Live — the NOVA neural-sync console</text>
-  <text x="30" y="60" fill="#8a8578" font-size="11">one open channel · audio + vision streaming both ways · tools firing mid-sentence · barge-in</text>
-
-  <!-- browser -->
-  <rect x="30" y="90" width="270" height="300" rx="14" fill="none" stroke="#7cc7ff" stroke-width="1.3"/>
-  <text x="165" y="114" fill="#7cc7ff" font-size="11" text-anchor="middle" letter-spacing="1">BROWSER (React HUD)</text>
-  <rect x="50" y="130" width="230" height="48" rx="10" fill="#7cc7ff" fill-opacity="0.07" stroke="#7cc7ff" stroke-width="1"/>
-  <text x="165" y="150" fill="#efe9dc" font-size="10.5" text-anchor="middle">mic → AudioWorklet</text>
-  <text x="165" y="166" fill="#8a8578" font-size="9" text-anchor="middle">resample → 16 kHz s16le · 50 ms chunks</text>
-  <rect x="50" y="190" width="230" height="44" rx="10" fill="#7cc7ff" fill-opacity="0.07" stroke="#7cc7ff" stroke-width="1"/>
-  <text x="165" y="209" fill="#efe9dc" font-size="10.5" text-anchor="middle">camera → canvas JPEG</text>
-  <text x="165" y="224" fill="#8a8578" font-size="9" text-anchor="middle">~1 fps frames</text>
-  <rect x="50" y="246" width="230" height="48" rx="10" fill="#a78bfa" fill-opacity="0.07" stroke="#a78bfa" stroke-width="1"/>
-  <text x="165" y="266" fill="#efe9dc" font-size="10.5" text-anchor="middle">speaker ← 24 kHz PCM</text>
-  <text x="165" y="282" fill="#8a8578" font-size="9" text-anchor="middle">gapless nextPlayTime scheduling</text>
-  <rect x="50" y="306" width="230" height="64" rx="10" fill="#fb7185" fill-opacity="0.07" stroke="#fb7185" stroke-width="1"/>
-  <text x="165" y="326" fill="#fb7185" font-size="10.5" text-anchor="middle">BARGE-IN + BIOMETRIC LOCK</text>
-  <text x="165" y="342" fill="#8a8578" font-size="9" text-anchor="middle">your RMS ≥ .012 → cut playback</text>
-  <text x="165" y="357" fill="#8a8578" font-size="9" text-anchor="middle">4-digit finger sequence · 65 s timer</text>
-
-  <!-- ws pipe -->
-  <line x1="300" y1="180" x2="392" y2="180" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
-  <text x="346" y="171" fill="#8a8578" font-size="9" text-anchor="middle">binary PCM · JSON frames</text>
-  <line x1="392" y1="270" x2="300" y2="270" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
-  <text x="346" y="288" fill="#8a8578" font-size="9" text-anchor="middle">ADK events as JSON</text>
-  <text x="346" y="232" fill="#efe9dc" font-size="11" text-anchor="middle">ws(s)://…/ws</text>
-
-  <!-- server -->
-  <rect x="394" y="90" width="250" height="300" rx="14" fill="none" stroke="#fb7185" stroke-width="1.3"/>
-  <text x="519" y="114" fill="#fb7185" font-size="11" text-anchor="middle" letter-spacing="1">FASTAPI · CLOUD RUN (:8500)</text>
-  <rect x="412" y="130" width="214" height="52" rx="10" fill="none" stroke="#8a8578" stroke-width="1"/>
-  <text x="519" y="151" fill="#efe9dc" font-size="10.5" text-anchor="middle">LiveRequestQueue</text>
-  <text x="519" y="168" fill="#8a8578" font-size="9" text-anchor="middle">send_realtime(audio/jpeg) · send_content</text>
-  <rect x="412" y="194" width="214" height="52" rx="10" fill="#fb7185" fill-opacity="0.07" stroke="#fb7185" stroke-width="1"/>
-  <text x="519" y="215" fill="#efe9dc" font-size="10.5" text-anchor="middle">runner.run_live()</text>
-  <text x="519" y="232" fill="#8a8578" font-size="9" text-anchor="middle">RunConfig: BIDI · AUDIO · transcriptions</text>
-  <rect x="412" y="258" width="214" height="52" rx="10" fill="#5ed7a6" fill-opacity="0.07" stroke="#5ed7a6" stroke-width="1"/>
-  <text x="519" y="279" fill="#5ed7a6" font-size="10.5" text-anchor="middle">⚡ report_digit(count)</text>
-  <text x="519" y="296" fill="#8a8578" font-size="9" text-anchor="middle">server-side tool — fires mid-conversation</text>
-  <text x="519" y="340" fill="#8a8578" font-size="9" text-anchor="middle">credentials live HERE —</text>
-  <text x="519" y="355" fill="#8a8578" font-size="9" text-anchor="middle">the browser never sees Gemini</text>
-
-  <!-- gemini -->
-  <rect x="700" y="150" width="150" height="180" rx="14" fill="#a78bfa" fill-opacity="0.08" stroke="#a78bfa" stroke-width="1.3"/>
-  <text x="775" y="180" fill="#a78bfa" font-size="11.5" text-anchor="middle">Gemini Live</text>
-  <text x="775" y="200" fill="#8a8578" font-size="9.5" text-anchor="middle">native audio</text>
-  <text x="775" y="222" fill="#efe9dc" font-size="9.5" text-anchor="middle">hears · sees · speaks</text>
-  <text x="775" y="244" fill="#efe9dc" font-size="9.5" text-anchor="middle">calls tools</text>
-  <text x="775" y="266" fill="#efe9dc" font-size="9.5" text-anchor="middle">detects interruption</text>
-  <text x="775" y="295" fill="#8a8578" font-size="8.5" text-anchor="middle">gemini-live-2.5-flash-</text>
-  <text x="775" y="308" fill="#8a8578" font-size="8.5" text-anchor="middle">native-audio</text>
-  <line x1="644" y1="210" x2="698" y2="210" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
-  <line x1="698" y1="260" x2="644" y2="260" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
-  <text x="671" y="240" fill="#8a8578" font-size="9" text-anchor="middle">bidi</text>
-
-  <!-- flow captions -->
-  <path d="M 165 370 Q 165 452 519 452 Q 800 452 800 332" fill="none" stroke="#fb7185" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#cp)"/>
-  <text x="440" y="470" fill="#fb7185" font-size="9.5">the loop: you speak / show fingers → NOVA hears+sees → tool fires → she answers in voice → you can cut her off</text>
-
-  <text x="30" y="500" fill="#514b5e" font-size="10">live on Cloud Run: --no-cpu-throttling --timeout 3600 · one origin serves SPA + WS → wss:// just works</text>
+<svg viewBox="0 0 1240 900" xmlns="http://www.w3.org/2000/svg">
+<rect width="1240" height="900" rx="22" fill="#FDF9F1"/>
+<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" fill="#11C0A4">ARCHITECTURE — the NOVA live console (05-live)</text>
+<rect x="24" y="58" width="1192" height="200" rx="16" fill="#F3F0FB"/>
+<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">BROWSER — THE HUD</text>
+<rect x="24" y="340" width="1192" height="200" rx="16" fill="#EDF6F1"/>
+<text x="44" y="370" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">SERVER — FASTAPI · CLOUD RUN</text>
+<rect x="24" y="622" width="1192" height="160" rx="16" fill="#FBEFE9"/>
+<text x="44" y="652" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">MODEL — GEMINI LIVE (NATIVE AUDIO)</text>
+<rect x="44" y="110" width="232" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="160" y="137" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">mic → AudioWorklet</text>
+<text x="160" y="159" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">16 kHz PCM · 50 ms chunks</text>
+<rect x="389" y="110" width="190" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="484" y="137" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">camera → canvas</text>
+<text x="484" y="159" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">JPEG · ~1 fps</text>
+<rect x="692" y="110" width="200" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="793" y="137" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">speaker ← 24 kHz</text>
+<text x="793" y="159" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">gapless playback</text>
+<rect x="1006" y="110" width="190" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="1101" y="137" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">barge-in + lock</text>
+<text x="1101" y="159" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">RMS → cut playback</text>
+<rect x="330" y="196" width="489" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="347" cy="212" r="10.5" fill="#7B5CFC"/>
+<text x="347" y="217" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
+<text x="363" y="217" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">you speak &amp; show fingers — everything streams, nothing waits</text>
+<line x1="300" y1="258" x2="300" y2="326" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 300 336 L 294 324 L 306 324 Z" fill="#B9AFC7"/>
+<text x="312" y="297" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">binary PCM ↓</text>
+<line x1="480" y1="258" x2="480" y2="326" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 480 336 L 474 324 L 486 324 Z" fill="#B9AFC7"/>
+<text x="492" y="297" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">{type:&quot;image&quot;} ↓</text>
+<line x1="800" y1="336" x2="800" y2="268" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 800 258 L 806 270 L 794 270 Z" fill="#B9AFC7"/>
+<text x="812" y="297" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">ADK events (JSON) ↑</text>
+<text x="620" y="331" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#332A4E">wss://…/ws — one origin, SPA + WebSocket</text>
+<rect x="44" y="396" width="256" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="172" y="423" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">LiveRequestQueue</text>
+<text x="172" y="445" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">send_realtime · send_content</text>
+<rect x="501" y="396" width="240" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="621" y="423" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">runner.run_live()</text>
+<text x="621" y="445" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">BIDI · AUDIO · transcripts</text>
+<rect x="943" y="396" width="253" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
+<text x="1069" y="423" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">⚡ report_digit(count)</text>
+<text x="1069" y="445" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">fires mid-sentence</text>
+<line x1="322" y1="429" x2="471" y2="429" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 481 429 L 469 435 L 469 423 Z" fill="#11C0A4"/>
+<line x1="761" y1="429" x2="929" y2="429" stroke="#F59B0C" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 939 429 L 928 435 L 928 423 Z" fill="#F59B0C"/>
+<text x="808" y="419" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#F59B0C">tool call</text>
+<rect x="330" y="486" width="468" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="347" cy="502" r="10.5" fill="#11C0A4"/>
+<text x="347" y="507" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
+<text x="363" y="507" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">credentials stay here — the browser never talks to Gemini</text>
+<line x1="600" y1="540" x2="600" y2="608" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 600 618 L 594 606 L 606 606 Z" fill="#B9AFC7"/>
+<text x="612" y="579" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">audio + frames ↓</text>
+<line x1="760" y1="618" x2="760" y2="550" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 760 540 L 766 552 L 754 552 Z" fill="#B9AFC7"/>
+<text x="772" y="579" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">voice · transcripts · interrupted ↑</text>
+<rect x="294" y="664" width="651" height="70" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="620" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">Gemini Live — hears · sees · speaks · detects interruption</text>
+<text x="620" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">gemini-live-2.5-flash-native-audio</text>
+<rect x="330" y="754" width="526" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="347" cy="770" r="10.5" fill="#FF6A45"/>
+<text x="347" y="775" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
+<text x="363" y="775" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">she answers in VOICE — speak over her and playback cuts instantly</text>
+<rect x="28" y="812" width="300" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="45" cy="828" r="10.5" fill="#7B5CFC"/>
+<text x="45" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
+<text x="61" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv sync · npm run build (frontend)</text>
+<rect x="339.9008" y="812" width="409" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="356.9008" cy="828" r="10.5" fill="#7B5CFC"/>
+<text x="356.9008" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
+<text x="372.9008" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run --directory backend python main.py → :8500</text>
+<rect x="761.1696000000001" y="812" width="256" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="778.1696000000001" cy="828" r="10.5" fill="#11C0A4"/>
+<text x="778.1696000000001" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
+<text x="794.1696000000001" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">or live: nova-live-….run.app</text>
+<text x="28" y="878" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#8B8299">biometric lock: a random 4-digit finger sequence · 65 s — NOVA sees your hand, calls report_digit, the lock advances</text>
 </svg>
