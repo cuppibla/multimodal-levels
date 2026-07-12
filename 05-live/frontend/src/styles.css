@@ -1,0 +1,58 @@
+/* NOVA live console — Way Back Home dark-void theme */
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: radial-gradient(1200px 800px at 50% -10%, #1a1530 0%, #0d0a18 55%, #080610 100%);
+  color: #efe9dc; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+.console { max-width: 780px; margin: 0 auto; padding: 28px 20px 40px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+header { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.brand { font-size: 11px; letter-spacing: 0.35em; color: #8a8578; }
+.status { font-size: 11px; letter-spacing: 0.25em; color: #6b6478; }
+.status.s-live { color: #5ed7a6; }
+.status.s-connecting { color: #fbbf24; }
+.status.s-closed { color: #fb7185; }
+
+.orb {
+  width: 130px; height: 130px; border-radius: 50%; margin-top: 22px;
+  background: radial-gradient(circle at 35% 30%, #a78bfa 0%, #7c5cd6 45%, #3b2b6e 100%);
+  box-shadow: 0 0 60px -12px rgba(167, 139, 250, 0.35);
+  animation: breathe 4s ease-in-out infinite; transition: box-shadow 0.4s;
+}
+.orb-live { box-shadow: 0 0 80px -8px rgba(94, 215, 166, 0.35); }
+.orb-speaking { animation: pulse 0.9s ease-in-out infinite; box-shadow: 0 0 100px -4px rgba(167, 139, 250, 0.65); }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.09); } }
+.nova-label { font-size: 12px; letter-spacing: 0.3em; color: #b8afd0; }
+
+.digit {
+  background: rgba(94, 215, 166, 0.1); border: 1px solid rgba(94, 215, 166, 0.35);
+  color: #5ed7a6; border-radius: 14px; padding: 10px 22px; font-size: 14px; letter-spacing: 0.12em;
+}
+.digit b { font-size: 20px; }
+
+.cta {
+  margin-top: 8px; padding: 14px 34px; font-size: 15px; font-weight: 700; letter-spacing: 0.08em;
+  color: #efe9dc; background: linear-gradient(135deg, #7c5cd6, #4c3a99);
+  border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px; cursor: pointer;
+}
+.cta:hover { filter: brightness(1.15); }
+.hint { font-size: 12.5px; color: #8a8578; }
+
+.stage { width: 100%; display: grid; grid-template-columns: 220px 1fr; gap: 14px; margin-top: 10px; }
+.cam { width: 220px; aspect-ratio: 4/3; border-radius: 14px; background: #0a0815; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.08); }
+.feed {
+  min-height: 180px; max-height: 300px; overflow-y: auto; border-radius: 14px; padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px; line-height: 1.55;
+}
+.line { margin-bottom: 4px; }
+.line .who { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-right: 8px; }
+.who-you .who { color: #7cc7ff; }
+.who-nova .who { color: #a78bfa; }
+.who-tool { color: #5ed7a6; }
+.who-tool .who { color: #5ed7a6; }
+.who-sys { color: #fb7185; }
+
+footer { font-size: 10.5px; letter-spacing: 0.12em; color: #514b5e; margin-top: 10px; }
+@media (max-width: 620px) { .stage { grid-template-columns: 1fr; } .cam { width: 100%; } }

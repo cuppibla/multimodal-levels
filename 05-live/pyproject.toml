@@ -1,0 +1,13 @@
+[project]
+name = "level-05-live"
+version = "0.2.0"
+description = "Multimodal Levels · Level 5 (Live) — NOVA voice console: FastAPI + ADK run_live, bidirectional native audio + vision + live tool calls."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "uvicorn>=0.30.0",
+    "websockets>=13.0",
+]

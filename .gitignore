@@ -1,13 +1,14 @@
 node_modules/
 .env
 .env.local
-assets/
-out/
-memory.json
-*.tsbuildinfo
-.DS_Store
-
-# python / uv (ADK modules)
 .venv/
 __pycache__/
 *.pyc
+outputs/
+evidence/
+assets/
+out/
+memory.json
+dist/
+*.tsbuildinfo
+.DS_Store

@@ -1,29 +1,19 @@
 # Multimodal Levels
 
-Hands-on building blocks for **multimodal + agentic apps on Gemini** — one concept per folder, as small, standalone, **runnable** code you can read, run, deploy, and lift straight into a talk.
+Real, runnable **agent systems** for multimodal + agentic apps on Gemini — one level per folder, each verified end-to-end on live Google Cloud. Distilled from the [Way Back Home](https://github.com/cuppibla/multimodal-production-system) teaching app; architectures follow the [gca way-back-home solutions](https://github.com/gca-americas/way-back-home).
 
-Each folder is the real mechanism with the demo scaffolding stripped away, so there's nothing flashy hiding the ten lines that actually matter. (Distilled from the [Way Back Home](https://github.com/cuppibla/multimodal-production-system) teaching app — the folders below map to its realms.)
+| Level | The verb | What actually runs | Verified |
+|---|---|---|---|
+| [`01-beacon/`](01-beacon/) | **Express** — it creates | multi-turn chat-session generation (portrait→icon, one face) · the **ADK consistency engine** (state + callback + ref-image pin) · **Veo async video** (poll the ticket) · deterministic verify gate | ✅ |
+| [`02-perceive/`](02-perceive/) | **Reason** — it coordinates | a full multi-agent system: **ParallelAgent** specialist crew · a **custom FastMCP server** (soil image + flora **video with audio**) · the **Google-managed BigQuery MCP** (real star-catalog lookups) · evidence on **GCS** · code-judged beacon | ✅ |
+| [`05-live/`](05-live/) | **Live** — it acts in real time | the **NOVA voice console**: FastAPI + ADK `run_live`, native-audio Gemini Live, worklet mic (16 kHz) ⇄ gapless voice (24 kHz), camera frames, RMS **barge-in**, live server-side tool calls | ✅ |
+| [`06-memory/`](06-memory/) | **Recall** — it remembers | **real Vertex AI Agent Engine**: Memory Bank (custom topics · generate/retrieve) + durable `user:` state — a brand-new session that already knows you | ✅ |
 
-## Levels
+Every level is its own `uv` project: `cd` in, `cp .env.example .env`, `uv sync`, run. All levels run on **your** Google Cloud project via ADC (`gcloud auth application-default login`).
 
-| Folder | App realm | The one idea | Runs |
-|--------|-----------|--------------|------|
-| [`01-beacon/`](01-beacon/) | Realm 01 · The Beacon | a prompt has 4 layers (only 1 is the user's); identity consistency is a **session**, not a seed | ✅ |
-| [`02-perceive/`](02-perceive/) | Realm 02 · The Crew | a specialist = one model + one lens + one modality; it sees two ways (read + measure); specialists fan out in parallel — with the same fan-out+vote in **real ADK** under [`02-perceive/adk/`](02-perceive/adk/) | ✅ |
-| [`05-live/`](05-live/) | Realm 05 · Going Live | "Live" = an open session streaming events both ways — audio out, transcript, a live tool call | ✅ |
-| [`06-memory/`](06-memory/) | Realm 06 · Remember Me | durable memory = a write/read loop (extract facts → recall by meaning) around a plain store | ✅ |
+## The arc
 
-_(Realms 3, 4, 7, 8 are the NVIDIA-owned stack — not part of this teaching cut.)_
-
-Each folder is its own package: `cd` in, `npm install`, run. No shared build, no monorepo tooling — copy a folder out and it still works.
-
-## Running any level
-
-```bash
-cd 02-perceive
-cp .env.example .env      # add a Gemini key OR use your own Vertex project
-npm install
-npm run roster           # start here — no API call, just the idea
-```
-
-Everything runs on **your** Gemini quota (an AI Studio key, or your GCP project via ADC) — same no-lock-in choice as the app.
+1. **Express** — output is a modality too; consistency is a *session*, not a seed; hold it app-wide with state + callbacks.
+2. **Reason** — one generalist can't see everything: fan out specialists in parallel, wire tools over MCP (yours *and* Google's), let code judge.
+3. **Live** — stop turn-taking: one open channel, audio and vision streaming both ways, tools firing mid-sentence.
+4. **Recall** — the session is evidence, not memory: curate it into a Memory Bank, route exact facts to state, and every new session starts already knowing you.
