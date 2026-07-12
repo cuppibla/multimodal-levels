@@ -2,6 +2,8 @@
 
 > One generalist can't see everything. Build a crew of specialists, run them **in parallel**, let **code** verify the answer.
 
+![architecture](diagrams/architecture.svg)
+
 A real multi-agent system (architecture follows [gca way-back-home level_1](https://github.com/gca-americas/way-back-home/tree/main/solutions/level_1)) — verified end-to-end:
 
 ```
@@ -40,6 +42,7 @@ uv sync
 
 uv run python setup/setup_star_catalog.py   # ① seed the BigQuery star catalog (one-time)
 cd mcp-server && uv run python main.py &    # ② start the custom MCP server → :8788/mcp
+#    (or use the deployed one: MCP_SERVER_URL=https://location-analyzer-680476413759.us-central1.run.app)
 cd ..
 uv run python generate_evidence.py --biome verdant   # ③ images (one chat session) + Veo video → GCS
 uv run python run_mission.py                # ④ the mission: parallel crew → consensus → beacon

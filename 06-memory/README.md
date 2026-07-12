@@ -2,6 +2,8 @@
 
 > You save the session… you open a brand-new one… **and it already knows you.**
 
+![architecture](diagrams/architecture.svg)
+
 Real ADK + **Vertex AI Agent Engine** integration — no mocks. One Agent Engine instance backs both kinds of long-term memory (the "two kinds of knowing"):
 
 | Kind | Example | Where it lives | How it's found |
@@ -38,6 +40,19 @@ Verified output from a real run (session B, zero history copied):
 > *"I know your callsign is **Vega-7**, and your oxygen recycler has been throwing **error code 42** — these are exact facts I have stored. I also remember from our past conversations that you find long checklists overwhelming, so you prefer to be walked through things one step at a time."*
 
 The agent even tells you which store each memory came from — exact facts vs curated patterns. That routing is the whole lesson: **state remembers strings; Memory Bank remembers meaning.**
+
+## The deployed service
+
+The same agent runs as a public Cloud Run service (proof that Memory Bank needs no Agent Engine hosting):
+
+```bash
+curl -X POST https://memory-agent-680476413759.us-central1.run.app/chat \
+  -H "Content-Type: application/json" \
+  -d '{"user_id":"vega-7","text":"What do you remember about me?"}'
+# → recalls the exact facts (user: state) AND the curated patterns (Memory Bank)
+```
+
+`POST /end {user_id, session_id}` flushes a finished session to the bank. Deploy your own: `gcloud run deploy memory-agent --source . …` (see [`Dockerfile`](Dockerfile)).
 
 ## Production notes
 

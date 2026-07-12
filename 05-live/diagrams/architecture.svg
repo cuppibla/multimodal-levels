@@ -1,0 +1,74 @@
+<svg viewBox="0 0 880 520" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,Menlo,monospace">
+  <defs>
+    <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8578"/>
+    </marker>
+    <marker id="cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/>
+    </marker>
+    <marker id="cc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7cc7ff"/>
+    </marker>
+  </defs>
+  <rect width="880" height="520" rx="16" fill="#0d0a18"/>
+  <text x="30" y="40" fill="#efe9dc" font-size="17" font-weight="bold">Level 5 · Live — the NOVA neural-sync console</text>
+  <text x="30" y="60" fill="#8a8578" font-size="11">one open channel · audio + vision streaming both ways · tools firing mid-sentence · barge-in</text>
+
+  <!-- browser -->
+  <rect x="30" y="90" width="270" height="300" rx="14" fill="none" stroke="#7cc7ff" stroke-width="1.3"/>
+  <text x="165" y="114" fill="#7cc7ff" font-size="11" text-anchor="middle" letter-spacing="1">BROWSER (React HUD)</text>
+  <rect x="50" y="130" width="230" height="48" rx="10" fill="#7cc7ff" fill-opacity="0.07" stroke="#7cc7ff" stroke-width="1"/>
+  <text x="165" y="150" fill="#efe9dc" font-size="10.5" text-anchor="middle">mic → AudioWorklet</text>
+  <text x="165" y="166" fill="#8a8578" font-size="9" text-anchor="middle">resample → 16 kHz s16le · 50 ms chunks</text>
+  <rect x="50" y="190" width="230" height="44" rx="10" fill="#7cc7ff" fill-opacity="0.07" stroke="#7cc7ff" stroke-width="1"/>
+  <text x="165" y="209" fill="#efe9dc" font-size="10.5" text-anchor="middle">camera → canvas JPEG</text>
+  <text x="165" y="224" fill="#8a8578" font-size="9" text-anchor="middle">~1 fps frames</text>
+  <rect x="50" y="246" width="230" height="48" rx="10" fill="#a78bfa" fill-opacity="0.07" stroke="#a78bfa" stroke-width="1"/>
+  <text x="165" y="266" fill="#efe9dc" font-size="10.5" text-anchor="middle">speaker ← 24 kHz PCM</text>
+  <text x="165" y="282" fill="#8a8578" font-size="9" text-anchor="middle">gapless nextPlayTime scheduling</text>
+  <rect x="50" y="306" width="230" height="64" rx="10" fill="#fb7185" fill-opacity="0.07" stroke="#fb7185" stroke-width="1"/>
+  <text x="165" y="326" fill="#fb7185" font-size="10.5" text-anchor="middle">BARGE-IN + BIOMETRIC LOCK</text>
+  <text x="165" y="342" fill="#8a8578" font-size="9" text-anchor="middle">your RMS ≥ .012 → cut playback</text>
+  <text x="165" y="357" fill="#8a8578" font-size="9" text-anchor="middle">4-digit finger sequence · 65 s timer</text>
+
+  <!-- ws pipe -->
+  <line x1="300" y1="180" x2="392" y2="180" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
+  <text x="346" y="171" fill="#8a8578" font-size="9" text-anchor="middle">binary PCM · JSON frames</text>
+  <line x1="392" y1="270" x2="300" y2="270" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
+  <text x="346" y="288" fill="#8a8578" font-size="9" text-anchor="middle">ADK events as JSON</text>
+  <text x="346" y="232" fill="#efe9dc" font-size="11" text-anchor="middle">ws(s)://…/ws</text>
+
+  <!-- server -->
+  <rect x="394" y="90" width="250" height="300" rx="14" fill="none" stroke="#fb7185" stroke-width="1.3"/>
+  <text x="519" y="114" fill="#fb7185" font-size="11" text-anchor="middle" letter-spacing="1">FASTAPI · CLOUD RUN (:8500)</text>
+  <rect x="412" y="130" width="214" height="52" rx="10" fill="none" stroke="#8a8578" stroke-width="1"/>
+  <text x="519" y="151" fill="#efe9dc" font-size="10.5" text-anchor="middle">LiveRequestQueue</text>
+  <text x="519" y="168" fill="#8a8578" font-size="9" text-anchor="middle">send_realtime(audio/jpeg) · send_content</text>
+  <rect x="412" y="194" width="214" height="52" rx="10" fill="#fb7185" fill-opacity="0.07" stroke="#fb7185" stroke-width="1"/>
+  <text x="519" y="215" fill="#efe9dc" font-size="10.5" text-anchor="middle">runner.run_live()</text>
+  <text x="519" y="232" fill="#8a8578" font-size="9" text-anchor="middle">RunConfig: BIDI · AUDIO · transcriptions</text>
+  <rect x="412" y="258" width="214" height="52" rx="10" fill="#5ed7a6" fill-opacity="0.07" stroke="#5ed7a6" stroke-width="1"/>
+  <text x="519" y="279" fill="#5ed7a6" font-size="10.5" text-anchor="middle">⚡ report_digit(count)</text>
+  <text x="519" y="296" fill="#8a8578" font-size="9" text-anchor="middle">server-side tool — fires mid-conversation</text>
+  <text x="519" y="340" fill="#8a8578" font-size="9" text-anchor="middle">credentials live HERE —</text>
+  <text x="519" y="355" fill="#8a8578" font-size="9" text-anchor="middle">the browser never sees Gemini</text>
+
+  <!-- gemini -->
+  <rect x="700" y="150" width="150" height="180" rx="14" fill="#a78bfa" fill-opacity="0.08" stroke="#a78bfa" stroke-width="1.3"/>
+  <text x="775" y="180" fill="#a78bfa" font-size="11.5" text-anchor="middle">Gemini Live</text>
+  <text x="775" y="200" fill="#8a8578" font-size="9.5" text-anchor="middle">native audio</text>
+  <text x="775" y="222" fill="#efe9dc" font-size="9.5" text-anchor="middle">hears · sees · speaks</text>
+  <text x="775" y="244" fill="#efe9dc" font-size="9.5" text-anchor="middle">calls tools</text>
+  <text x="775" y="266" fill="#efe9dc" font-size="9.5" text-anchor="middle">detects interruption</text>
+  <text x="775" y="295" fill="#8a8578" font-size="8.5" text-anchor="middle">gemini-live-2.5-flash-</text>
+  <text x="775" y="308" fill="#8a8578" font-size="8.5" text-anchor="middle">native-audio</text>
+  <line x1="644" y1="210" x2="698" y2="210" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
+  <line x1="698" y1="260" x2="644" y2="260" stroke="#8a8578" stroke-width="1.4" marker-end="url(#c)"/>
+  <text x="671" y="240" fill="#8a8578" font-size="9" text-anchor="middle">bidi</text>
+
+  <!-- flow captions -->
+  <path d="M 165 370 Q 165 452 519 452 Q 800 452 800 332" fill="none" stroke="#fb7185" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#cp)"/>
+  <text x="440" y="470" fill="#fb7185" font-size="9.5">the loop: you speak / show fingers → NOVA hears+sees → tool fires → she answers in voice → you can cut her off</text>
+
+  <text x="30" y="500" fill="#514b5e" font-size="10">live on Cloud Run: --no-cpu-throttling --timeout 3600 · one origin serves SPA + WS → wss:// just works</text>
+</svg>

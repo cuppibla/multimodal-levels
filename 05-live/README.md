@@ -2,6 +2,10 @@
 
 > Eyes and ears on the craft. A real bidirectional voice app: **speak to NOVA, she speaks back** — and she watches the camera for the neural-sync handshake.
 
+![architecture](diagrams/architecture.svg)
+
+**▶ Try it live:** https://nova-live-680476413759.us-central1.run.app — open, INITIATE NEURAL SYNC, allow mic+camera, hold up fingers.
+
 A standalone live-voice web app (architecture follows [FashionMind](https://github.com/cuppibla/fashionmind) and [gca level_3](https://github.com/gca-americas/way-back-home/tree/main/solutions/level_3)):
 
 ```

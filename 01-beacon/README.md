@@ -2,6 +2,8 @@
 
 > Output is a modality too. The app doesn't just describe the world — it **creates**, and puts *you* on the map.
 
+![architecture](diagrams/architecture.svg)
+
 Real, runnable code for every beat of the session (deck: *Way Back Home · D1·S1 — Express*):
 
 | Slide beat | Code | The one idea |

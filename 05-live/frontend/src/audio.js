@@ -45,7 +45,23 @@ export function createStreamer() {
   let nextPlayTime = 0;
   let active = [];
 
+  // real spectrum for the HUD waveform — everything routes through one analyser
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 128;
+  analyser.smoothingTimeConstant = 0.75;
+  analyser.connect(ctx.destination);
+  const bins = new Uint8Array(analyser.frequencyBinCount);
+
   return {
+    analyser,
+    /** 0..1 levels for n bars, straight off the live output spectrum */
+    levels(n = 24) {
+      analyser.getByteFrequencyData(bins);
+      const out = new Array(n);
+      const step = Math.floor(bins.length / n) || 1;
+      for (let i = 0; i < n; i++) out[i] = (bins[i * step] || 0) / 255;
+      return out;
+    },
     // base64 24 kHz s16le PCM → schedule right after the previous chunk (no gaps)
     enqueue(b64) {
       const raw = atob(b64.replace(/-/g, "+").replace(/_/g, "/"));
@@ -60,7 +76,7 @@ export function createStreamer() {
       buf.getChannelData(0).set(f32);
       const src = ctx.createBufferSource();
       src.buffer = buf;
-      src.connect(ctx.destination);
+      src.connect(analyser); // → analyser → destination (feeds the HUD waveform)
       const t = Math.max(ctx.currentTime, nextPlayTime);
       src.start(t);
       nextPlayTime = t + buf.duration;
