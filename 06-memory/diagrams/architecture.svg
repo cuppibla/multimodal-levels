@@ -1,68 +1,68 @@
 <svg viewBox="0 0 1240 900" xmlns="http://www.w3.org/2000/svg">
 <rect width="1240" height="900" rx="22" fill="#FDF9F1"/>
-<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" fill="#F59B0C">ARCHITECTURE — real cross-session memory (06-memory)</text>
+<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="700" fill="#F59B0C">ARCHITECTURE — real cross-session memory (06-memory)</text>
 <rect x="24" y="58" width="1192" height="210" rx="16" fill="#FBEFE9"/>
-<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">AGENT — RESCUE OPS · CLOUD RUN</text>
+<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">AGENT — RESCUE OPS · CLOUD RUN</text>
 <rect x="24" y="348" width="1192" height="230" rx="16" fill="#F3F0FB"/>
-<text x="44" y="378" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">ONE VERTEX AI AGENT ENGINE — MANAGED</text>
+<text x="44" y="378" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">ONE VERTEX AI AGENT ENGINE — MANAGED</text>
 <rect x="24" y="662" width="1192" height="130" rx="16" fill="#EDF6F1"/>
-<text x="44" y="692" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">THE PAYOFF — TWO SEPARATE PROCESSES, ZERO COPYING</text>
-<rect x="44" y="116" width="232" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="160" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">PreloadMemoryTool()</text>
-<text x="160" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">READ — injected pre-turn</text>
-<rect x="506" y="116" width="207" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
-<text x="609" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">save_exact_fact</text>
-<text x="609" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">state[&quot;user:callsign&quot;]</text>
-<rect x="943" y="116" width="253" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
-<text x="1069" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">add_session_to_memory</text>
-<text x="1069" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">WRITE — at session end</text>
-<rect x="330" y="206" width="497" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="347" cy="222" r="10.5" fill="#F59B0C"/>
-<text x="347" y="227" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
-<text x="363" y="227" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">route by shape — exact values → state · meaning → Memory Bank</text>
-<rect x="125" y="420" width="550" height="70" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="400" y="447" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">Memory Bank — patterns, by meaning</text>
-<text x="400" y="469" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">GENERATE: Gemini curates · RETRIEVE: similarity, scoped per user</text>
-<rect x="173" y="505" width="453" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
-<text x="400" y="532" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">Sessions + user: state — exact facts</text>
-<text x="400" y="554" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">VertexAiSessionService · durable · looked up EXACTLY</text>
-<text x="950" y="448" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#8B8299">custom topics:</text>
-<text x="950" y="468" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#11C0A4">survivor_context · comms_style</text>
-<text x="950" y="520" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#2FA6F0">user:callsign = Vega-7</text>
-<text x="950" y="540" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#2FA6F0">user:recycler_error = 42</text>
-<line x1="160" y1="182" x2="314" y2="408" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 320 416 L 309 410 L 318 403 Z" fill="#11C0A4"/>
-<text x="152" y="299" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#11C0A4">retrieve</text>
-<line x1="1069" y1="182" x2="529" y2="412" stroke="#F59B0C" stroke-width="2.2" stroke-dasharray="6 6" stroke-linecap="round"/>
-<path d="M 520 416 L 529 406 L 533 417 Z" fill="#F59B0C"/>
-<text x="801" y="291" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#F59B0C">generate</text>
-<path d="M 609.36 182 Q 800 400 655 538" fill="none" stroke="#2FA6F0" stroke-width="2.2" stroke-dasharray="6 6"/>
+<text x="44" y="692" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">THE PAYOFF — TWO SEPARATE PROCESSES, ZERO COPYING</text>
+<rect x="44" y="116" width="264" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="176" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">PreloadMemoryTool()</text>
+<text x="176" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">READ — injected pre-turn</text>
+<rect x="490" y="116" width="235" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
+<text x="608" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">save_exact_fact</text>
+<text x="608" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">state[&quot;user:callsign&quot;]</text>
+<rect x="907" y="116" width="289" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
+<text x="1052" y="143" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">add_session_to_memory</text>
+<text x="1052" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">WRITE — at session end</text>
+<rect x="330" y="206" width="612" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="349" cy="225" r="12.5" fill="#F59B0C"/>
+<text x="349" y="230" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">1</text>
+<text x="367" y="230" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">route by shape — exact values → state · meaning → Memory Bank</text>
+<rect x="85" y="420" width="629" height="70" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="400" y="447" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">Memory Bank — patterns, by meaning</text>
+<text x="400" y="469" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">GENERATE: Gemini curates · RETRIEVE: similarity, scoped per user</text>
+<rect x="141" y="505" width="518" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
+<text x="400" y="532" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">Sessions + user: state — exact facts</text>
+<text x="400" y="554" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">VertexAiSessionService · durable · looked up EXACTLY</text>
+<text x="950" y="448" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="700" fill="#8B8299">custom topics:</text>
+<text x="950" y="468" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="700" fill="#11C0A4">survivor_context · comms_style</text>
+<text x="950" y="520" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="700" fill="#2FA6F0">user:callsign = Vega-7</text>
+<text x="950" y="540" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="700" fill="#2FA6F0">user:recycler_error = 42</text>
+<line x1="176" y1="182" x2="315" y2="407" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 320 416 L 309 409 L 319 403 Z" fill="#11C0A4"/>
+<text x="160" y="299" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#11C0A4">retrieve</text>
+<line x1="1052" y1="182" x2="529" y2="412" stroke="#F59B0C" stroke-width="2.2" stroke-dasharray="6 6" stroke-linecap="round"/>
+<path d="M 520 416 L 528 406 L 533 416 Z" fill="#F59B0C"/>
+<text x="792" y="291" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#F59B0C">generate</text>
+<path d="M 607.68 182 Q 800 400 655 538" fill="none" stroke="#2FA6F0" stroke-width="2.2" stroke-dasharray="6 6"/>
 <path d="M 655 538 L 660 526 L 667 534 Z" fill="#2FA6F0"/>
-<text x="728" y="372" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#2FA6F0">user: r/w</text>
-<rect x="44" y="712" width="296" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
-<text x="192" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">SESSION A — “I’m Vega-7…”</text>
-<text x="192" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">facts told → flush</text>
-<rect x="483" y="712" width="232" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="599" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">consolidation</text>
-<text x="599" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">Gemini curates · ~seconds</text>
-<rect x="857" y="712" width="339" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
-<text x="1027" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">SESSION B — already knows you</text>
-<text x="1027" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">both stores, unprompted</text>
-<line x1="357" y1="745" x2="464" y2="745" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 474 745 L 462 751 L 462 739 Z" fill="#B9AFC7"/>
-<line x1="724" y1="745" x2="832" y2="745" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 842 745 L 830 751 L 830 739 Z" fill="#11C0A4"/>
-<rect x="28" y="812" width="344" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="45" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="45" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
-<text x="61" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python setup_engine.py (one-time)</text>
-<rect x="383.648" y="812" width="278" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="400.648" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="400.648" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
-<text x="416.648" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python chat.py session-a</text>
-<rect x="673.6752" y="812" width="278" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="690.6752" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="690.6752" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
-<text x="706.6752" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python chat.py session-b</text>
+<text x="728" y="372" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#2FA6F0">user: r/w</text>
+<rect x="44" y="712" width="338" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="213" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">SESSION A — “I’m Vega-7…”</text>
+<text x="213" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">facts told → flush</text>
+<rect x="464" y="712" width="262" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="595" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">consolidation</text>
+<text x="595" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">Gemini curates · ~seconds</text>
+<rect x="809" y="712" width="387" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="1002" y="739" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">SESSION B — already knows you</text>
+<text x="1002" y="761" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">both stores, unprompted</text>
+<line x1="378" y1="745" x2="460" y2="745" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 470 745 L 459 751 L 459 739 Z" fill="#B9AFC7"/>
+<line x1="720" y1="745" x2="807" y2="745" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 817 745 L 806 751 L 806 739 Z" fill="#11C0A4"/>
+<rect x="28" y="812" width="422" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="47" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="47" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">1</text>
+<text x="65" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python setup_engine.py (one-time)</text>
+<rect x="461.76" y="812" width="340" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="480.76" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="480.76" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">2</text>
+<text x="498.76" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python chat.py session-a</text>
+<rect x="814.124" y="812" width="340" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="833.124" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="833.124" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">3</text>
+<text x="851.124" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python chat.py session-b</text>
 <text x="28" y="878" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#8B8299">hosting proof: the agent runs on Cloud Run — Memory Bank does NOT require Agent Engine hosting (memory-agent-….run.app/chat)</text>
 </svg>

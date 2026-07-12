@@ -1,97 +1,97 @@
 <svg viewBox="0 0 1240 900" xmlns="http://www.w3.org/2000/svg">
 <rect width="1240" height="900" rx="22" fill="#FDF9F1"/>
-<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" fill="#7B5CFC">ARCHITECTURE — the multi-agent system (02-perceive)</text>
+<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="700" fill="#7B5CFC">ARCHITECTURE — the multi-agent system (02-perceive)</text>
 <rect x="24" y="58" width="1192" height="360" rx="16" fill="#F3F0FB"/>
-<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">AGENT LAYER</text>
+<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">AGENT LAYER</text>
 <rect x="24" y="434" width="1192" height="170" rx="16" fill="#EDF6F1"/>
-<text x="44" y="464" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">TOOL LAYER</text>
+<text x="44" y="464" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">TOOL LAYER</text>
 <rect x="24" y="620" width="1192" height="160" rx="16" fill="#FAF1E4"/>
-<text x="44" y="650" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">DATA LAYER</text>
-<rect x="397" y="96" width="445" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
-<text x="620" y="123" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">MissionAnalysisAI</text>
-<text x="620" y="145" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">root · SequentialAgent — synthesizes + votes 2-of-3</text>
+<text x="44" y="650" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">DATA LAYER</text>
+<rect x="366" y="96" width="508" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="620" y="123" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">MissionAnalysisAI</text>
+<text x="620" y="145" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">root · SequentialAgent — synthesizes + votes 2-of-3</text>
 <rect x="140" y="236" width="960" height="150" rx="14" fill="none" stroke="#7B5CFC" stroke-width="2" stroke-dasharray="7 6"/>
-<text x="158" y="260" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.5" font-weight="700" fill="#7B5CFC">EvidenceAnalysisCrew · ParallelAgent — runs concurrently</text>
-<rect x="203" y="286" width="215" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="310" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">GeologicalAnalyst</text>
-<text x="310" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">reads {soil_url}</text>
-<rect x="470" y="286" width="300" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
-<text x="620" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">BotanicalAnalyst</text>
-<text x="620" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">reads {flora_url} · video + audio</text>
-<rect x="812" y="286" width="236" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
-<text x="930" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">AstronomicalAnalyst</text>
-<text x="930" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">reads {stars_url}</text>
+<text x="158" y="260" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="700" fill="#7B5CFC">EvidenceAnalysisCrew · ParallelAgent — runs concurrently</text>
+<rect x="188" y="286" width="243" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="310" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">GeologicalAnalyst</text>
+<text x="310" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">reads {soil_url}</text>
+<rect x="450" y="286" width="341" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
+<text x="620" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">BotanicalAnalyst</text>
+<text x="620" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">reads {flora_url} · video + audio</text>
+<rect x="796" y="286" width="268" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
+<text x="930" y="313" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">AstronomicalAnalyst</text>
+<text x="930" y="335" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">reads {stars_url}</text>
 <line x1="560" y1="162" x2="560" y2="222" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
 <path d="M 560 232 L 554 220 L 566 220 Z" fill="#B9AFC7"/>
-<text x="468" y="197" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">delegates</text>
+<text x="468" y="197" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#8B8299">delegates</text>
 <line x1="680" y1="232" x2="680" y2="172" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
 <path d="M 680 162 L 686 174 L 674 174 Z" fill="#B9AFC7"/>
-<text x="692" y="197" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">3 reports → state (output_key)</text>
-<rect x="44" y="476" width="207" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
-<text x="148" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">confirm_location</text>
-<text x="148" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">ground-truths the vote</text>
-<rect x="277" y="476" width="222" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="387" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">analyze_geological</text>
-<text x="387" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">Custom MCP</text>
-<rect x="523" y="476" width="211" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
-<text x="629" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">analyze_botanical</text>
-<text x="629" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">Custom MCP · audio too</text>
-<rect x="760" y="476" width="253" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
-<text x="886" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">extract_star_features</text>
-<text x="886" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">FunctionTool</text>
-<rect x="1038" y="476" width="158" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
-<text x="1117" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">BigQuery MCP</text>
-<text x="1117" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">Google-managed</text>
-<line x1="310" y1="352" x2="382" y2="464" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 387 472 L 376 465 L 386 459 Z" fill="#B9AFC7"/>
-<line x1="620" y1="352" x2="628" y2="462" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 629 472 L 622 461 L 634 460 Z" fill="#B9AFC7"/>
-<line x1="905" y1="352" x2="888" y2="462" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 886 472 L 883 460 L 894 461 Z" fill="#B9AFC7"/>
-<line x1="955" y1="352" x2="1090" y2="466" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 1097 472 L 1085 469 L 1092 460 Z" fill="#B9AFC7"/>
-<text x="1034" y="398" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">two tools</text>
-<path d="M 397.47 136 Q 60 210 147.66 472" fill="none" stroke="#FF6A45" stroke-width="2.2" stroke-dasharray="6 6"/>
-<path d="M 147.66 472 L 139 463 L 149 459 Z" fill="#FF6A45"/>
-<text x="52" y="300" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#FF6A45">verify ↓</text>
-<rect x="44" y="664" width="280" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
-<text x="184" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">beacon.json</text>
-<text x="184" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">BEACON ACTIVE — written by code</text>
-<rect x="444" y="664" width="393" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
-<text x="640" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">Cloud Storage</text>
-<text x="640" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">evidence: soil .png · flora .mp4 · stars .png</text>
-<rect x="956" y="664" width="240" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
-<text x="1076" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">BigQuery</text>
-<text x="1076" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">star_catalog · exact match</text>
-<line x1="1117" y1="542" x2="1079" y2="651" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 1076 660 L 1075 647 L 1085 651 Z" fill="#B9AFC7"/>
-<text x="1107" y="601" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">execute_sql</text>
-<line x1="148" y1="542" x2="181" y2="650" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 184 660 L 175 650 L 186 647 Z" fill="#B9AFC7"/>
-<line x1="600" y1="660" x2="426" y2="551" stroke="#B9AFC7" stroke-width="2.2" stroke-dasharray="4 5" stroke-linecap="round"/>
-<path d="M 417 546 L 430 547 L 424 557 Z" fill="#B9AFC7"/>
-<line x1="680" y1="660" x2="605" y2="554" stroke="#B9AFC7" stroke-width="2.2" stroke-dasharray="4 5" stroke-linecap="round"/>
-<path d="M 599 546 L 610 552 L 601 559 Z" fill="#B9AFC7"/>
-<text x="360" y="609" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#8B8299">Part.from_uri(gs://…)</text>
-<rect x="24" y="812" width="220" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="41" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="41" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
-<text x="57" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">callback hydrates state</text>
-<rect x="253.69760000000002" y="812" width="234" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="270.6976" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="270.6976" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
-<text x="286.6976" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">crew fans out in parallel</text>
-<rect x="497.97760000000005" y="812" width="249" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="514.9776" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="514.9776" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
-<text x="530.9776" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">each analyst calls its tool</text>
-<rect x="756.84" y="812" width="227" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="773.84" cy="828" r="10.5" fill="#7B5CFC"/>
-<text x="773.84" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">4</text>
-<text x="789.84" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">synthesizer votes 2-of-3</text>
-<rect x="993.8288" y="812" width="212" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="1010.8288" cy="828" r="10.5" fill="#FF6A45"/>
-<text x="1010.8288" y="833" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">5</text>
-<text x="1026.8288" y="833" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">code verifies → beacon</text>
+<text x="692" y="197" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#8B8299">3 reports → state (output_key)</text>
+<rect x="44" y="476" width="211" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="149" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="700" fill="#332A4E">confirm_location</text>
+<text x="149" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.25" fill="#8B8299">ground-truths the vote</text>
+<rect x="283" y="476" width="216" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="391" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="700" fill="#332A4E">analyze_geological</text>
+<text x="391" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.25" fill="#8B8299">Custom MCP</text>
+<rect x="527" y="476" width="211" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
+<text x="633" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="700" fill="#332A4E">analyze_botanical</text>
+<text x="633" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.25" fill="#8B8299">Custom MCP · audio too</text>
+<rect x="766" y="476" width="248" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
+<text x="890" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="700" fill="#332A4E">extract_star_features</text>
+<text x="890" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.25" fill="#8B8299">FunctionTool</text>
+<rect x="1042" y="476" width="154" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="1119" y="503" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="700" fill="#332A4E">BigQuery MCP</text>
+<text x="1119" y="525" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13.25" fill="#8B8299">Google-managed</text>
+<line x1="310" y1="352" x2="385" y2="464" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 391 472 L 380 465 L 389 459 Z" fill="#B9AFC7"/>
+<line x1="620" y1="352" x2="632" y2="462" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 633 472 L 626 461 L 637 460 Z" fill="#B9AFC7"/>
+<line x1="905" y1="352" x2="891" y2="462" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 890 472 L 886 460 L 897 461 Z" fill="#B9AFC7"/>
+<line x1="955" y1="352" x2="1091" y2="466" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 1099 472 L 1086 469 L 1093 460 Z" fill="#B9AFC7"/>
+<text x="1035" y="398" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#8B8299">two tools</text>
+<path d="M 365.85 136 Q 60 210 149.365 472" fill="none" stroke="#FF6A45" stroke-width="2.2" stroke-dasharray="6 6"/>
+<path d="M 149.365 472 L 140 463 L 151 459 Z" fill="#FF6A45"/>
+<text x="52" y="300" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#FF6A45">verify ↓</text>
+<rect x="44" y="664" width="318" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="203" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">beacon.json</text>
+<text x="203" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">BEACON ACTIVE — written by code</text>
+<rect x="419" y="664" width="448" height="66" rx="12" fill="#fff" stroke="#2FA6F0" stroke-width="2.5"/>
+<text x="643" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">Cloud Storage</text>
+<text x="643" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">evidence: soil .png · flora .mp4 · stars .png</text>
+<rect x="924" y="664" width="272" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="1060" y="691" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">BigQuery</text>
+<text x="1060" y="713" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">star_catalog · exact match</text>
+<line x1="1119" y1="542" x2="1065" y2="651" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 1060 660 L 1060 647 L 1070 652 Z" fill="#B9AFC7"/>
+<text x="1099" y="601" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#8B8299">execute_sql</text>
+<line x1="149" y1="542" x2="199" y2="651" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 203 660 L 193 652 L 203 647 Z" fill="#B9AFC7"/>
+<line x1="603" y1="660" x2="429" y2="551" stroke="#B9AFC7" stroke-width="2.2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<path d="M 421 546 L 434 547 L 428 557 Z" fill="#B9AFC7"/>
+<line x1="683" y1="660" x2="608" y2="554" stroke="#B9AFC7" stroke-width="2.2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<path d="M 603 546 L 614 552 L 605 559 Z" fill="#B9AFC7"/>
+<text x="363" y="609" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#8B8299">Part.from_uri(gs://…)</text>
+<rect x="24" y="812" width="268" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="43" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="43" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">1</text>
+<text x="61" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">callback hydrates state</text>
+<rect x="302.012" y="812" width="286" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="321.012" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="321.012" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">2</text>
+<text x="339.012" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">crew fans out in parallel</text>
+<rect x="598.1120000000001" y="812" width="304" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="617.1120000000001" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="617.1120000000001" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">3</text>
+<text x="635.1120000000001" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">each analyst calls its tool</text>
+<rect x="912.3000000000001" y="812" width="277" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="931.3000000000001" cy="831" r="12.5" fill="#7B5CFC"/>
+<text x="931.3000000000001" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">4</text>
+<text x="949.3000000000001" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">synthesizer votes 2-of-3</text>
+<rect x="1199.3560000000002" y="812" width="259" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="1218.3560000000002" cy="831" r="12.5" fill="#FF6A45"/>
+<text x="1218.3560000000002" y="836" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">5</text>
+<text x="1236.3560000000002" y="836" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">code verifies → beacon</text>
 <text x="28" y="878" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#8B8299">verified run: 3/3 VERDANT · the astronomer&#x27;s quadrant came out of BigQuery · the botanist heard &quot;water dripping, insect calls&quot;</text>
 </svg>

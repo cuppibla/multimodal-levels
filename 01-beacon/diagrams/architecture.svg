@@ -1,98 +1,98 @@
 <svg viewBox="0 0 1240 900" xmlns="http://www.w3.org/2000/svg">
 <rect width="1240" height="900" rx="22" fill="#FDF9F1"/>
-<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" fill="#FF6A45">ARCHITECTURE — identity &amp; generation (01-beacon)</text>
+<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="700" fill="#FF6A45">ARCHITECTURE — identity &amp; generation (01-beacon)</text>
 <rect x="24" y="58" width="1192" height="200" rx="16" fill="#FBEFE9"/>
-<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">① ONE CHAT SESSION — generator.py</text>
+<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">① ONE CHAT SESSION — generator.py</text>
 <rect x="24" y="274" width="1192" height="230" rx="16" fill="#F3F0FB"/>
-<text x="44" y="304" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">② ADK CONSISTENCY ENGINE — agent/agent.py</text>
+<text x="44" y="304" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">② ADK CONSISTENCY ENGINE — agent/agent.py</text>
 <rect x="24" y="520" width="1192" height="200" rx="16" fill="#FAF1E4"/>
-<text x="44" y="550" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.5" fill="#9A93AC">③ ASYNC VIDEO — video.py</text>
-<rect x="44" y="130" width="256" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
-<text x="172" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">4-layer prompt</text>
-<text x="172" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">anchor · style · spec · SAME</text>
-<rect x="406" y="130" width="211" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
-<text x="512" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">turn 1 · portrait</text>
-<text x="512" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">gemini-*-image</text>
-<rect x="724" y="130" width="215" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
-<text x="832" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">turn 2 · map icon</text>
-<text x="832" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">SEES turn 1 → same face</text>
-<rect x="1046" y="130" width="150" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="1121" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">verify.py</text>
-<text x="1121" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">code judges ✓</text>
-<line x1="302" y1="163" x2="382" y2="163" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 392 163 L 380 169 L 380 157 Z" fill="#B9AFC7"/>
-<line x1="622" y1="163" x2="692" y2="163" stroke="#FF6A45" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 702 163 L 690 169 L 690 157 Z" fill="#FF6A45"/>
-<text x="610" y="151" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#FF6A45">same session</text>
-<line x1="962" y1="163" x2="1021" y2="163" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<text x="44" y="550" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">③ ASYNC VIDEO — video.py</text>
+<rect x="44" y="130" width="290" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="189" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">4-layer prompt</text>
+<text x="189" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">anchor · style · spec · SAME</text>
+<rect x="410" y="130" width="239" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="530" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">turn 1 · portrait</text>
+<text x="530" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">gemini-*-image</text>
+<rect x="725" y="130" width="244" height="66" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="847" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">turn 2 · map icon</text>
+<text x="847" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">SEES turn 1 → same face</text>
+<rect x="1045" y="130" width="151" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="1121" y="157" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">verify.py</text>
+<text x="1121" y="179" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">code judges ✓</text>
+<line x1="319" y1="163" x2="400" y2="163" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 410 163 L 398 169 L 398 157 Z" fill="#B9AFC7"/>
+<line x1="640" y1="163" x2="707" y2="163" stroke="#FF6A45" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 717 163 L 706 169 L 706 157 Z" fill="#FF6A45"/>
+<text x="627" y="151" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#FF6A45">same session</text>
+<line x1="977" y1="163" x2="1021" y2="163" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
 <path d="M 1031 163 L 1019 169 L 1019 157 Z" fill="#11C0A4"/>
-<rect x="390" y="216" width="475" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="407" cy="232" r="10.5" fill="#FF6A45"/>
-<text x="407" y="237" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
-<text x="423" y="237" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">stateless calls = two strangers — a session holds ONE face</text>
-<rect x="44" y="330" width="253" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
-<text x="171" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">before_agent_callback</text>
-<text x="171" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">locks identity once</text>
-<rect x="356" y="330" width="256" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
-<text x="484" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">session.state</text>
-<text x="484" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">identity · style · ref image</text>
-<rect x="671" y="330" width="275" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
-<text x="808" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">generate_explorer_image</text>
-<text x="808" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">re-reads state EVERY call</text>
-<rect x="1005" y="330" width="191" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="1100" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">scene 1…N</text>
-<text x="1100" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">same face, any scene</text>
-<line x1="296" y1="363" x2="369" y2="363" stroke="#7B5CFC" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 379 363 L 368 369 L 368 357 Z" fill="#7B5CFC"/>
-<text x="307" y="353" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#7B5CFC">seeds</text>
-<line x1="589" y1="363" x2="663" y2="363" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="390" y="216" width="585" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="409" cy="235" r="12.5" fill="#FF6A45"/>
+<text x="409" y="240" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">1</text>
+<text x="427" y="240" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">stateless calls = two strangers — a session holds ONE face</text>
+<rect x="44" y="330" width="277" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="182" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21.0" font-weight="700" fill="#332A4E">before_agent_callback</text>
+<text x="182" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" fill="#8B8299">locks identity once</text>
+<rect x="349" y="330" width="282" height="66" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="490" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21.0" font-weight="700" fill="#332A4E">session.state</text>
+<text x="490" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" fill="#8B8299">identity · style · ref image</text>
+<rect x="658" y="330" width="300" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="808" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21.0" font-weight="700" fill="#332A4E">generate_explorer_image</text>
+<text x="808" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" fill="#8B8299">re-reads state EVERY call</text>
+<rect x="986" y="330" width="210" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="1091" y="357" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21.0" font-weight="700" fill="#332A4E">scene 1…N</text>
+<text x="1091" y="379" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" fill="#8B8299">same face, any scene</text>
+<line x1="307" y1="363" x2="375" y2="363" stroke="#7B5CFC" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 385 363 L 373 369 L 373 357 Z" fill="#7B5CFC"/>
+<text x="316" y="353" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#7B5CFC">seeds</text>
+<line x1="594" y1="363" x2="663" y2="363" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
 <path d="M 673 363 L 662 369 L 662 357 Z" fill="#B9AFC7"/>
-<line x1="943" y1="363" x2="995" y2="363" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 1005 363 L 994 369 L 994 357 Z" fill="#11C0A4"/>
-<path d="M 808.4533333333333 396 Q 700 456 524.2666666666667 404" fill="none" stroke="#7B5CFC" stroke-width="2.2" stroke-dasharray="6 6"/>
-<path d="M 524.2666666666667 404 L 537 402 L 534 413 Z" fill="#7B5CFC"/>
-<text x="470" y="456" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="12.5" font-weight="700" fill="#7B5CFC">first render → pinned back as the model sheet</text>
-<rect x="390" y="462" width="460" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="407" cy="478" r="10.5" fill="#7B5CFC"/>
-<text x="407" y="483" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
-<text x="423" y="483" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">state + callback = the identity re-applied to every call</text>
-<rect x="44" y="590" width="211" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
-<text x="149" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">generate_videos()</text>
-<text x="149" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">veo-3.x</text>
-<rect x="377" y="590" width="191" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
-<text x="473" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">operation</text>
-<text x="473" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">a ticket, not a file</text>
-<rect x="690" y="590" width="183" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
-<text x="782" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">poll op.done</text>
-<text x="782" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">every 10 s · ~1 min</text>
-<rect x="996" y="590" width="200" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
-<text x="1096" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">beacon_video.mp4</text>
-<text x="1096" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" fill="#8B8299">720p · native audio</text>
-<line x1="264" y1="623" x2="368" y2="623" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 378 623 L 366 629 L 366 617 Z" fill="#B9AFC7"/>
-<line x1="568" y1="623" x2="672" y2="623" stroke="#F59B0C" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 682 623 L 670 629 L 670 617 Z" fill="#F59B0C"/>
-<line x1="882" y1="623" x2="971" y2="623" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M 981 623 L 969 629 L 969 617 Z" fill="#11C0A4"/>
-<rect x="390" y="672" width="314" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="407" cy="688" r="10.5" fill="#F59B0C"/>
-<text x="407" y="693" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
-<text x="423" y="693" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">async — it didn&#x27;t fail, it&#x27;s working</text>
+<line x1="943" y1="363" x2="986" y2="363" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 996 363 L 984 369 L 984 357 Z" fill="#11C0A4"/>
+<path d="M 808.2800000000001 396 Q 700 456 529.5 404" fill="none" stroke="#7B5CFC" stroke-width="2.2" stroke-dasharray="6 6"/>
+<path d="M 529.5 404 L 542 402 L 539 413 Z" fill="#7B5CFC"/>
+<text x="470" y="456" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14.5" font-weight="700" fill="#7B5CFC">first render → pinned back as the model sheet</text>
+<rect x="390" y="462" width="566" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="409" cy="481" r="12.5" fill="#7B5CFC"/>
+<text x="409" y="486" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">2</text>
+<text x="427" y="486" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">state + callback = the identity re-applied to every call</text>
+<rect x="44" y="590" width="239" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="164" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">generate_videos()</text>
+<text x="164" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">veo-3.x</text>
+<rect x="371" y="590" width="216" height="66" rx="12" fill="#fff" stroke="#F59B0C" stroke-width="2.5"/>
+<text x="479" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">operation</text>
+<text x="479" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">a ticket, not a file</text>
+<rect x="675" y="590" width="207" height="66" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="778" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">poll op.done</text>
+<text x="778" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">every 10 s · ~1 min</text>
+<rect x="969" y="590" width="227" height="66" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="1082" y="617" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#332A4E">beacon_video.mp4</text>
+<text x="1082" y="639" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="15" fill="#8B8299">720p · native audio</text>
+<line x1="279" y1="623" x2="374" y2="623" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 384 623 L 372 629 L 372 617 Z" fill="#B9AFC7"/>
+<line x1="574" y1="623" x2="668" y2="623" stroke="#F59B0C" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 678 623 L 666 629 L 666 617 Z" fill="#F59B0C"/>
+<line x1="878" y1="623" x2="957" y2="623" stroke="#11C0A4" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 967 623 L 956 629 L 956 617 Z" fill="#11C0A4"/>
+<rect x="390" y="672" width="386" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="409" cy="691" r="12.5" fill="#F59B0C"/>
+<text x="409" y="696" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">3</text>
+<text x="427" y="696" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">async — it didn&#x27;t fail, it&#x27;s working</text>
 <text x="28" y="764" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#8B8299">models create · code judges — the gate on progress is deterministic, never an LLM grading itself</text>
-<rect x="28" y="800" width="278" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="45" cy="816" r="10.5" fill="#7B5CFC"/>
-<text x="45" y="821" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">1</text>
-<text x="61" y="821" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">run: uv run python generator.py</text>
-<rect x="318.0272" y="800" width="242" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="335.0272" cy="816" r="10.5" fill="#7B5CFC"/>
-<text x="335.0272" y="821" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">2</text>
-<text x="351.0272" y="821" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python run_agent.py</text>
-<rect x="571.5984000000001" y="800" width="212" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="588.5984000000001" cy="816" r="10.5" fill="#7B5CFC"/>
-<text x="588.5984000000001" y="821" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">3</text>
-<text x="604.5984000000001" y="821" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python video.py</text>
-<rect x="796.0048000000002" y="800" width="220" height="32" rx="16" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
-<circle cx="813.0048000000002" cy="816" r="10.5" fill="#11C0A4"/>
-<text x="813.0048000000002" y="821" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#fff">4</text>
-<text x="829.0048000000002" y="821" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#332A4E">uv run python verify.py</text>
+<rect x="28" y="800" width="340" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="47" cy="819" r="12.5" fill="#7B5CFC"/>
+<text x="47" y="824" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">1</text>
+<text x="65" y="824" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">run: uv run python generator.py</text>
+<rect x="380.364" y="800" width="295" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="399.364" cy="819" r="12.5" fill="#7B5CFC"/>
+<text x="399.364" y="824" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">2</text>
+<text x="417.364" y="824" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python run_agent.py</text>
+<rect x="687.508" y="800" width="259" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="706.508" cy="819" r="12.5" fill="#7B5CFC"/>
+<text x="706.508" y="824" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">3</text>
+<text x="724.508" y="824" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python video.py</text>
+<rect x="958.4760000000001" y="800" width="268" height="38" rx="19" fill="#fff" stroke="#E7DECD" stroke-width="1.5"/>
+<circle cx="977.4760000000001" cy="819" r="12.5" fill="#11C0A4"/>
+<text x="977.4760000000001" y="824" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="16" font-weight="800" fill="#fff">4</text>
+<text x="995.4760000000001" y="824" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">uv run python verify.py</text>
 </svg>
