@@ -1,0 +1,11 @@
+[project]
+name = "level-06-memory"
+version = "0.2.0"
+description = "Multimodal Levels · Level 6 (Recall) — real cross-session memory on Vertex AI Agent Engine: Memory Bank + durable user: state."
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-cloud-aiplatform[agent-engines]>=1.133.0",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]

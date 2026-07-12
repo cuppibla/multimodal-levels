@@ -1,54 +1,48 @@
-# Level 1 · The Beacon
+# Level 1 · Express — Identity & Generation
 
-> Constrained multimodal generation — and keeping one identity consistent across a session.
+> Output is a modality too. The app doesn't just describe the world — it **creates**, and puts *you* on the map.
 
-The real idea from the app's **Realm 01**, distilled to three files:
+Real, runnable code for every beat of the session (deck: *Way Back Home · D1·S1 — Express*):
 
-| File | What it is |
-|------|-----------|
-| [`src/identity.ts`](src/identity.ts) | the **4-layer consistency prompt** |
-| [`src/beacon.ts`](src/beacon.ts) | naive (drifts) vs one session (stays on-model) |
-| [`src/run.ts`](src/run.ts) | the CLI |
+| Slide beat | Code | The one idea |
+|---|---|---|
+| ① Output is a modality too | [`generator.py`](generator.py) | one model emits text **and** image in a single call (`response_modalities=["TEXT","IMAGE"]`) |
+| ② Generation is a conversation | [`generator.py`](generator.py) | two stateless calls = two strangers; **one chat session** = the same explorer (in-context conditioning, not a seed) |
+| ③ Structure makes it repeatable | [`generator.py`](generator.py) | the 4-layer prompt — Anchor / Style-lock / Constraints / Consistency; user input only ever touches the Anchor |
+| ⑤ Session · State · Callback | [`agent/agent.py`](agent/agent.py) | the **ADK consistency engine**: identity locked in `state` by a `before_agent_callback`, the ref image pinned in state, every tool call re-applies it |
+| ⑥ Image now, video later | [`video.py`](video.py) | Veo returns a **long-running operation** — a ticket, not a file; you poll `operation.done` |
+| ⑦ Models create, code judges | [`verify.py`](verify.py) | probabilistic creation, **deterministic verification** — the gate is code, never the model's opinion |
 
-## Idea 1 — a prompt has four layers
-
-Only **one** of them is the user's ([`identity.ts`](src/identity.ts)):
-
-1. **ANCHOR** — the subject in concrete visual terms ← the user's words, dropped in as *data*
-2. **STYLE-LOCK** — the art style, ambiguity killed ← yours, fixed
-3. **CONSTRAINTS** — framing/background for where the image lands ← yours, fixed
-4. **CONSISTENCY** — repeat what must not change ("SAME face, SAME suit…") ← yours, turn 2
-
-Because the user's text only fills layer 1, "ignore the suit, draw a dragon" is *described*, not obeyed — a small built-in guardrail.
-
-## Idea 2 — consistency is a session, not a seed
-
-Generation is stochastic. Two independent calls with the *same* prompt give you two different people:
-
-```ts
-await generateOnce(anchor);   // person A
-await generateOnce(anchor);   // person B — drifted
-```
-
-The fix isn't a magic seed — it's a **chat session**. Turn 1 draws the portrait; turn 2 asks for the icon on the *same* chat, so the model can **see the portrait it just drew** and match it ([`beacon.ts`](src/beacon.ts)):
-
-```ts
-const chat = ai().chats.create({ model: IMAGE_MODEL, config: { responseModalities: ["TEXT", "IMAGE"] } });
-const portrait = pullImage(await chat.sendMessage({ message: portraitPrompt(anchor) })); // turn 1
-const icon     = pullImage(await chat.sendMessage({ message: iconPrompt() }));            // turn 2 — sees turn 1
-```
-
-That's what a "session" *is*: replayed history the model conditions on. No seed, no fine-tune.
-
-## Run it
+## Run it locally
 
 ```bash
-cp .env.example .env        # add GEMINI_API_KEY, or use your Vertex project
-npm install
+cp .env.example .env          # set GOOGLE_CLOUD_PROJECT (Vertex/ADC) or GOOGLE_API_KEY
+uv sync
 
-npm run prompt                                              # the 4 layers, no API call
-npm run naive -- "a cheerful botanist with round glasses"   # → out/naive-1.png, naive-2.png (they differ)
-npm run identity -- "a cheerful botanist with round glasses" # → out/portrait.png + icon.png (same person)
+# ② the keystone — portrait → icon in ONE chat session (same person)
+uv run python generator.py
+uv run python generator.py --naive        # the problem: two stateless calls → two strangers
+uv run python generator.py --anchor "a cheerful botanist with round glasses"
+
+# ⑤ the ADK consistency engine — different scenes, one face
+uv run python run_agent.py                # or interactively:  uv run adk run agent  /  uv run adk web
+
+# ⑥ async video — a ticket, not a file (Veo, ~1 min, billed)
+uv run python video.py
+
+# ⑦ the deterministic gate
+uv run python verify.py
 ```
 
-Open `out/naive-1.png` next to `out/naive-2.png` (drift), then `out/portrait.png` next to `out/icon.png` (matched). That contrast is the whole lesson.
+Outputs land in `outputs/`. Open `naive-1.png` vs `naive-2.png` (drift), then `portrait.png` vs `icon.png` (matched), then `agent_01.png` vs `agent_02.png` (different scenes, same face — that's state + callback at work).
+
+## The consistency ladder (slide ④ — pick the lightest that holds)
+
+1. **Prompt** — the 4-layer structure *(lightest)*
+2. **Chat session** — in-context conditioning ← `generator.py`, most demos
+3. **Reference images** — 4–5 refs pinned per call ← `agent/agent.py` pins the first render in state and re-feeds it
+4. **Fine-tune / LoRA** — bake it into the weights *(heaviest)*
+
+## Model IDs move
+
+`gemini-2.5-flash-image` (Nano Banana) sunsets Oct 2026 → set `GEMINI_IMAGE_MODEL=gemini-3.1-flash-image` (speed · 4 refs) or `gemini-3-pro-image` (pro · 5 refs). **Same API, same session, same `response_modalities` — same pattern, new ID.**

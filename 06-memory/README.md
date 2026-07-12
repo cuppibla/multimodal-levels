@@ -1,42 +1,46 @@
-# Level 6 · Remember Me
+# Level 6 · Recall — real cross-session memory
 
-> Durable, cross-session memory — by hand, so you can see the mechanism a managed Memory Bank hides.
+> You save the session… you open a brand-new one… **and it already knows you.**
 
-The real code from the app's **Realm 06**, in three files:
+Real ADK + **Vertex AI Agent Engine** integration — no mocks. One Agent Engine instance backs both kinds of long-term memory (the "two kinds of knowing"):
+
+| Kind | Example | Where it lives | How it's found |
+|---|---|---|---|
+| **Exact fact** — a value you look up | callsign `Vega-7`, error code `42` | durable `user:` state · `VertexAiSessionService` | exact match — you want *your* value, not something *similar* |
+| **Pattern** — meaning built over time | "long checklists overwhelm me" | **Memory Bank** · `VertexAiMemoryBankService` | similarity — recalled by what it *means* |
 
 | File | What it is |
-|------|-----------|
-| [`src/memory.ts`](src/memory.ts) | `extractFacts` (write) + `recall` (read) |
-| [`src/store.ts`](src/store.ts) | `memory.json` — the durable store |
-| [`src/run.ts`](src/run.ts) | the CLI |
+|---|---|
+| [`setup_engine.py`](setup_engine.py) | creates/reuses the Agent Engine — with **custom memory topics** (`survivor_context`, `comms_style`) + managed topics |
+| [`agent/agent.py`](agent/agent.py) | the agent: `PreloadMemoryTool` (READ) + `save_exact_fact`/`get_exact_facts` (`user:` state) |
+| [`chat.py`](chat.py) | the proof: session A → flush → **brand-new** session B recalls everything |
 
-## The loop: write, then read
+## The loop (talk: "the memory loop")
 
-**WRITE** — a session ends. Gemini reads the transcript and keeps only what's *durable* — the things that would change how it greets or helps this person next time. Two kinds:
-
-- **exact** — a value you look up: a callsign, a number, a date.
-- **pattern** — a soft trait: "freezes up at long checklists."
-
-**READ** — next session. Embed the query + every stored fact, and recall by **meaning** (not keyword). Exact facts are always surfaced (you want *your* balance, not something like it); patterns rank by similarity.
-
-```ts
-const facts = await extractFacts(transcript);          // WRITE — a few durable facts
-const hits  = await recall("how do I brief them?", facts); // READ — by meaning
-```
-
-"Persistence is not memory": the store ([`store.ts`](src/store.ts)) is just a JSON file. What makes it *memory* is the extract-then-recall loop around it — which is exactly the split between a database and a memory service.
+1. **The session is evidence, not memory.** A transcript is a recording; memory is what you *learn* from it.
+2. **WRITE — generate.** `memory_service.add_session_to_memory(session)` hands the conversation to Gemini, which **curates** it: extracts durable facts per topic, merges duplicates, updates stale ones.
+3. **READ — retrieve.** `PreloadMemoryTool()` similarity-searches the bank for this `user_id` before the model runs and injects the matches into the prompt.
+4. Exact values skip the bank entirely — they're written to `user:` state the moment they're said.
 
 ## Run it
 
 ```bash
-cp .env.example .env        # add GEMINI_API_KEY, or use your Vertex project
-npm install
+cp .env.example .env                    # your project; needs gcloud ADC
+uv sync
+uv run python setup_engine.py           # one-time — prints AGENT_ENGINE_ID → put it in .env
 
-npm run demo                # canned transcript → extract → recall, end to end
-# or drive it yourself, across two separate runs (the facts persist in memory.json):
-npm run remember -- "Vega-7 here. Long checklists make me freeze — one step at a time. Recycler throws error 42."
-npm run recall   -- "how should I brief this operator?"
-npm run forget              # wipe the store
+uv run python chat.py session-a         # tell it facts; watch Memory Bank consolidate them
+uv run python chat.py session-b         # BRAND-NEW session — it already knows you
 ```
 
-`remember` and `recall` are **separate processes** — the memory survives between them. That's the whole point.
+Verified output from a real run (session B, zero history copied):
+
+> *"I know your callsign is **Vega-7**, and your oxygen recycler has been throwing **error code 42** — these are exact facts I have stored. I also remember from our past conversations that you find long checklists overwhelming, so you prefer to be walked through things one step at a time."*
+
+The agent even tells you which store each memory came from — exact facts vs curated patterns. That routing is the whole lesson: **state remembers strings; Memory Bank remembers meaning.**
+
+## Production notes
+
+- A long-running app fires the WRITE in an `after_agent_callback` as a background task instead of an explicit flush ([gca level_2 pattern](https://github.com/gca-americas/way-back-home/tree/main/solutions/level_2)).
+- You do **not** have to host the agent inside Agent Engine to use Memory Bank — Cloud Run + `VertexAiMemoryBankService` pointed at the engine works (that's how [FashionMind](https://github.com/cuppibla/fashionmind) runs).
+- Live-audio caveat: voice transcripts live in `input/output_transcription`, not `content.parts` — replay them as synthetic events before flushing, or Memory Bank sees an empty session.

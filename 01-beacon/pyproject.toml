@@ -1,0 +1,11 @@
+[project]
+name = "level-01-beacon"
+version = "0.2.0"
+description = "Multimodal Levels · Level 1 (Express) — multi-turn generation, the ADK consistency engine, async video, deterministic verification."
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "pillow>=10.0.0",
+    "python-dotenv>=1.0.0",
+]
