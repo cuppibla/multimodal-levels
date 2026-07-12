@@ -1,73 +1,52 @@
-# Level 2 · Perceive
+# Level 2 · Reason — the specialist crew
 
-> How one specialist sees — and why three of them beat one generalist.
+> One generalist can't see everything. Build a crew of specialists, run them **in parallel**, let **code** verify the answer.
 
-This is the real code from the app's **Realm 02**, with the game scaffolding removed. Four small files hold the whole idea:
+A real multi-agent system (architecture follows [gca way-back-home level_1](https://github.com/gca-americas/way-back-home/tree/main/solutions/level_1)) — verified end-to-end:
 
-| File | What it is |
-|------|-----------|
-| [`src/perceivers.ts`](src/perceivers.ts) | the specialists — **just data**. A `lens` string each. |
-| [`src/perceive.ts`](src/perceive.ts) | the two ways of seeing + the parallel fan-out |
-| [`src/biomes.ts`](src/biomes.ts) | the reference library `measure` matches against |
-| [`src/run.ts`](src/run.ts) | a tiny CLI so you can watch it happen |
-
-## The one idea: a specialist is not a separate AI
-
-A "Geologist" is **the same `gemini-2.5-flash`** as every other specialist. What makes it a Geologist is one instruction — the `lens` — and which image it's handed. That's the entire definition ([`perceivers.ts`](src/perceivers.ts)):
-
-```ts
-{ id: "geo", name: "Geologist", modality: "soil sample",
-  lens: "a planetary geologist judging ONLY the soil/rock texture, colour and mineral cues" }
-
-{ id: "bot", name: "Botanist",  modality: "flora",
-  lens: "a xenobotanist judging ONLY the plant life — leaf form, colour, how it copes with its climate" }
+```
+MissionAnalysisAI (SequentialAgent)
+ ├─ before_agent_callback ······· hydrates evidence URLs + coords into shared STATE
+ ├─ EvidenceAnalysisCrew (ParallelAgent — true concurrent fan-out)
+ │   ├─ GeologicalAnalyst ······· soil IMAGE        → custom MCP · analyze_geological
+ │   ├─ BotanicalAnalyst ········ flora VIDEO+AUDIO → custom MCP · analyze_botanical
+ │   └─ AstronomicalAnalyst ····· star image → local vision tool → BigQuery MCP lookup
+ └─ MissionSynthesizer ·········· 2-of-3 consensus → confirm_location (deterministic gate)
 ```
 
-And here is the single place that string is used — the `lens` is interpolated straight into the prompt, model held constant ([`perceive.ts`](src/perceive.ts) → `read()`):
+## What makes it real
 
-```ts
-model: READ_MODEL,                                    // gemini-2.5-flash — identical for everyone
-contents: [{ role: "user", parts: [
-  imagePart(imageDataUrl),                            // the modality
-  { text: `You are ${p.lens}. This is the ${p.modality} from a crash site. Judge ONLY through your lens…` },
-]}],                                                   // ↑ p.lens IS the specialist
-```
+- **True multimodal evidence** — the botanist analyzes a Veo-generated **video with a native audio track** (it reported *"water dripping, insect calls"* from the soundtrack in our verification run). Evidence lives on **Cloud Storage** as `gs://` URIs; Gemini ingests it by URI inside the tools.
+- **Two MCP patterns, one client wiring** (the pedagogical core):
+  - [`mcp-server/`](mcp-server/) — a **custom** FastMCP server *you* author (Streamable HTTP, 2 tools), consumed via ADK `MCPToolset`.
+  - the **Google-managed BigQuery MCP** (`https://bigquery.googleapis.com/mcp`) — zero server code, OAuth ADC auth; the astronomer runs `execute_sql_readonly` against a real **BigQuery** table.
+- **State as the whiteboard** — the callback writes `soil_url / flora_url / stars_url / x / y` once; every sub-agent instruction reads them by `{key}` templating; analysts publish reports via `output_key` for the synthesizer.
+- **Code judges** — `confirm_location` checks the crew's biome against coordinates the model never saw, and writes `outputs/beacon.json`. The gate is deterministic.
 
-`read(soil, geo)` and `read(flora, bot)` are the **same function call**. Swap the 15-word string, get a different specialist. No training, no second endpoint.
+| Piece | File |
+|---|---|
+| Orchestration (parallel → synthesize) | [`agent/agent.py`](agent/agent.py) |
+| The three specialists | [`agent/agents/`](agent/agents/) |
+| Custom-MCP / BigQuery-MCP / gate tools | [`agent/tools/`](agent/tools/) |
+| The custom MCP server | [`mcp-server/main.py`](mcp-server/main.py) |
+| BigQuery star catalog seed | [`setup/setup_star_catalog.py`](setup/setup_star_catalog.py) |
+| Evidence generator (images + Veo video → GCS) | [`generate_evidence.py`](generate_evidence.py) |
 
-## Two ways one specialist sees
-
-1. **READ** (multimodal) — the model looks and says what it sees, in words + a best-guess biome. *An opinion.*
-2. **MEASURE** (embedding) — turn those words into a vector, find the nearest biome in a reference library. *Geometry.*
-
-They cross-check each other. The MEASURE bars are **normalised similarity** — the nearest is always `1.00`, so it's a ranking, not a confidence %.
-
-## The fan-out is one line
-
-Three specialists don't need each other, so run them at once, then vote ([`perceive.ts`](src/perceive.ts) → `crew()`):
-
-```ts
-const readings = await Promise.all(picks.map(({ p, image }) => perceive(image, p))); // fan-out → gather
-return { readings, vote: consensus(readings) };                                       // plain-code majority
-```
-
-That `Promise.all(map(perceive))` **is** the "parallel" pattern. Everything fancier (ADK's `ParallelAgent`) is a wrapper over exactly this shape.
-
-## The same thing in real ADK → [`adk/`](adk/)
-
-`src/` above is the raw mechanism. [`adk/`](adk/) is the framework: three lens `LlmAgent`s → a real `ParallelAgent` → a custom `BaseAgent` that tallies the vote — runnable with `uv run python run.py` or `adk web`. Read them side by side: *here's the 2-line primitive, here's the framework that wraps it.*
-
-## Run it
+## Run it locally
 
 ```bash
-cp .env.example .env        # add GEMINI_API_KEY, or use your Vertex project
-npm install
+cp .env.example .env                        # your project; needs gcloud ADC
+uv sync
 
-npm run roster              # the 3 lenses, no API call — start here
-npm run samples -- verdant  # draw a matching soil/flora/stars crash site into assets/
-npm run perceive -- assets/verdant-soil.png            # Geologist, two ways
-npm run perceive -- assets/verdant-soil.png --who bot  # same image, Botanist's lens — watch it hedge
-npm run perceive -- --crew assets/verdant-soil.png assets/verdant-flora.png assets/verdant-stars.png
+uv run python setup/setup_star_catalog.py   # ① seed the BigQuery star catalog (one-time)
+cd mcp-server && uv run python main.py &    # ② start the custom MCP server → :8788/mcp
+cd ..
+uv run python generate_evidence.py --biome verdant   # ③ images (one chat session) + Veo video → GCS
+uv run python run_mission.py                # ④ the mission: parallel crew → consensus → beacon
 ```
 
-Swapping `--who geo` for `--who bot` on the **same** soil image is the demo: identical model, identical call, different lens → a Botanist looking at soil gives a visibly weaker read. That's the whole point, in one command.
+Verified run: all three specialists independently returned VERDANT (the astronomer's answer came out of BigQuery, quadrant SW), the synthesizer applied 2-of-3, and the code gate wrote `outputs/beacon.json` → **BEACON ACTIVATED**. Try `--biome volcanic` to regenerate the whole site elsewhere.
+
+## The simpler on-ramps
+
+- [`adk-basics/`](adk-basics/) *(if present)* / [`src/`](src/) — the original TypeScript "two ways of seeing" primitive (`read` + `measure` + `Promise.all` fan-out), still runnable with `npm install && npm run roster`. Read it first if the full system feels like a lot — it's the same shape, minus the infrastructure.

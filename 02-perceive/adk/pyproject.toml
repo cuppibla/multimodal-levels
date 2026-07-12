@@ -1,9 +1,0 @@
-[project]
-name = "level-02-perceive-adk"
-version = "0.1.0"
-description = "Multimodal Levels · Level 2 (ADK) — the perceive crew as a real ADK ParallelAgent + deterministic vote."
-requires-python = ">=3.10"
-dependencies = [
-    "google-adk>=1.0.0",
-    "python-dotenv>=1.0.0",
-]

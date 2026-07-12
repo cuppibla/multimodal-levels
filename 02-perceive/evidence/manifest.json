@@ -1,0 +1,10 @@
+{
+  "biome_generated": "VERDANT",
+  "x": 25,
+  "y": 25,
+  "urls": {
+    "soil": "gs://neon-emitter-458622-e3-multimodal-levels/evidence/verdant/soil_sample.png",
+    "flora": "gs://neon-emitter-458622-e3-multimodal-levels/evidence/verdant/flora_recording.mp4",
+    "stars": "gs://neon-emitter-458622-e3-multimodal-levels/evidence/verdant/star_field.png"
+  }
+}

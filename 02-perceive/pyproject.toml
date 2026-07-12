@@ -1,0 +1,16 @@
+[project]
+name = "level-02-perceive"
+version = "0.2.0"
+description = "Multimodal Levels · Level 2 (Reason) — a real multi-agent system: parallel specialist crew, custom + managed MCP, BigQuery, multimodal evidence (image + video/audio)."
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "google-cloud-bigquery>=3.0.0",
+    "google-cloud-storage>=3.0.0",
+    "google-auth>=2.0.0",
+    "mcp>=1.0.0",
+    "aiohttp>=3.9.0",
+    "pillow>=10.0.0",
+    "python-dotenv>=1.0.0",
+]
