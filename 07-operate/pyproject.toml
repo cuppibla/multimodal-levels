@@ -1,0 +1,12 @@
+[project]
+name = "level-07-operate"
+version = "0.1.0"
+description = "Multimodal Levels · Level 7 (Operate) — event-driven coordination on real Cloud Pub/Sub. Publish once, survive a crash: nack -> redeliver -> ack, processed exactly once (NIM plans the formation)."
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "google-cloud-pubsub>=2.21.0",
+    "httpx>=0.27.0",
+    "python-dotenv>=1.0.0",
+]
