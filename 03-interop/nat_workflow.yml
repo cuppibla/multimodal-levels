@@ -1,0 +1,15 @@
+# NeMo Agent Toolkit — run the same agent declaratively and auto-instrument every hop over OpenTelemetry.
+# `nat run --config_file nat_workflow.yml` (or `nat serve`). model_name is a NIM — swappable, not load-bearing.
+llms:
+  nim_llm:
+    _type: nim
+    model_name: meta/llama-3.1-8b-instruct   # any NIM — swappable
+
+functions:
+  current_datetime:
+    _type: current_datetime
+
+workflow:
+  _type: react_agent          # ReAct loop
+  llm_name: nim_llm
+  tool_names: [current_datetime]

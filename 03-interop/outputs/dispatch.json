@@ -1,0 +1,18 @@
+{
+  "task": "How do I reseat the nav-array coupling after a debris strike?",
+  "card": {
+    "discovered_at": "http://localhost:8790/.well-known/agent.json",
+    "name": "Architect",
+    "skills": [
+      "lookup_schematic"
+    ],
+    "a2a_url": "http://localhost:8790/a2a",
+    "framework": "NVIDIA NIM \u00b7 meta/llama-3.1-8b-instruct"
+  },
+  "dispatch": {
+    "remote": true,
+    "a2a_url": "http://localhost:8790/a2a",
+    "answer": "1. Isolate power to the nav-array.\n2. Remove damaged coupling with a torque wrench (10-15 Nm).\n3. Inspect and clean surrounding area.\n4. Apply new coupling lubricant (Type-3).\n5. Reinstall coupling, tightening in a star pattern (5-7 Nm).\n6. Reapply power, verify nav-array alignment and operation."
+  },
+  "verified": true
+}
