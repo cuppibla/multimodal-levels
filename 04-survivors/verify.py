@@ -1,6 +1,9 @@
 """The deterministic gate — code judges the retrieval, never the model's opinion. GraphRAG must reach the
-correct physician through typed edges; flat vector search must miss (it's fooled by the bio wording)."""
+correct physician through typed edges; flat vector search must miss (it's fooled by the bio wording).
+On pass it writes outputs/walk.json — the checked-in proof of a real run."""
 from __future__ import annotations
+import json
+import os
 import sys
 
 from dotenv import load_dotenv
@@ -32,5 +35,11 @@ print(f"\n  context · flat-vector ranking: {[(r['name'], r['score']) for r in f
 print(f"  context · similarity surfaces '{flat.get('top')}' (the trap is '{trap}'); the graph reaches '{correct}'.")
 
 ok = all(CHECKS)
+
+# Real-artifact, up front (like Annie's outputs/beacon.json) — the verified run, checked in.
+os.makedirs("outputs", exist_ok=True)
+with open("outputs/walk.json", "w") as f:
+    json.dump({"question": MISSION_QUESTION, "flat_vector": flat, "graphrag": graph, "verified": ok}, f, indent=2)
+
 print("\n" + ("◉ SURVIVOR MAPPED — the edges knew what the words didn't." if ok else "GATE CLOSED — retrieval misbehaved."))
 sys.exit(0 if ok else 1)
