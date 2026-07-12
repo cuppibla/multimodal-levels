@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 900" font-family="'Space Mono', ui-monospace, monospace">
   <rect width="1240" height="900" fill="#FDF9F1"/>
   <style>
-    .band{fill:#fff;stroke:#e7e0d2;stroke-width:1.5;rx:14}
-    .lbl{fill:#8a8577;font-size:15px;letter-spacing:2px}
-    .h{fill:#2b2b2b;font-size:20px;font-weight:700}
-    .t{fill:#2b2b2b;font-size:15px}
-    .m{fill:#8a8577;font-size:13px}
+    .band{fill:#fff;stroke:#e7e0d2;stroke-width:1.5}
+    .lbl{fill:#8a8577;font-size:14px;letter-spacing:2px}
+    .h{fill:#2b2b2b;font-size:19px;font-weight:700}
+    .t{fill:#2b2b2b;font-size:14px}
+    .m{fill:#8a8577;font-size:12.5px}
     .ok{fill:#11A88F;font-weight:700}
     .bad{fill:#FF6A45;font-weight:700}
     .node{fill:#fff;stroke:#2b2b2b;stroke-width:2}
@@ -13,62 +13,63 @@
   </style>
   <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0L8,3L0,6Z" fill="#8a8577"/></marker></defs>
 
-  <text x="60" y="52" class="lbl">LEVEL 4 · KNOWLEDGE — THE SURVIVOR MAP</text>
-  <text x="60" y="80" class="h" font-size="24">GraphRAG · NeMo Retriever finds where · Neo4j knows how</text>
+  <text x="60" y="50" class="lbl">LEVEL 4 · KNOWLEDGE — THE SURVIVOR MAP</text>
+  <text x="60" y="80" class="h" font-size="23">GraphRAG · NeMo Retriever finds where · Neo4j knows how</text>
 
   <!-- BAND 1 · AGENT -->
-  <rect x="60" y="110" width="1120" height="120" class="band"/>
-  <text x="84" y="140" class="lbl">① AGENT</text>
-  <rect x="84" y="152" width="360" height="58" rx="10" fill="#fff" stroke="#2b2b2b" stroke-width="2"/>
+  <rect x="60" y="108" width="1120" height="116" rx="14" class="band"/>
+  <text x="84" y="138" class="lbl">① AGENT</text>
+  <rect x="84" y="150" width="330" height="58" rx="10" fill="#fff" stroke="#2b2b2b" stroke-width="2"/>
   <text x="104" y="178" class="h">survivor_router</text>
-  <text x="104" y="198" class="m">ADK Agent · gemini-2.5-flash · shows both, commits to the graph</text>
+  <text x="104" y="198" class="m">ADK Agent · gemini-2.5-flash</text>
   <text x="470" y="176" class="t">"Which physician can treat the crew member</text>
-  <text x="470" y="196" class="t">who took severe burns in the reactor breach?"</text>
+  <text x="470" y="197" class="t">who took severe burns in the reactor breach?"</text>
 
   <!-- BAND 2 · RETRIEVAL -->
-  <rect x="60" y="250" width="1120" height="240" class="band"/>
-  <text x="84" y="280" class="lbl">② RETRIEVAL — SAME NeMo Retriever, OPPOSITE OUTCOMES</text>
+  <rect x="60" y="244" width="1120" height="242" rx="14" class="band"/>
+  <text x="84" y="274" class="lbl">② RETRIEVAL — SAME NeMo Retriever, OPPOSITE OUTCOMES</text>
 
-  <rect x="84" y="298" width="520" height="170" rx="10" fill="#FFF3EE" stroke="#FF6A45" stroke-width="2"/>
-  <text x="104" y="326" class="h">flat_vector_search</text>
-  <text x="104" y="350" class="m">NeMo Retriever · cosine(question, physician bios)</text>
-  <text x="104" y="386" class="t">ranks by WORDS →</text>
-  <text x="104" y="414" class="t">Dr. Vale <tspan class="bad">✗</tspan>  <tspan class="m">(bio: "burn triage, thermal injury")</tspan></text>
-  <text x="104" y="446" class="m">…but Vale runs the rewarming bay — unreachable from Mara.</text>
+  <rect x="84" y="294" width="518" height="172" rx="10" fill="#FFF3EE" stroke="#FF6A45" stroke-width="2"/>
+  <text x="104" y="322" class="h">flat_vector_search</text>
+  <text x="104" y="346" class="m">NeMo Retriever · cosine(question, physician bios)</text>
+  <text x="104" y="382" class="t">ranks by WORDS →</text>
+  <text x="104" y="410" class="t">Dr. Vale <tspan class="bad">✗</tspan>  <tspan class="m">bio: "burn triage, thermal injury"</tspan></text>
+  <text x="104" y="442" class="m">…runs the rewarming bay — unreachable from Mara</text>
 
-  <rect x="636" y="298" width="520" height="170" rx="10" fill="#EBFAF6" stroke="#11A88F" stroke-width="2"/>
-  <text x="656" y="326" class="h">graph_answer</text>
-  <text x="656" y="352" class="t">① NeMo Retriever: question → <tspan class="ok">anchor survivor (Mara)</tspan></text>
-  <text x="656" y="380" class="m">   the query locates WHERE to look</text>
-  <text x="656" y="410" class="t">② Neo4j: typed variable-length walk</text>
-  <text x="656" y="436" class="m">   MATCH (a)-[:REL*1..3]-&gt;(b {role:'physician'})</text>
+  <rect x="634" y="294" width="518" height="172" rx="10" fill="#EBFAF6" stroke="#11A88F" stroke-width="2"/>
+  <text x="654" y="322" class="h">graph_answer</text>
+  <text x="654" y="348" class="t">① NeMo Retriever → <tspan class="ok">anchor survivor (Mara)</tspan></text>
+  <text x="654" y="372" class="m">   the query locates WHERE to look</text>
+  <text x="654" y="404" class="t">② Neo4j → typed variable-length walk</text>
+  <text x="654" y="430" class="m">   MATCH (a)-[:REL*1..3]-&gt;(b {role:'physician'})</text>
 
   <!-- BAND 3 · GRAPH -->
-  <rect x="60" y="510" width="1120" height="300" class="band"/>
-  <text x="84" y="540" class="lbl">③ THE SURVIVOR GRAPH — Neo4j (the edges carry the meaning)</text>
+  <rect x="60" y="506" width="1120" height="304" rx="14" class="band"/>
+  <text x="84" y="536" class="lbl">③ THE SURVIVOR GRAPH — Neo4j (the edges carry the meaning)</text>
 
-  <circle cx="200" cy="640" r="46" class="node"/>
-  <text x="200" y="638" text-anchor="middle" class="t" font-weight="700">Mara</text>
-  <text x="200" y="658" text-anchor="middle" class="m">survivor</text>
-  <path d="M248,640 L470,640" class="edge"/>
-  <text x="300" y="628" class="m">needs</text>
+  <circle cx="200" cy="632" r="46" class="node"/>
+  <text x="200" y="630" text-anchor="middle" class="t" font-weight="700">Mara</text>
+  <text x="200" y="650" text-anchor="middle" class="m">survivor</text>
+  <path d="M248,632 L466,632" class="edge"/>
+  <text x="300" y="620" class="m">needs</text>
 
-  <rect x="470" y="606" width="150" height="70" rx="10" class="node"/>
-  <text x="545" y="640" text-anchor="middle" class="t" font-weight="700">Burn Care</text>
-  <text x="545" y="660" text-anchor="middle" class="m">need</text>
-  <path d="M624,640 L840,640" class="edge"/>
-  <text x="676" y="628" class="m">provided_by</text>
+  <rect x="470" y="600" width="150" height="66" rx="10" class="node"/>
+  <text x="545" y="632" text-anchor="middle" class="t" font-weight="700">Burn Care</text>
+  <text x="545" y="652" text-anchor="middle" class="m">need</text>
+  <path d="M624,632 L836,632" class="edge"/>
+  <text x="672" y="620" class="m">provided_by</text>
 
-  <circle cx="890" cy="640" r="50" class="node" stroke="#11A88F"/>
-  <text x="890" y="634" text-anchor="middle" class="ok">Dr. Okoye</text>
-  <text x="890" y="654" text-anchor="middle" class="m">physician ★</text>
-  <text x="890" y="720" text-anchor="middle" class="m">bio: "trauma &amp; reconstructive" — never says "burn"</text>
+  <circle cx="888" cy="632" r="50" class="node" stroke="#11A88F"/>
+  <text x="888" y="626" text-anchor="middle" class="ok">Dr. Okoye</text>
+  <text x="888" y="646" text-anchor="middle" class="m">physician ★</text>
+  <text x="888" y="712" text-anchor="middle" class="m">bio: "trauma &amp; reconstructive" — never says "burn"</text>
 
-  <rect x="470" y="740" width="150" height="54" rx="10" class="node" stroke="#FF6A45" stroke-dasharray="5 4"/>
-  <text x="545" y="765" text-anchor="middle" class="bad">Dr. Vale</text>
-  <text x="545" y="783" text-anchor="middle" class="m">bio says "burn" · unreachable</text>
+  <rect x="150" y="734" width="240" height="52" rx="10" class="node" stroke="#FF6A45" stroke-dasharray="5 4"/>
+  <text x="270" y="758" text-anchor="middle" class="bad">Dr. Vale</text>
+  <text x="270" y="776" text-anchor="middle" class="m">bio says "burn" · unreachable</text>
 
-  <text x="700" y="775" class="t"><tspan class="ok">◉</tspan> models retrieve · <tspan class="ok">code judges</tspan> (verify.py) — the walk must reach the medic through the edges</text>
+  <text x="470" y="752" class="t"><tspan class="ok">◉</tspan> models retrieve · <tspan class="ok">code judges</tspan></text>
+  <text x="470" y="776" class="m">verify.py gates that the walk reached the medic through the edges</text>
 
-  <text x="60" y="856" class="m">run:  uv run python setup_graph.py  →  uv run python run_mission.py  →  uv run python verify.py</text>
+  <text x="60" y="852" class="m">run:  uv run python setup_graph.py  →  run_mission.py  →  verify.py</text>
 </svg>
