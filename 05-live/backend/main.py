@@ -30,6 +30,7 @@ from agent.agent import root_agent  # noqa: E402
 
 APP_NAME = "nova-live"
 PORT = int(os.getenv("PORT", 8500))
+WORKSHOP_TOKEN = os.getenv("WORKSHOP_TOKEN", "")  # set on the hosted service → WS requires ?token=…
 
 app = FastAPI()
 session_service = InMemorySessionService()  # live audio: keep sessions in-process (latency)
@@ -43,6 +44,11 @@ async def health() -> dict:
 
 @app.websocket("/ws/{user_id}/{session_id}")
 async def live_ws(websocket: WebSocket, user_id: str, session_id: str) -> None:
+    # Workshop gate: without the shared token this deployed relay would be an open Gemini Live
+    # endpoint on the host's bill. Unset (local dev / your own deploy) → open as before.
+    if WORKSHOP_TOKEN and websocket.query_params.get("token") != WORKSHOP_TOKEN:
+        await websocket.close(code=4401)  # close before accept → handshake denied
+        return
     await websocket.accept()
 
     run_config = RunConfig(

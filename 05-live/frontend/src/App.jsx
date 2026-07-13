@@ -98,7 +98,9 @@ export default function App() {
 
     const proto = location.protocol === "https:" ? "wss:" : "ws:";
     const session = Math.random().toString(36).slice(2, 9);
-    const ws = new WebSocket(`${proto}//${location.host}/ws/operator/${session}`);
+    // forward the workshop token from the launch URL (?token=…) — the backend checks it at the handshake
+    const token = new URLSearchParams(location.search).get("token") || "";
+    const ws = new WebSocket(`${proto}//${location.host}/ws/operator/${session}${token ? `?token=${encodeURIComponent(token)}` : ""}`);
     wsRef.current = ws;
 
     ws.onopen = async () => {

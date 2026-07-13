@@ -19,6 +19,7 @@ load_dotenv()
 
 import uvicorn  # noqa: E402
 from fastapi import FastAPI  # noqa: E402
+from fastapi.responses import JSONResponse  # noqa: E402
 from google.adk.memory import VertexAiMemoryBankService  # noqa: E402
 from google.adk.runners import Runner  # noqa: E402
 from google.adk.sessions import VertexAiSessionService  # noqa: E402
@@ -38,6 +39,17 @@ runner = Runner(agent=root_agent, app_name=APP_NAME,
                 session_service=session_service, memory_service=memory_service)
 
 app = FastAPI(title="Rescue Ops — memory agent")
+
+# Workshop gate: when WORKSHOP_TOKEN is set on the service, every call (except /health) must carry
+# X-WBH-Token — this deployed agent calls Gemini on the host's bill. Unset → open (local dev).
+WORKSHOP_TOKEN = os.getenv("WORKSHOP_TOKEN", "")
+
+
+@app.middleware("http")
+async def workshop_gate(request, call_next):
+    if WORKSHOP_TOKEN and request.url.path != "/health" and request.headers.get("x-wbh-token") != WORKSHOP_TOKEN:
+        return JSONResponse({"error": "workshop token required"}, status_code=401)
+    return await call_next(request)
 
 
 class ChatIn(BaseModel):
