@@ -1,0 +1,13 @@
+[project]
+name = "level-04-survivors"
+version = "0.1.0"
+description = "Multimodal Levels · Level 4 (Knowledge) — GraphRAG: NeMo Retriever flat-vector vs a real Neo4j typed graph walk. Similarity finds where to look; the graph knows how things connect."
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "neo4j>=5.20.0",        # the real survivor graph — variable-length Cypher walk
+    "httpx>=0.27.0",        # NVIDIA NeMo Retriever embeddings (nv-embedqa-e5-v5)
+    "numpy>=1.26.0",        # cosine for the flat-vector baseline
+    "python-dotenv>=1.0.0",
+]

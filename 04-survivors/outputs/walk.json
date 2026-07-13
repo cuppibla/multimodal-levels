@@ -1,0 +1,41 @@
+{
+  "question": "Which physician can treat the crew member who took severe burns in the reactor breach?",
+  "flat_vector": {
+    "method": "flat-vector (NeMo Retriever)",
+    "ranked": [
+      {
+        "name": "Dr. Vale",
+        "score": 0.431
+      },
+      {
+        "name": "Dr. Okoye",
+        "score": 0.386
+      },
+      {
+        "name": "Dr. Reyes",
+        "score": 0.248
+      }
+    ],
+    "top": "Dr. Vale"
+  },
+  "graphrag": {
+    "method": "graphrag",
+    "anchor": "Mara",
+    "answer": "Dr. Okoye",
+    "answer_id": "okoye",
+    "path": [
+      {
+        "from": "mara",
+        "edge": "needs",
+        "to": "burn-care"
+      },
+      {
+        "from": "burn-care",
+        "edge": "provided_by",
+        "to": "okoye"
+      }
+    ],
+    "cypher": "MATCH path = (a:Entity {id:$anchor})-[:REL*1..3]->(b:Entity {role:'physician'})\nRETURN [n IN nodes(path) | n.id]  AS ids,\n       [r IN relationships(path) | r.type] AS types\nORDER BY length(path) LIMIT 1"
+  },
+  "verified": true
+}

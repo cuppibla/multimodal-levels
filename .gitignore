@@ -12,3 +12,4 @@ memory.json
 dist/
 *.tsbuildinfo
 .DS_Store
+*.log

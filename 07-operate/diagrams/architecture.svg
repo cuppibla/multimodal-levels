@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 900" font-family="'Space Mono', ui-monospace, monospace">
+  <rect width="1240" height="900" fill="#FDF9F1"/>
+  <style>
+    .band{fill:#fff;stroke:#e7e0d2;stroke-width:1.5}
+    .lbl{fill:#8a8577;font-size:14px;letter-spacing:2px}
+    .h{fill:#2b2b2b;font-size:19px;font-weight:700}
+    .t{fill:#2b2b2b;font-size:14px}
+    .m{fill:#8a8577;font-size:12.5px}
+    .ok{fill:#11A88F;font-weight:700}
+    .bad{fill:#FF6A45;font-weight:700}
+    .sky{fill:#2E86C1;font-weight:700}
+    .node{fill:#fff;stroke:#2b2b2b;stroke-width:2}
+    .edge{stroke:#8a8577;stroke-width:2;fill:none;marker-end:url(#arr)}
+  </style>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0L8,3L0,6Z" fill="#8a8577"/></marker></defs>
+
+  <text x="60" y="50" class="lbl">LEVEL 7 · OPERATE — THE SATELLITE ARRAY</text>
+  <text x="60" y="80" class="h" font-size="23">Publish once. Survive a crash. Processed exactly once.</text>
+
+  <!-- BAND 1 · OPERATOR -->
+  <rect x="60" y="108" width="1120" height="112" rx="14" class="band"/>
+  <text x="84" y="138" class="lbl">① OPERATOR</text>
+  <rect x="84" y="150" width="330" height="56" rx="10" fill="#fff" stroke="#2b2b2b" stroke-width="2"/>
+  <text x="104" y="176" class="h">operator</text>
+  <text x="104" y="196" class="m">ADK Agent · gemini-2.5-flash</text>
+  <path d="M420,178 L560,178" class="edge"/>
+  <text x="440" y="168" class="sky">PUBLISH FORM_UP</text>
+  <text x="600" y="183" class="t">a durable event — fire and move on</text>
+
+  <!-- BAND 2 · THE RESILIENT LOOP -->
+  <rect x="60" y="240" width="1120" height="252" rx="14" class="band"/>
+  <text x="84" y="270" class="lbl">② THE RESILIENT LOOP — GOOGLE CLOUD PUB/SUB (real broker)</text>
+
+  <rect x="84" y="292" width="300" height="70" rx="10" class="node" stroke="#2E86C1"/>
+  <text x="104" y="322" class="sky">topic wbh-formation</text>
+  <text x="104" y="344" class="m">→ subscription (ack deadline 10s)</text>
+
+  <rect x="440" y="292" width="300" height="70" rx="10" class="node" stroke="#FF6A45"/>
+  <text x="460" y="322" class="t">worker-A · pull #1</text>
+  <text x="460" y="344" class="bad">✗ CRASHED before ack — NACK</text>
+  <path d="M388,327 L436,327" class="edge"/>
+
+  <rect x="796" y="292" width="300" height="70" rx="10" class="node" stroke="#11A88F"/>
+  <text x="816" y="322" class="t">worker-B · pull #2</text>
+  <text x="816" y="344" class="ok">✓ the redelivery</text>
+  <path d="M744,327 L792,327" class="edge"/>
+  <text x="690" y="392" class="m">↻ Pub/Sub redelivers</text>
+
+  <text x="104" y="416" class="t">at-least-once delivery →</text>
+  <text x="104" y="440" class="t">your handler must be <tspan class="sky">idempotent</tspan></text>
+  <text x="104" y="464" class="m">a worker can die mid-flight; the broker just redelivers the same message</text>
+
+  <!-- BAND 3 · EXACTLY ONCE -->
+  <rect x="60" y="512" width="1120" height="298" rx="14" class="band"/>
+  <text x="84" y="542" class="lbl">③ EXACTLY ONCE — worker-B plans, then acks</text>
+
+  <rect x="84" y="560" width="360" height="120" rx="10" fill="#EBFAF6" stroke="#11A88F" stroke-width="2"/>
+  <text x="104" y="590" class="h">worker-B</text>
+  <text x="104" y="616" class="t">① plan_formation(directive)</text>
+  <text x="104" y="638" class="m">   NVIDIA NIM → shape (e.g. circle)</text>
+  <text x="104" y="662" class="t">② ACK → settled, processed <tspan class="ok">once</tspan></text>
+
+  <circle cx="640" cy="620" r="6" fill="#2E86C1"/>
+  <circle cx="700" cy="590" r="6" fill="#2E86C1"/><circle cx="700" cy="650" r="6" fill="#2E86C1"/>
+  <circle cx="760" cy="576" r="6" fill="#2E86C1"/><circle cx="760" cy="664" r="6" fill="#2E86C1"/>
+  <circle cx="710" cy="620" r="6" fill="#2E86C1"/>
+  <text x="640" y="705" class="m">render_formation → 12 pods (the shape the NIM chose)</text>
+
+  <text x="880" y="595" class="t"><tspan class="ok">◉</tspan> models plan · <tspan class="ok">code judges</tspan></text>
+  <text x="880" y="619" class="m">verify.py asserts the full loop</text>
+  <text x="880" y="641" class="m">ran on REAL Cloud Pub/Sub</text>
+
+  <text x="60" y="852" class="m">run:  uv run python setup_bus.py  →  run_mission.py  →  verify.py</text>
+</svg>

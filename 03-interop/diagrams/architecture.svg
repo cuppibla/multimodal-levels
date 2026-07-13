@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 900" font-family="'Space Mono', ui-monospace, monospace">
+  <rect width="1240" height="900" fill="#FDF9F1"/>
+  <style>
+    .band{fill:#fff;stroke:#e7e0d2;stroke-width:1.5}
+    .lbl{fill:#8a8577;font-size:14px;letter-spacing:2px}
+    .h{fill:#2b2b2b;font-size:19px;font-weight:700}
+    .t{fill:#2b2b2b;font-size:14px}
+    .m{fill:#8a8577;font-size:12.5px}
+    .ok{fill:#11A88F;font-weight:700}
+    .accent{fill:#7A5CFF;font-weight:700}
+    .edge{stroke:#8a8577;stroke-width:2;fill:none;marker-end:url(#arr)}
+  </style>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0L8,3L0,6Z" fill="#8a8577"/></marker></defs>
+
+  <text x="60" y="50" class="lbl">LEVEL 3 · INTEROP — OPEN CHANNELS</text>
+  <text x="60" y="80" class="h" font-size="23">A2A · discover the Card, delegate across the boundary</text>
+
+  <!-- BAND 1 · LOCAL -->
+  <rect x="60" y="108" width="1120" height="120" rx="14" class="band"/>
+  <text x="84" y="138" class="lbl">① LOCAL — THE DISPATCHER</text>
+  <rect x="84" y="150" width="360" height="60" rx="10" fill="#fff" stroke="#2b2b2b" stroke-width="2"/>
+  <text x="104" y="178" class="h">dispatcher</text>
+  <text x="104" y="199" class="m">ADK Agent · gemini-2.5-flash</text>
+  <text x="480" y="176" class="t">knows NOTHING but ARCHITECT_URL —</text>
+  <text x="480" y="197" class="t">no hardcoded interface, no shared code</text>
+
+  <!-- BAND 2 · A2A -->
+  <rect x="60" y="248" width="1120" height="248" rx="14" class="band"/>
+  <text x="84" y="278" class="lbl">② A2A — DISCOVER, THEN DELEGATE</text>
+
+  <rect x="84" y="296" width="470" height="176" rx="10" fill="#F4F0FF" stroke="#7A5CFF" stroke-width="2"/>
+  <text x="104" y="324" class="h">the Agent Card</text>
+  <text x="104" y="348" class="m">GET /.well-known/agent.json — the contract</text>
+  <text x="104" y="380" class="t">name:  <tspan class="accent">Architect</tspan></text>
+  <text x="104" y="404" class="t">skills: [lookup_schematic]</text>
+  <text x="104" y="428" class="t">framework: <tspan class="accent">NVIDIA NIM</tspan></text>
+  <text x="104" y="452" class="m">url: …/a2a  (bind to this shape, not our code)</text>
+
+  <text x="600" y="360" class="t">① discover_agent_card()</text>
+  <text x="600" y="382" class="m">   read the Card at runtime</text>
+  <path d="M596,372 L570,372" class="edge"/>
+  <text x="600" y="424" class="t">② delegate(task)</text>
+  <text x="600" y="446" class="m">   POST /a2a · {role, parts:[{text}]}</text>
+  <path d="M840,438 L1000,438" class="edge"/>
+  <text x="880" y="426" class="m">A2A message ↓</text>
+
+  <!-- BAND 3 · REMOTE -->
+  <rect x="60" y="516" width="1120" height="294" rx="14" class="band"/>
+  <text x="84" y="546" class="lbl">③ REMOTE — THE ARCHITECT (its own process / Cloud Run)</text>
+
+  <rect x="84" y="564" width="470" height="150" rx="10" fill="#EBFAF6" stroke="#11A88F" stroke-width="2"/>
+  <text x="104" y="594" class="h">Architect</text>
+  <text x="104" y="618" class="m">FastAPI service · NVIDIA NIM (llama-3.1-8b)</text>
+  <text x="104" y="650" class="t">serves  /.well-known/agent.json</text>
+  <text x="104" y="674" class="t">answers /a2a → concise repair steps</text>
+  <text x="104" y="700" class="m">a different repo/team/deploy — neither imports the other</text>
+
+  <text x="600" y="600" class="t"><tspan class="ok">◉</tspan> models act · <tspan class="ok">code judges</tspan></text>
+  <text x="600" y="624" class="m">verify.py asserts the call was REMOTE + returned a real answer</text>
+  <text x="600" y="664" class="t">NeMo Agent Toolkit</text>
+  <text x="600" y="688" class="m">nat run --config_file nat_workflow.yml</text>
+  <text x="600" y="710" class="m">→ every hop auto-traced over OpenTelemetry</text>
+
+  <text x="60" y="852" class="m">run:  uv run python -m architect.main &amp;  →  run_mission.py  →  verify.py   ·   deploy: gcloud run deploy architect --source ./architect</text>
+</svg>

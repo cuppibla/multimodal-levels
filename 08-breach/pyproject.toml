@@ -1,0 +1,11 @@
+[project]
+name = "level-08-breach"
+version = "0.1.0"
+description = "Multimodal Levels · Level 8 (Breach) — agentic security. A system prompt is a request, not a boundary: NeMo-style input/output guardrails on real NVIDIA NIM, where the output rail's leak check is deterministic code the model can't be talked out of."
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=1.18.0",
+    "google-genai>=1.0.0",
+    "httpx>=0.27.0",
+    "python-dotenv>=1.0.0",
+]

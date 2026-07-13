@@ -1,0 +1,93 @@
+{
+  "directive": "Encircle the ridge to sweep every approach at once.",
+  "plan": {
+    "shape": "circle",
+    "reason": "Comprehensive coverage of all approaches"
+  },
+  "pods": [
+    {
+      "x": 1.0,
+      "y": 0.0
+    },
+    {
+      "x": 0.866,
+      "y": 0.5
+    },
+    {
+      "x": 0.5,
+      "y": 0.866
+    },
+    {
+      "x": 0.0,
+      "y": 1.0
+    },
+    {
+      "x": -0.5,
+      "y": 0.866
+    },
+    {
+      "x": -0.866,
+      "y": 0.5
+    },
+    {
+      "x": -1.0,
+      "y": 0.0
+    },
+    {
+      "x": -0.866,
+      "y": -0.5
+    },
+    {
+      "x": -0.5,
+      "y": -0.866
+    },
+    {
+      "x": -0.0,
+      "y": -1.0
+    },
+    {
+      "x": 0.5,
+      "y": -0.866
+    },
+    {
+      "x": 0.866,
+      "y": -0.5
+    }
+  ],
+  "events": [
+    {
+      "kind": "publish",
+      "text": "PUBLISH  FORM_UP \u2192 wbh-formation \u00b7 msg 20680905965592846",
+      "ms": 373
+    },
+    {
+      "kind": "claim",
+      "text": "worker-A  received (delivery #1) \u00b7 planning\u2026",
+      "ms": 3050
+    },
+    {
+      "kind": "crash",
+      "text": "worker-A  \u2717 CRASHED before ack \u2014 NACK \u2192 Pub/Sub redelivers",
+      "ms": 3101
+    },
+    {
+      "kind": "redeliver",
+      "text": "bus       \u21bb redelivered same msg \u2192 worker-B (delivery #2)",
+      "ms": 4896
+    },
+    {
+      "kind": "plan",
+      "text": "worker-B  \u2713 planned: circle \u2014 Comprehensive coverage of all approaches",
+      "ms": 5674
+    },
+    {
+      "kind": "ack",
+      "text": "worker-B  \u2713 ACK \u2014 settled, processed exactly once",
+      "ms": 5674
+    }
+  ],
+  "msgId": "20680905965592846",
+  "broker": "cloud-pubsub",
+  "ms": 5674,
+  "verified": true
+}
