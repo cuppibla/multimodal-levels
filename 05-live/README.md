@@ -43,7 +43,8 @@ cd frontend && npm install && npm run build && cd ..
 **Step 2 — start the backend (SPA + WebSocket bridge, one origin).**
 
 ```bash
-# → http://localhost:8500
+# → http://localhost:8500 — the port is the PORT env var (backend/main.py), default 8500;
+#   pick another with:  PORT=8600 uv run --directory backend python main.py
 uv run --directory backend python main.py
 ```
 
@@ -69,6 +70,7 @@ Frontend dev loop: `cd frontend && npm run dev` → http://localhost:5510 (proxi
 
 | Symptom | Fix |
 |---|---|
+| nothing on http://localhost:8500 | run Step 2 from `05-live/` (the repo folder), and check its output — the startup line prints the actual URL. `Address already in use` → something else owns :8500, restart with `PORT=8600 …` and open that. A `frontend/dist` error → Step 1's build was skipped |
 | silence after OPEN LIVE CHANNEL | mic permission denied, or `PERMISSION_DENIED: aiplatform` in the backend log (redo Step 0 auth) |
 | chipmunk / slow-motion voice | a sample-rate got changed — mic path must be 16 kHz, playback 24 kHz |
 | finger badge never lights | camera permission, or the camera preview is black (another app holds it) |
