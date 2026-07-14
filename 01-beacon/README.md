@@ -15,28 +15,102 @@ Real, runnable code for every beat of the session (deck: *Way Back Home · D1·S
 | ⑥ Image now, video later | [`video.py`](video.py) | Veo returns a **long-running operation** — a ticket, not a file; you poll `operation.done` |
 | ⑦ Models create, code judges | [`verify.py`](verify.py) | probabilistic creation, **deterministic verification** — the gate is code, never the model's opinion |
 
-## Run it locally
+## 🧭 The tutorial — from zero to orbit
+
+One continuous path: **Part 1 runs everything locally** (each step says what to run AND what you
+should see), **Part 2 deploys it** (three ways). This is the same content as the ⌁ Launch Bay in
+the Way Back Home console — this page is the long-form version.
+
+### Part 1 · Run it locally
+
+**Step 0 — prerequisites (~3 min, once).** You need Python 3.11+, [`uv`](https://docs.astral.sh/uv/),
+and ONE of two auth paths:
 
 ```bash
-cp .env.example .env          # set GOOGLE_CLOUD_PROJECT (Vertex/ADC) or GOOGLE_API_KEY
-uv sync
+# Path 1 · Vertex AI (a GCP project with billing):
+gcloud auth application-default login          # ADC — your code authenticates as YOU, no key file
+gcloud services enable aiplatform.googleapis.com
 
-# ② the keystone — portrait → icon in ONE chat session (same person)
+# Path 2 · AI Studio (no GCP project needed): grab a free key at aistudio.google.com/apikey
+```
+
+```bash
+cp .env.example .env     # Vertex: set GOOGLE_CLOUD_PROJECT · AI Studio: set GOOGLE_API_KEY
+uv sync                  # creates .venv and installs everything
+```
+
+> **What to expect:** `uv sync` prints the resolved package list and exits clean. If a later step
+> throws an auth error, this step is the one to redo — nothing else here touches credentials.
+
+**Step 1 — feel the PROBLEM first: two stateless calls = two strangers.**
+
+```bash
+uv run python generator.py --naive
+```
+
+> **What to expect:** `outputs/naive-1.png` and `outputs/naive-2.png` — the SAME prompt, run as
+> two independent calls. Open them side by side: two different people. That drift is the whole
+> reason this level exists.
+
+**Step 2 — the keystone: ONE chat session = the same person (slide ②).**
+
+```bash
 uv run python generator.py
-uv run python generator.py --naive        # the problem: two stateless calls → two strangers
+```
+
+> **What to expect:** `outputs/portrait.png` and `outputs/icon.png` — a portrait, then an icon
+> generated in the SAME chat session. Same face, same suit. Nothing was fine-tuned and there is
+> no magic seed: the session's history is the conditioning (in-context, not weights).
+
+**Step 3 — make it yours: only the Anchor is your words (slide ③).**
+
+```bash
 uv run python generator.py --anchor "a cheerful botanist with round glasses"
+```
 
-# ⑤ the ADK consistency engine — different scenes, one face
-uv run python run_agent.py                # or interactively:  uv run adk run agent  /  uv run adk web
+> **What to expect:** the same two-image run, but the person matches YOUR anchor. Read the
+> printed prompt: your words landed ONLY in the Anchor layer — Style-lock, Constraints, and
+> Consistency are the framework's. That 4-layer split is what makes generation repeatable.
 
-# ⑥ async video — a ticket, not a file (Veo, ~1 min, billed)
+**Step 4 — the ADK consistency engine: different scenes, one face (slide ⑤).**
+
+```bash
+uv run python run_agent.py         # or interactively:  uv run adk run agent  ·  uv run adk web
+```
+
+> **What to expect:** `outputs/agent_01.png` and `outputs/agent_02.png` — two DIFFERENT scenes,
+> same explorer. How: a `before_agent_callback` locks the identity into session **state**, pins
+> the first render as a reference image in state, and every tool call re-applies both. This is
+> the pattern you'll deploy in Part 2.
+
+**Step 5 — async video: a ticket, not a file (slide ⑥ · ~1 min · billed).**
+
+```bash
 uv run python video.py
+```
 
-# ⑦ the deterministic gate
+> **What to expect:** the script prints the Veo **long-running operation** id immediately, then
+> polls `operation.done` until the MP4 lands in `outputs/`. That's the async contract: video is
+> never a synchronous response. (Veo runs on Vertex in `us-central1` — if you see a model-not-found,
+> check `VEO_MODEL` in `.env`; `veo-3.0-generate-001` is the safe default.)
+
+**Step 6 — the deterministic gate: models create, code judges (slide ⑦).**
+
+```bash
 uv run python verify.py
 ```
 
-Outputs land in `outputs/`. Open `naive-1.png` vs `naive-2.png` (drift), then `portrait.png` vs `icon.png` (matched), then `agent_01.png` vs `agent_02.png` (different scenes, same face — that's state + callback at work).
+> **What to expect:** a pass/fail verdict computed by CODE over the generated artifacts — no LLM
+> grades itself anywhere in this repo. Progress gates on this, not on vibes.
+
+**Troubleshooting Part 1:**
+
+| Symptom | Fix |
+|---|---|
+| `401/403` on any generation call | redo Step 0 — ADC not logged in, or `GOOGLE_CLOUD_PROJECT` wrong, or key typo |
+| `429 RESOURCE_EXHAUSTED` | image gen is **2/min** on default quota — wait a minute and rerun; it's quota, not code |
+| Veo `NOT_FOUND` | model id moved — set `VEO_MODEL=veo-3.0-generate-001` and keep location `us-central1` |
+| images look inconsistent in Step 2 | make sure you ran `generator.py` (session), not `--naive` (stateless) |
 
 ## The consistency ladder (slide ④ — pick the lightest that holds)
 
@@ -51,10 +125,10 @@ Outputs land in `outputs/`. Open `naive-1.png` vs `naive-2.png` (drift), then `p
 
 ---
 
-## 🚀 Ship it — three ways to orbit
+## 🚀 Part 2 · Ship it — three ways to orbit
 
-> The deep tutorial behind the **⌁ Launch Bay** in the Way Back Home realm. Everything below
-> was run against a real project — copy-paste in order and you'll have this agent deployed.
+> You just ran the consistency engine locally (Part 1, Step 4). Now deploy exactly that agent.
+> Copy-paste in order — every command below matches the ⌁ Launch Bay in the console.
 
 A single ADK agent has a **ladder of deploy targets**. You pick by how much infrastructure you
 want to own — the agent code never changes.

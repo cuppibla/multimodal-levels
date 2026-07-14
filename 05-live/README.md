@@ -22,23 +22,54 @@ browser ──(mic 16 kHz PCM · camera JPEG frames)──►  FastAPI /ws  ─�
 | **Barge-in** | both | your speech onset (RMS ≥ 0.012) instantly cuts NOVA's playback; the server also forwards `interrupted` |
 | Console UI | [`frontend/src/App.jsx`](frontend/src/App.jsx) | the orb, live transcript, biometric badge, camera preview |
 
-## Run it locally
+## 🧭 Run it locally — step by step
+
+Part 1 of the tutorial; Part 2 (deploying it, three ways) is the **🚀 Ship it** section below.
+
+**Step 0 — prerequisites.** A GCP project with billing + ADC
+(`gcloud auth application-default login`), Vertex AI API enabled, Node 20+, and a mic + camera.
+
+**Step 1 — install and build the SPA (one-time).**
 
 ```bash
-cp .env.example .env                     # your project; needs gcloud ADC
+cp .env.example .env                                    # set GOOGLE_CLOUD_PROJECT
 uv sync
-cd frontend && npm install && npm run build && cd ..   # one-time (or use the dev proxy below)
+cd frontend && npm install && npm run build && cd ..
+```
 
+> **What to expect:** `frontend/dist/` appears — the built console the backend will serve.
+
+**Step 2 — start the backend (SPA + WebSocket bridge, one origin).**
+
+```bash
 uv run --directory backend python main.py     # → http://localhost:8500
 ```
 
-Open **http://localhost:8500**, click **▶ OPEN LIVE CHANNEL**, allow mic + camera:
+> **What to expect:** a uvicorn line on :8500. One process now serves the UI AND the `/ws`
+> bridge — the browser never talks to Gemini directly (credentials stay server-side; that's
+> the whole point of the bridge).
 
-- talk — NOVA answers in **voice** (watch the orb pulse)
-- **hold up 1–5 fingers** — she calls `report_digit` server-side, the badge lights up, and she confirms out loud
-- **speak over her** — playback cuts instantly (client RMS barge-in; Gemini also detects it server-side)
+**Step 3 — prove the stream.** Open **http://localhost:8500**, click **▶ OPEN LIVE CHANNEL**,
+allow mic + camera, then run the three checks:
+
+| Do this | What to expect |
+|---|---|
+| talk | NOVA answers in **voice** — the orb pulses with her actual output spectrum |
+| **hold up 1–5 fingers** | she calls the `report_digit` tool server-side; the biometric badge lights; she confirms out loud |
+| **speak over her** | her playback cuts **instantly** (client RMS barge-in at 0.012; Gemini also detects it server-side) |
+
+All three green = the full contract works: mic 16 kHz up · voice 24 kHz down · interruption
+both ways. These are exactly what you'll re-check after deploying (Ship it, step A3).
 
 Frontend dev loop: `cd frontend && npm run dev` → http://localhost:5510 (proxies `/ws` + `/api` to :8500).
+
+**Troubleshooting:**
+
+| Symptom | Fix |
+|---|---|
+| silence after OPEN LIVE CHANNEL | mic permission denied, or `PERMISSION_DENIED: aiplatform` in the backend log (redo Step 0 auth) |
+| chipmunk / slow-motion voice | a sample-rate got changed — mic path must be 16 kHz, playback 24 kHz |
+| finger badge never lights | camera permission, or the camera preview is black (another app holds it) |
 
 ## 🚀 Ship it — deploying a stream is not deploying a request
 

@@ -34,21 +34,75 @@ MissionAnalysisAI (SequentialAgent)
 | BigQuery star catalog seed | [`setup/setup_star_catalog.py`](setup/setup_star_catalog.py) |
 | Evidence generator (images + Veo video → GCS) | [`generate_evidence.py`](generate_evidence.py) |
 
-## Run it locally
+## 🧭 Run it locally — step by step
+
+Part 1 of the tutorial; Part 2 (deploying, both shapes) is the **🚀 Ship it** section below.
+Each step says what to run AND what you should see.
+
+**Step 0 — prerequisites.** A GCP project with billing, ADC logged in
+(`gcloud auth application-default login`), and the Vertex AI + BigQuery APIs enabled.
 
 ```bash
-cp .env.example .env                        # your project; needs gcloud ADC
+cp .env.example .env         # set GOOGLE_CLOUD_PROJECT
 uv sync
-
-uv run python setup/setup_star_catalog.py   # ① seed the BigQuery star catalog (one-time)
-cd mcp-server && uv run python main.py &    # ② start the custom MCP server → :8788/mcp
-#    (or use the deployed one: MCP_SERVER_URL=https://location-analyzer-680476413759.us-central1.run.app)
-cd ..
-uv run python generate_evidence.py --biome verdant   # ③ images (one chat session) + Veo video → GCS
-uv run python run_mission.py                # ④ the mission: parallel crew → consensus → beacon
 ```
 
-Verified run: all three specialists independently returned VERDANT (the astronomer's answer came out of BigQuery, quadrant SW), the synthesizer applied 2-of-3, and the code gate wrote `outputs/beacon.json` → **BEACON ACTIVATED**. Try `--biome volcanic` to regenerate the whole site elsewhere.
+**Step 1 — seed the BigQuery star catalog (one-time).**
+
+```bash
+uv run python setup/setup_star_catalog.py
+```
+
+> **What to expect:** dataset `multimodal_levels`, table `star_catalog`, 12 rows of
+> enum-constrained vocabulary (star colors × sky conditions → biome + quadrant). The astronomer
+> will later match against these EXACT values — that's why its vision tool is enum-constrained.
+
+**Step 2 — start the custom MCP server.**
+
+```bash
+cd mcp-server && uv run python main.py &     # → http://localhost:8788/mcp
+cd ..
+```
+
+> **What to expect:** a uvicorn line on :8788. This is MCP pattern #1 — a FastMCP server YOU
+> author (2 tools: `analyze_geological`, `analyze_botanical`). Pattern #2 needs no server at
+> all: the astronomer hits Google's MANAGED BigQuery MCP endpoint directly.
+
+**Step 3 — generate the crash-site evidence (~2–4 min; Veo is the slow part · billed).**
+
+```bash
+uv run python generate_evidence.py --biome verdant
+```
+
+> **What to expect:** three artifacts in GCS (`soil_sample.png`, `flora_recording.mp4` with a
+> native AUDIO track, `star_field.png`) + `evidence/manifest.json` holding the `gs://` URIs and
+> the secret crash coordinates. The images come from ONE chat session (Level 1's trick, reused);
+> the flora video comes from Veo.
+
+**Step 4 — run the mission: parallel crew → consensus → gate.**
+
+```bash
+uv run python run_mission.py
+```
+
+> **What to expect (verified run):** three report lines arriving as the parallel fan-out
+> completes —
+> `GEOLOGICAL ANALYSIS: VERDANT (confidence: 98%) …` ·
+> `BOTANICAL ANALYSIS: VERDANT … · water dripping, insect calls` (the botanist heard the
+> video's AUDIO track through the MCP server) ·
+> `ASTRONOMICAL ANALYSIS: VERDANT (quadrant SW) …` (that biome came out of BigQuery, not the
+> model's imagination) — then the synthesizer applies 2-of-3 and the code gate writes
+> `outputs/beacon.json` → **BEACON ACTIVATED**. Try `--biome volcanic` to regenerate the whole
+> site elsewhere and watch the same pipeline conclude differently.
+
+**Troubleshooting:**
+
+| Symptom | Fix |
+|---|---|
+| astronomer says INCONCLUSIVE | Step 1 not run (no catalog), or BigQuery API/IAM missing |
+| analysts report `NOT AVAILABLE — run generate_evidence.py first` | Step 3 not run — no manifest |
+| MCP tool calls hang | Step 2 server not up, or `MCP_SERVER_URL` points somewhere stale |
+| `429` during evidence gen | image quota is 2/min — the script throttles, but a rerun right after a run can trip it |
 
 ## The simpler on-ramps
 

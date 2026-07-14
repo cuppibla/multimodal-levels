@@ -24,18 +24,49 @@ Real ADK + **Vertex AI Agent Engine** integration — no mocks. One Agent Engine
 3. **READ — retrieve.** `PreloadMemoryTool()` similarity-searches the bank for this `user_id` before the model runs and injects the matches into the prompt.
 4. Exact values skip the bank entirely — they're written to `user:` state the moment they're said.
 
-## Run it
+## 🧭 Run it locally — step by step
+
+Part 1 of the tutorial; Part 2 (deploying with memory, both hosts) is the **🚀 Ship it**
+section below.
+
+**Step 0 — prerequisites.**
 
 ```bash
-cp .env.example .env                    # your project; needs gcloud ADC
+gcloud auth application-default login       # ADC
+cp .env.example .env                        # set GOOGLE_CLOUD_PROJECT (+ location us-central1)
 uv sync
-uv run python setup_engine.py           # one-time — prints AGENT_ENGINE_ID → put it in .env
-
-uv run python chat.py session-a         # tell it facts; watch Memory Bank consolidate them
-uv run python chat.py session-b         # BRAND-NEW session — it already knows you
 ```
 
-Verified output from a real run (session B, zero history copied):
+**Step 1 — provision the memory infrastructure (one-time, ~1 min).**
+
+```bash
+uv run python setup_engine.py
+```
+
+> **What to expect:** it prints `AGENT_ENGINE_ID=<number>` — **put it in `.env`**. You just
+> created the Vertex AI Agent Engine that backs BOTH stores: durable `user:` state (exact
+> facts) and Memory Bank (curated patterns), with our custom topics (`survivor_context`,
+> `comms_style`). Think "created a database" — every host from here on just points at this id.
+
+**Step 2 — session A: give it something to remember.**
+
+```bash
+uv run python chat.py session-a
+```
+
+> **What to expect:** chat normally — tell it your callsign, a device error, a preference
+> ("long checklists overwhelm me"). On exit the session is flushed to Memory Bank
+> (`add_session_to_memory`) and the script polls until the curated memories appear. Watch which
+> store each item lands in: exact values → `user:` state, meaning → the bank.
+
+**Step 3 — session B: the proof.**
+
+```bash
+uv run python chat.py session-b
+```
+
+> **What to expect:** a BRAND-NEW session, zero history copied — ask *"what do you remember
+> about me?"* Verified output from a real run:
 
 > *"I know your callsign is **Vega-7**, and your oxygen recycler has been throwing **error code 42** — these are exact facts I have stored. I also remember from our past conversations that you find long checklists overwhelming, so you prefer to be walked through things one step at a time."*
 
