@@ -1,0 +1,93 @@
+<svg viewBox="0 0 1240 900" xmlns="http://www.w3.org/2000/svg">
+<rect width="1240" height="900" rx="22" fill="#FDF9F1"/>
+<text x="28" y="40" text-anchor="start" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="700" fill="#7B5CFC">ANATOMY — a multi-agent system (02-perceive)</text>
+
+<!-- ═══ BAND ③ · AGENTS (top) ═══ -->
+<rect x="24" y="58" width="1192" height="212" rx="16" fill="#F3F0FB"/>
+<text x="44" y="88" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">③ AGENTS — orchestrate + communicate</text>
+
+<rect x="44" y="106" width="252" height="88" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="170" y="141" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">MissionAnalysisAI</text>
+<text x="170" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">SequentialAgent — the spine</text>
+
+<line x1="300" y1="150" x2="330" y2="150" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 340 150 l -10 -5 v 10 z" fill="#B9AFC7"/>
+
+<rect x="344" y="106" width="300" height="88" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5"/>
+<text x="494" y="141" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">EvidenceAnalysisCrew</text>
+<text x="494" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">ParallelAgent — Geo · Bot · Astro</text>
+
+<line x1="648" y1="150" x2="678" y2="150" stroke="#B9AFC7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 688 150 l -10 -5 v 10 z" fill="#B9AFC7"/>
+
+<rect x="692" y="106" width="252" height="88" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="818" y="141" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">MissionSynthesizer</text>
+<text x="818" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">2-of-3 vote → code gate</text>
+
+<rect x="972" y="106" width="220" height="88" rx="12" fill="#fff" stroke="#7B5CFC" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="1082" y="141" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">they talk via</text>
+<text x="1082" y="165" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">session.state · A2A</text>
+
+<rect x="330" y="212" width="580" height="40" rx="20" fill="#fff"/>
+<circle cx="356" cy="232" r="13" fill="#7B5CFC"/>
+<text x="356" y="237" text-anchor="middle" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#fff">③</text>
+<text x="380" y="238" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">the layer that thinks — topology is free, reasoning sits at the nodes</text>
+
+<!-- gap arrow agents → tools -->
+<line x1="620" y1="270" x2="620" y2="296" stroke="#7B5CFC" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M 620 306 l -6 -10 h 12 z" fill="#7B5CFC"/>
+<text x="638" y="292" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#7B5CFC">tools/list · tools/call</text>
+
+<!-- ═══ BAND ② · TOOLS (middle) ═══ -->
+<rect x="24" y="310" width="1192" height="212" rx="16" fill="#FBEFE9"/>
+<text x="44" y="340" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">② TOOLS · MCP — one protocol, two flavors</text>
+
+<rect x="44" y="358" width="540" height="100" rx="12" fill="#fff" stroke="#FF6A45" stroke-width="2.5"/>
+<text x="314" y="390" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">custom FastMCP — you build it</text>
+<text x="314" y="414" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">mcp-server/main.py · Streamable HTTP · :8788/mcp</text>
+<text x="314" y="436" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">analyze_geological · analyze_botanical</text>
+
+<rect x="652" y="358" width="540" height="100" rx="12" fill="#fff" stroke="#5B9BFF" stroke-width="2.5"/>
+<text x="922" y="390" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">Google-managed BigQuery MCP</text>
+<text x="922" y="414" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">bigquery.googleapis.com/mcp · OAuth/ADC</text>
+<text x="922" y="436" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">execute_sql_readonly · zero server code</text>
+
+<rect x="330" y="470" width="580" height="40" rx="20" fill="#fff"/>
+<circle cx="356" cy="490" r="13" fill="#FF6A45"/>
+<text x="356" y="495" text-anchor="middle" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#fff">②</text>
+<text x="380" y="496" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">discover, then invoke — the same two calls for both flavors</text>
+
+<!-- gap arrow tools → data -->
+<line x1="620" y1="522" x2="620" y2="548" stroke="#E08A1E" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M 620 558 l -6 -10 h 12 z" fill="#E08A1E"/>
+<text x="638" y="544" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#E08A1E">reads gs:// URIs · runs SQL</text>
+
+<!-- ═══ BAND ① · DATA (bottom) ═══ -->
+<rect x="24" y="562" width="1192" height="212" rx="16" fill="#FAF1E4"/>
+<text x="44" y="592" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2.5" fill="#9A93AC">① DATA — the crash site</text>
+
+<rect x="44" y="610" width="264" height="88" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="176" y="645" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">soil_sample.png</text>
+<text x="176" y="669" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">IMAGE · gs://</text>
+
+<rect x="336" y="610" width="290" height="88" rx="12" fill="#fff" stroke="#E08A1E" stroke-width="2.5"/>
+<text x="481" y="645" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">flora_recording.mp4</text>
+<text x="481" y="669" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">VIDEO + AUDIO track · gs://</text>
+
+<rect x="654" y="610" width="252" height="88" rx="12" fill="#fff" stroke="#332A4E" stroke-width="2.5"/>
+<text x="780" y="645" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">star_field.png</text>
+<text x="780" y="669" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">IMAGE · gs://</text>
+
+<rect x="934" y="610" width="258" height="88" rx="12" fill="#fff" stroke="#11C0A4" stroke-width="2.5"/>
+<text x="1063" y="645" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#332A4E">BigQuery star_catalog</text>
+<text x="1063" y="669" text-anchor="middle" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="14" fill="#8B8299">color · sky → quadrant · biome</text>
+
+<rect x="330" y="716" width="580" height="40" rx="20" fill="#fff"/>
+<circle cx="356" cy="736" r="13" fill="#E08A1E"/>
+<text x="356" y="741" text-anchor="middle" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#fff">①</text>
+<text x="380" y="742" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#332A4E">multimodal evidence by URI + one SQL table — the whole layer</text>
+
+<!-- footer -->
+<rect x="240" y="806" width="760" height="52" rx="26" fill="#fff" stroke="#EBD9C0" stroke-width="2"/>
+<text x="620" y="839" text-anchor="middle" font-family="Nunito, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#332A4E">walk it bottom-up: ① the evidence exists → ② tools reach it → ③ agents reason over it</text>
+</svg>

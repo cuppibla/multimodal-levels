@@ -16,6 +16,10 @@ MissionAnalysisAI (SequentialAgent)
  └─ MissionSynthesizer ·········· 2-of-3 consensus → confirm_location (deterministic gate)
 ```
 
+The same system as **three layers** — data → tools (MCP) → agents (the map the session walks bottom-up):
+
+![the three layers](diagrams/layers.svg)
+
 ## What makes it real
 
 - **True multimodal evidence** — the botanist analyzes a Veo-generated **video with a native audio track** (it reported *"water dripping, insect calls"* from the soundtrack in our verification run). Evidence lives on **Cloud Storage** as `gs://` URIs; Gemini ingests it by URI inside the tools.
@@ -33,6 +37,8 @@ MissionAnalysisAI (SequentialAgent)
 | The custom MCP server | [`mcp-server/main.py`](mcp-server/main.py) |
 | BigQuery star catalog seed | [`setup/setup_star_catalog.py`](setup/setup_star_catalog.py) |
 | Evidence generator (images + Veo video → GCS) | [`generate_evidence.py`](generate_evidence.py) |
+| 60-second MCP spotlight (both flavors, no crew) | [`spotlight_mcp.py`](spotlight_mcp.py) |
+| State spotlight — YOUR variable through callback → state → gate | [`spotlight_state.py`](spotlight_state.py) |
 
 ## 🧭 Run it locally — step by step
 
@@ -56,6 +62,10 @@ uv run python setup/setup_star_catalog.py
 > **What to expect:** dataset `multimodal_levels`, table `star_catalog`, 12 rows of
 > enum-constrained vocabulary (star colors × sky conditions → biome + quadrant). The astronomer
 > will later match against these EXACT values — that's why its vision tool is enum-constrained.
+>
+> **Cost:** lookups scan KBs (BigQuery bills a 10 MB minimum per on-demand query) — effectively
+> $0 at any workshop scale, inside the monthly free tier. **Verify the seed:**
+> `bq query --use_legacy_sql=false 'SELECT COUNT(*) FROM `multimodal_levels.star_catalog`'`
 
 **Step 2 — start the custom MCP server.**
 
@@ -94,6 +104,55 @@ uv run python run_mission.py
 > model's imagination) — then the synthesizer applies 2-of-3 and the code gate writes
 > `outputs/beacon.json` → **BEACON ACTIVATED**. Try `--biome volcanic` to regenerate the whole
 > site elsewhere and watch the same pipeline conclude differently.
+
+**Step 4b (alternative) — the same mission, interactively in the ADK dev UI.**
+
+```bash
+uv run adk web               # → http://localhost:8000 — pick `agent` in the top-left dropdown
+                             #   (`a2a_crew` also appears — that's the Shape-2 dispatcher; it
+                             #    needs the A2A fleet from the 🚀 Ship-it section running)
+```
+
+Then send the same message the script sends:
+*"Analyze all crash-site evidence and confirm my location. Activate the beacon."*
+
+> **What to expect:** the same run, but *visible*. The **Events** panel shows the three analysts
+> fanning out concurrently, every MCP `tools/call` (both the FastMCP server and BigQuery), and
+> the **State** tab shows the whiteboard filling up — the callback's `soil_url / flora_url /
+> stars_url / x / y`, then each analyst's `output_key` report landing before the synthesizer
+> reads them. Fastest way to *see* the architecture instead of inferring it from log lines.
+> Steps 1–3 are still prerequisites (catalog seeded, MCP server up, evidence generated); if
+> :8000 is taken, `uv run adk web --port 8080`.
+
+**Step 5 (optional) — the 60-second MCP spotlight.** The tool layer alone, no crew:
+
+```bash
+uv run python spotlight_mcp.py
+```
+
+> **What to expect:** the same client speaks the same three verbs — `initialize → tools/list →
+> tools/call` — against BOTH servers. Act ①: your FastMCP answers `analyze_geological` on the
+> soil evidence (a real Gemini call). Act ②: Google's managed BigQuery MCP runs
+> `execute_sql_readonly` and the catalog row comes back
+> (`red_orange · ash_dimmed → NE · VOLCANIC`). The only difference between the acts is who
+> runs the server. Point act ① at a deployed analyzer with `MCP_SERVER_URL=…`
+> (+ `WORKSHOP_TOKEN=…` if that deploy is gated).
+
+**Step 6 (optional) — watch YOUR variable travel: callback → state → instruction → gate.**
+
+```bash
+uv run python spotlight_state.py --x 25 --y 25    # or run it bare and type the numbers
+```
+
+> **What to expect:** the state machinery, made touchable — with YOUR values. ① a
+> `before_agent_callback` writes the evidence URLs **and the coordinates you typed** into
+> session state, once; ② the Geologist's instruction is printed verbatim — it contains a
+> LITERAL `{soil_url}` (nobody pasted a URL) — then shown resolved, because ADK reads state at
+> runtime; ③ the real Geologist runs (real MCP tool call) and its report lands **back in
+> state** via `output_key` — the whiteboard round-trip; ④ `confirm_location`'s math runs on
+> YOUR coordinates. Now rerun with `--x 75 --y 75`: quadrant NE = VOLCANIC ground truth, the
+> model still says VERDANT → **✗ MISMATCH — the gate sides with your variable over the model.**
+> That's "code judges" in one line of output.
 
 **Troubleshooting:**
 
