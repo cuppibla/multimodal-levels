@@ -18,12 +18,16 @@ Real, runnable code for every beat of the session (deck: *Way Back Home · D2·S
 ## Run it locally
 
 ```bash
-cp .env.example .env          # GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY
+# copy, then edit .env — GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY
+cp .env.example .env
 uv sync
 
-uv run python setup_bus.py    # ① create the topic + subscription (one-time, real Cloud Pub/Sub)
-uv run python run_mission.py  # the operator publishes → crash → redeliver → plan → ack
-uv run python verify.py       # the gate (processed exactly once)
+# ① create the topic + subscription (one-time, real Cloud Pub/Sub)
+uv run python setup_bus.py
+# ② the operator publishes → crash → redeliver → plan → ack
+uv run python run_mission.py
+# ③ the gate (processed exactly once)
+uv run python verify.py
 
 # cleanup:
 gcloud pubsub subscriptions delete wbh-formation-sub && gcloud pubsub topics delete wbh-formation

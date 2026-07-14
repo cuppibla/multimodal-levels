@@ -49,7 +49,8 @@ Each step says what to run AND what you should see.
 (`gcloud auth application-default login`), and the Vertex AI + BigQuery APIs enabled.
 
 ```bash
-cp .env.example .env         # set GOOGLE_CLOUD_PROJECT
+# copy the env template, then edit it: set GOOGLE_CLOUD_PROJECT
+cp .env.example .env
 uv sync
 ```
 
@@ -70,7 +71,8 @@ uv run python setup/setup_star_catalog.py
 **Step 2 — start the custom MCP server.**
 
 ```bash
-cd mcp-server && uv run python main.py &     # → http://localhost:8788/mcp
+# → http://localhost:8788/mcp
+cd mcp-server && uv run python main.py &
 cd ..
 ```
 
@@ -108,9 +110,10 @@ uv run python run_mission.py
 **Step 4b (alternative) — the same mission, interactively in the ADK dev UI.**
 
 ```bash
-uv run adk web               # → http://localhost:8000 — pick `agent` in the top-left dropdown
-                             #   (`a2a_crew` also appears — that's the Shape-2 dispatcher; it
-                             #    needs the A2A fleet from the 🚀 Ship-it section running)
+# → http://localhost:8000 — pick `agent` in the top-left dropdown
+#   (`a2a_crew` also appears — that's the Shape-2 dispatcher; it
+#    needs the A2A fleet from the 🚀 Ship-it section running)
+uv run adk web
 ```
 
 Then send the same message the script sends:
@@ -141,7 +144,8 @@ uv run python spotlight_mcp.py
 **Step 6 (optional) — watch YOUR variable travel: callback → state → instruction → gate.**
 
 ```bash
-uv run python spotlight_state.py --x 25 --y 25    # or run it bare and type the numbers
+# or run it bare and type the numbers when prompted
+uv run python spotlight_state.py --x 25 --y 25
 ```
 
 > **What to expect:** the state machinery, made touchable — with YOUR values. ① a
@@ -279,9 +283,10 @@ uv sync --extra a2a
 (or `&` them):
 
 ```bash
-ANALYST=geological   uv run python -m a2a_crew.serve_analyst &   # :8791
-ANALYST=botanical    uv run python -m a2a_crew.serve_analyst &   # :8792
-ANALYST=astronomical uv run python -m a2a_crew.serve_analyst &   # :8793
+# ports: geological :8791 · botanical :8792 · astronomical :8793
+ANALYST=geological   uv run python -m a2a_crew.serve_analyst &
+ANALYST=botanical    uv run python -m a2a_crew.serve_analyst &
+ANALYST=astronomical uv run python -m a2a_crew.serve_analyst &
 ```
 
 Each service publishes its **Agent Card** — the discovery contract a caller binds to instead of

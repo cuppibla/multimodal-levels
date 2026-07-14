@@ -32,7 +32,8 @@ Part 1 of the tutorial; Part 2 (deploying it, three ways) is the **🚀 Ship it*
 **Step 1 — install and build the SPA (one-time).**
 
 ```bash
-cp .env.example .env                                    # set GOOGLE_CLOUD_PROJECT
+# copy the env template, then edit it: set GOOGLE_CLOUD_PROJECT
+cp .env.example .env
 uv sync
 cd frontend && npm install && npm run build && cd ..
 ```
@@ -42,7 +43,8 @@ cd frontend && npm install && npm run build && cd ..
 **Step 2 — start the backend (SPA + WebSocket bridge, one origin).**
 
 ```bash
-uv run --directory backend python main.py     # → http://localhost:8500
+# → http://localhost:8500
+uv run --directory backend python main.py
 ```
 
 > **What to expect:** a uvicorn line on :8500. One process now serves the UI AND the `/ws`
@@ -136,10 +138,12 @@ backend scales on *streams only*.
 
 ```bash
 cd frontend && npm run build
-firebase deploy --only hosting          # SPA → CDN (or any static host)
+# SPA → CDN (or any static host)
+firebase deploy --only hosting
 
+# WS backend, same flags as A
 gcloud run deploy nova-ws --source . --region us-central1 --allow-unauthenticated \
-  --no-cpu-throttling --timeout 3600 --memory 1Gi   # WS backend, same flags as A
+  --no-cpu-throttling --timeout 3600 --memory 1Gi
 ```
 
 The cost you take on: the SPA now connects **cross-origin** — you own the `wss://` URL config

@@ -24,11 +24,14 @@ Real, runnable code for every beat of the session (deck: *Way Back Home · D2·S
 ## Run it locally
 
 ```bash
-cp .env.example .env          # NVIDIA_API_KEY (agent + rails) · GOOGLE_CLOUD_PROJECT (Vertex/ADC)
+# copy, then edit .env — NVIDIA_API_KEY (agent + rails) · GOOGLE_CLOUD_PROJECT (Vertex/ADC)
+cp .env.example .env
 uv sync
 
-uv run python run_mission.py  # the sentinel ADK agent runs the red-team suite, bare vs guarded
-uv run python verify.py       # the gate — the deterministic boundary must hold
+# ① the sentinel ADK agent runs the red-team suite, bare vs guarded
+uv run python run_mission.py
+# ② the gate — the deterministic boundary must hold
+uv run python verify.py
 ```
 
 `verify.py` needs only `NVIDIA_API_KEY`; it never calls Vertex.

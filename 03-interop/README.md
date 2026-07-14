@@ -18,14 +18,18 @@ Real, runnable code for every beat of the session (deck: *Way Back Home · D1·S
 ## Run it locally
 
 ```bash
-cp .env.example .env          # GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY
+# copy, then edit .env — GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY
+cp .env.example .env
 uv sync
 
-# ① start the remote Architect — its OWN process (its own repo/host in real life):
-uv run python -m architect.main &     # → :8790 · serves /.well-known/agent.json + /a2a (NIM)
+# ① start the remote Architect — its OWN process (its own repo/host in real life)
+#   → :8790 · serves /.well-known/agent.json + /a2a (NIM)
+uv run python -m architect.main &
 
-uv run python run_mission.py          # the dispatcher discovers the Card → delegates → answer
-uv run python verify.py               # the gate (remote=true)
+# ② the dispatcher discovers the Card → delegates → answer
+uv run python run_mission.py
+# ③ the gate (remote=true)
+uv run python verify.py
 # interactive: uv run adk run agent   /   uv run adk web
 ```
 

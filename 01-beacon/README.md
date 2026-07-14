@@ -29,15 +29,18 @@ and ONE of two auth paths:
 
 ```bash
 # Path 1 · Vertex AI (a GCP project with billing):
-gcloud auth application-default login          # ADC — your code authenticates as YOU, no key file
+# ADC — your code authenticates as YOU, no key file
+gcloud auth application-default login
 gcloud services enable aiplatform.googleapis.com
 
 # Path 2 · AI Studio (no GCP project needed): grab a free key at aistudio.google.com/apikey
 ```
 
 ```bash
-cp .env.example .env     # Vertex: set GOOGLE_CLOUD_PROJECT · AI Studio: set GOOGLE_API_KEY
-uv sync                  # creates .venv and installs everything
+# copy, then edit .env — Vertex: set GOOGLE_CLOUD_PROJECT · AI Studio: set GOOGLE_API_KEY
+cp .env.example .env
+# creates .venv and installs everything
+uv sync
 ```
 
 > **What to expect:** `uv sync` prints the resolved package list and exits clean. If a later step
@@ -92,7 +95,8 @@ uv run python forge.py
 **Step 5 — the ADK consistency engine: different scenes, one face (slide ⑤).**
 
 ```bash
-uv run python run_agent.py         # or interactively:  uv run adk run agent  ·  uv run adk web
+# or interactively:  uv run adk run agent  ·  uv run adk web
+uv run python run_agent.py
 ```
 
 > **What to expect:** `outputs/agent_01.png` and `outputs/agent_02.png` — two DIFFERENT scenes,
@@ -159,8 +163,10 @@ want to own — the agent code never changes.
 ### Step 0 — prerequisites (once, ~2 min)
 
 ```bash
-gcloud auth login                                  # you
-gcloud auth application-default login              # your code (ADC — this is how the agent authenticates)
+# you:
+gcloud auth login
+# your code (ADC — this is how the agent authenticates):
+gcloud auth application-default login
 gcloud config set project YOUR_PROJECT_ID
 gcloud services enable run.googleapis.com aiplatform.googleapis.com cloudbuild.googleapis.com
 ```

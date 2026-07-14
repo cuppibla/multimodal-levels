@@ -32,8 +32,10 @@ section below.
 **Step 0 — prerequisites.**
 
 ```bash
-gcloud auth application-default login       # ADC
-cp .env.example .env                        # set GOOGLE_CLOUD_PROJECT (+ location us-central1)
+# ADC:
+gcloud auth application-default login
+# copy the env template, then edit it: set GOOGLE_CLOUD_PROJECT (+ location us-central1)
+cp .env.example .env
 uv sync
 ```
 
@@ -84,7 +86,8 @@ engine once, point any host at it, prove a fresh process still remembers.
 ### Step 1 · PROVISION — create the engine (once, like creating a database)
 
 ```bash
-cp .env.example .env            # GOOGLE_CLOUD_PROJECT + GOOGLE_CLOUD_LOCATION=us-central1
+# copy, then edit .env — GOOGLE_CLOUD_PROJECT + GOOGLE_CLOUD_LOCATION=us-central1
+cp .env.example .env
 uv sync
 uv run python setup_engine.py
 # → prints AGENT_ENGINE_ID=1234567890123456789  → put it in .env

@@ -18,15 +18,19 @@ Real, runnable code for every beat of the session (deck: *Way Back Home · D1·S
 ## Run it locally
 
 ```bash
-cp .env.example .env          # GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY · NEO4J_*
+# copy, then edit .env — GOOGLE_CLOUD_PROJECT (Vertex/ADC) · NVIDIA_API_KEY · NEO4J_*
+cp .env.example .env
 uv sync
 
 # a real Neo4j (or point NEO4J_URI at Aura):
 docker run -d --name neo4j -p 7687:7687 -p 7474:7474 -e NEO4J_AUTH=neo4j/survivornet neo4j:5
 
-uv run python setup_graph.py     # ① seed the survivor network into Neo4j (one-time, idempotent)
-uv run python run_mission.py     # the mission: flat-vector fails → the graph walk finds the medic
-uv run python verify.py          # the deterministic gate
+# ① seed the survivor network into Neo4j (one-time, idempotent)
+uv run python setup_graph.py
+# ② the mission: flat-vector fails → the graph walk finds the medic
+uv run python run_mission.py
+# ③ the deterministic gate
+uv run python verify.py
 # interactive: uv run adk run agent   /   uv run adk web
 ```
 
