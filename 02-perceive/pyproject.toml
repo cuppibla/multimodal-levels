@@ -14,3 +14,10 @@ dependencies = [
     "pillow>=10.0.0",
     "python-dotenv>=1.0.0",
 ]
+
+[project.optional-dependencies]
+# The A2A variant (a2a_crew/ — each analyst as its own service): uv sync --extra a2a
+a2a = [
+    "google-adk[a2a]>=1.18.0",
+    "uvicorn>=0.30.0",
+]

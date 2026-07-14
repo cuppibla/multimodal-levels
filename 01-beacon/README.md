@@ -48,3 +48,165 @@ Outputs land in `outputs/`. Open `naive-1.png` vs `naive-2.png` (drift), then `p
 ## Model IDs move
 
 `gemini-2.5-flash-image` (Nano Banana) sunsets Oct 2026 → set `GEMINI_IMAGE_MODEL=gemini-3.1-flash-image` (speed · 4 refs) or `gemini-3-pro-image` (pro · 5 refs). **Same API, same session, same `response_modalities` — same pattern, new ID.**
+
+---
+
+## 🚀 Ship it — three ways to orbit
+
+> The deep tutorial behind the **⌁ Launch Bay** in the Way Back Home realm. Everything below
+> was run against a real project — copy-paste in order and you'll have this agent deployed.
+
+A single ADK agent has a **ladder of deploy targets**. You pick by how much infrastructure you
+want to own — the agent code never changes.
+
+| Path | One line | Own the containers? | Own the sessions? |
+|---|---|---|---|
+| **A · Cloud Run** | a URL in ~2 minutes, scale-to-zero | no (built for you) | you choose (see A4) |
+| **B · Agent Engine** | the managed agent runtime | no | no — managed |
+| **C · GKE** | your cluster, your rules | yes | you choose |
+
+### Step 0 — prerequisites (once, ~2 min)
+
+```bash
+gcloud auth login                                  # you
+gcloud auth application-default login              # your code (ADC — this is how the agent authenticates)
+gcloud config set project YOUR_PROJECT_ID
+gcloud services enable run.googleapis.com aiplatform.googleapis.com cloudbuild.googleapis.com
+```
+
+> **Concept — ADC, not keys.** Locally, Application Default Credentials come from *your* login.
+> Deployed, they come from the service's **service account**. Same code, zero key files —
+> nothing to leak, nothing to rotate. If you ever write `GOOGLE_API_KEY` into a Dockerfile,
+> stop and use this instead.
+
+### What actually ships
+
+```
+01-beacon/
+├── agent/            ⬆ GOES TO ORBIT — the ADK consistency engine (state + callback)
+│   ├── __init__.py   ⬆
+│   └── agent.py      ⬆
+├── pyproject.toml    ⬆ (dependencies)
+├── generator.py      · stays in the simulator — teaching script
+├── video.py          · stays — Veo demo
+├── verify.py         · stays — local gate
+└── outputs/          · stays — your renders
+```
+
+The unit of deployment is the **agent package**, not the repo. `adk deploy` copies the agent
+folder, wraps it in the ADK API server, and ships that.
+
+### Path A — Cloud Run (start here)
+
+**A1 · Deploy.** From `01-beacon/`:
+
+```bash
+uv run adk deploy cloud_run \
+  --project $(gcloud config get-value project) \
+  --region us-central1 \
+  --service_name beacon-agent \
+  --with_ui \
+  agent
+```
+
+What happens under the hood: your `agent/` folder is copied into a generated container source,
+**Cloud Build** builds the image, **Cloud Run** runs it. First run asks
+`Allow unauthenticated invocations? [y/N]` — say `y` for a shareable demo URL, `N` to keep it
+token-gated (then every request needs `Authorization: Bearer $(gcloud auth print-identity-token)`).
+
+Expected tail of the output:
+
+```
+Service [beacon-agent] revision [beacon-agent-00001-xxx] has been deployed
+and is serving 100 percent of traffic.
+Service URL: https://beacon-agent-XXXXXXXXXX-uc.a.run.app
+```
+
+**A2 · Smoke it.** `--with_ui` gives you the ADK dev UI at the service URL — open it, pick
+`agent`, chat. Or speak HTTP directly (this is the same API the dev UI uses):
+
+```bash
+URL=https://beacon-agent-XXXXXXXXXX-uc.a.run.app
+
+# sessions are explicit resources — create one first:
+curl -X POST $URL/apps/agent/users/survivor/sessions -H "Content-Type: application/json" -d '{}'
+# → {"id":"<SESSION_ID>", ...}
+
+curl -X POST $URL/run_sse -H "Content-Type: application/json" -d '{
+  "app_name":"agent","user_id":"survivor","session_id":"<SESSION_ID>",
+  "new_message":{"role":"user","parts":[{"text":"Register me: a cheerful botanist with round glasses."}]}
+}'
+```
+
+**A3 · Watch it scale to zero.** `gcloud run services describe beacon-agent --region us-central1`
+— with no traffic, instances drop to 0 and you pay nothing. That's the Cloud Run deal.
+
+**A4 · The one gotcha for THIS agent — where does the identity live?** The consistency engine
+locks your explorer's identity in **session state**. Default session storage is **in-memory,
+per instance** — so if Cloud Run scales to 2 instances, or restarts one, a session can land on
+an instance that never met you. Three honest fixes, lightest first:
+
+```bash
+# demo: pin to one instance (state survives requests, not restarts)
+... -- --max-instances 1
+
+# prod: point sessions at a managed backend (Agent Engine) — instances become disposable
+... --session_service_uri agentengine://REASONING_ENGINE_ID
+```
+
+or deploy to Agent Engine (Path B), where managed sessions are the default. **This is the whole
+deployment lesson of this level: stateful agents force you to decide where state lives.**
+
+### Path B — Vertex AI Agent Engine (the managed agent runtime)
+
+One command, no containers, sessions managed for you:
+
+```bash
+uv run adk deploy agent_engine \
+  --project $(gcloud config get-value project) \
+  --region us-central1 \
+  --display_name beacon-agent \
+  agent
+```
+
+Takes **5–10 minutes** (it's building the managed runtime — don't ctrl-C). The output ends with
+a resource name like `projects/…/locations/us-central1/reasoningEngines/1234567890`. Query it
+from any Python (note: there's no gcloud CLI for Agent Engine — the SDK is the interface):
+
+```bash
+uv run python - <<'EOF'
+import vertexai
+client = vertexai.Client(location="us-central1")
+agent = client.agent_engines.get(name="projects/PROJECT_NUMBER/locations/us-central1/reasoningEngines/ENGINE_ID")
+import asyncio
+async def go():
+    async for ev in agent.async_stream_query(message="Register me: a calm geologist.", user_id="survivor"):
+        print(ev)
+asyncio.run(go())
+EOF
+```
+
+Choose B over A when you want **someone else to own sessions, scaling, and the runtime** — the
+consistency engine's state problem from A4 simply disappears.
+
+### Path C — GKE (when the platform is the point)
+
+```bash
+uv run adk deploy gke \
+  --project $(gcloud config get-value project) \
+  --cluster_name YOUR_CLUSTER --region us-central1 \
+  agent
+```
+
+Full Kubernetes control (HPA, node pools, service mesh). Right when your org already lives on
+GKE; overkill for everything else in this repo.
+
+### Troubleshooting
+
+| Symptom | Cause → fix |
+|---|---|
+| `403` calling the service URL | deployed without `--allow-unauthenticated` → send `Authorization: Bearer $(gcloud auth print-identity-token)` |
+| `PERMISSION_DENIED: aiplatform` from the deployed agent | the service account lacks Vertex access → grant `roles/aiplatform.user` to the Cloud Run service account |
+| `429 RESOURCE_EXHAUSTED` on image calls | image gen quota is **2/min** on default Vertex quota — wait a minute; it's the quota, not your code |
+| First request after idle is slow | cold start — `-- --min-instances 1` if it matters |
+| `422 Field required` posting to `/run_sse` | the body needs the `new_message.parts` shape and an existing session — create the session first (A2) |
