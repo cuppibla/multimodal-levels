@@ -43,8 +43,8 @@ cd frontend && npm install && npm run build && cd ..
 **Step 2 — start the backend (SPA + WebSocket bridge, one origin).**
 
 ```bash
-# → http://localhost:8500 (change the number to use a different port)
-PORT=8500 uv run --directory backend python main.py
+# → http://localhost:8500
+uv run --directory backend python main.py --port 8500
 ```
 
 > **What to expect:** a uvicorn line on :8500. One process now serves the UI AND the `/ws`
@@ -69,7 +69,7 @@ Frontend dev loop: `cd frontend && npm run dev` → http://localhost:5510 (proxi
 
 | Symptom | Fix |
 |---|---|
-| nothing on http://localhost:8500 | run Step 2 from `05-live/` — its startup line prints the URL to open. `Address already in use` → rerun with `PORT=8600`. A `frontend/dist` error → do Step 1's build first |
+| nothing on http://localhost:8500 | run Step 2 from `05-live/` — its startup line prints the URL to open. `Address already in use` → rerun with `--port 8600`. A `frontend/dist` error → do Step 1's build first |
 | silence after OPEN LIVE CHANNEL | mic permission denied, or `PERMISSION_DENIED: aiplatform` in the backend log (redo Step 0 auth) |
 | chipmunk / slow-motion voice | a sample-rate got changed — mic path must be 16 kHz, playback 24 kHz |
 | finger badge never lights | camera permission, or the camera preview is black (another app holds it) |

@@ -114,7 +114,13 @@ if DIST.exists():
     app.mount("/", StaticFiles(directory=DIST, html=True), name="spa")
 
 if __name__ == "__main__":
+    import argparse
+
     import uvicorn
 
-    print(f"\n  NOVA live console → http://localhost:{PORT}  (model: {root_agent.model})\n")
-    uvicorn.run(app, host="0.0.0.0", port=PORT)
+    parser = argparse.ArgumentParser(description="NOVA live console (SPA + WS bridge)")
+    parser.add_argument("--port", type=int, default=PORT, help="port to serve on (default: $PORT or 8500)")
+    port = parser.parse_args().port
+
+    print(f"\n  NOVA live console → http://localhost:{port}  (model: {root_agent.model})\n")
+    uvicorn.run(app, host="0.0.0.0", port=port)
