@@ -65,6 +65,12 @@ both ways. These are exactly what you'll re-check after deploying (Ship it, step
 
 Frontend dev loop: `cd frontend && npm run dev` → http://localhost:5510 (proxies `/ws` + `/api` to :8500).
 
+> **🧪 Go deeper — [the exercise ladder](exercises/README.md).** Four hands-on labs against
+> the same model, no browser needed: NOVA in `adk web` (E1), the `LiveRequestQueue`
+> contract vs a raw `google-genai` socket (E2), **why a slow tool kills a live
+> conversation — with 3 measured cures** (E3), and what a live session actually
+> remembers, from reconnect to Memory Bank (E4).
+
 **Troubleshooting:**
 
 | Symptom | Fix |

@@ -13,3 +13,7 @@ dist/
 *.tsbuildinfo
 .DS_Store
 *.log
+
+# exercise scratch output (06-memory)
+_e1_sessions.db
+_dream_store.json

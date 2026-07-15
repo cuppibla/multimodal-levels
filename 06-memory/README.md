@@ -74,6 +74,14 @@ uv run python chat.py session-b
 
 The agent even tells you which store each memory came from — exact facts vs curated patterns. That routing is the whole lesson: **state remembers strings; Memory Bank remembers meaning.**
 
+> **🧪 Go deeper — [the memory ladder](exercises/README.md).** Five hands-on labs, no
+> Agent Engine needed (E1–E4 run on local services): the **amnesia ladder** from a
+> goldfish turn to memory that survives a restart (E1), the four **kinds** of memory —
+> working · episodic · semantic · procedural (E2), **why facts rot in a vector store**,
+> adversarially (E3), compaction + rewind + the cache-isn't-memory twist (E4), and
+> **the dream** — reflective memory with a measured A/B: the agent's first move
+> changes because of a lesson it earned (E5).
+
 ## 🚀 Ship it — the agent is disposable; the memory is infrastructure
 
 > The deep tutorial behind the **⌁ Launch Bay** in the Way Back Home realm. The deployed

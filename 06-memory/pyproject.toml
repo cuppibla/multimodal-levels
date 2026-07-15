@@ -5,7 +5,9 @@ description = "Multimodal Levels · Level 6 (Recall) — real cross-session memo
 requires-python = ">=3.10"
 dependencies = [
     "fastapi>=0.139.0",
-    "google-adk>=1.18.0",
+    "aiosqlite>=0.20.0",        # async sqlite driver for DatabaseSessionService (exercises/e1)
+    "greenlet>=3.0.0",          # sqlalchemy async bridge (needed by the db extra)
+    "google-adk[db]>=1.18.0",   # [db] → DatabaseSessionService (exercises/e1: memory that survives a restart)
     "google-cloud-aiplatform[agent-engines]>=1.133.0",
     "google-genai>=1.0.0",
     "python-dotenv>=1.0.0",
