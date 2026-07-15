@@ -111,12 +111,14 @@ uv run adk web --port 8600
 
 Open **http://localhost:8600**, pick `nova_live`, and:
 
-1. **Press the 📞 call button** (next to the message box) — the live channel
-   (`run_live`) opens and she greets you in voice on her own.
+1. **Press the 📞 call button** (next to the message box), allow the mic, and
+   **say hello — you speak first.** On a fresh session NOVA waits for you, and
+   the backend log stopping at `Trying to connect to live model …` is the
+   *success* state — nothing more is logged until events flow.
    **→ what you learn:** `adk web` is already a complete live frontend — mic
    capture, playback, the WebSocket bridge — before you write any UI.
-2. **Talk.** Interrupt her mid-sentence, then ask her to check `ship_status`
-   and watch the tool fire in your terminal.
+2. **Keep talking.** Interrupt her mid-sentence, then ask her to check
+   `ship_status` and watch the tool fire in your terminal.
    **→ what you learn:** barge-in and server-side tool calls are *protocol
    features* of the live channel, not frontend tricks you have to build.
 3. Open the **Events** tab and inspect what the voice turn left behind —
@@ -131,6 +133,14 @@ Open **http://localhost:8600**, pick `nova_live`, and:
 > while a call is active (verified on ADK 2.4.0). That error is not your setup;
 > it's the gap between the two APIs, and it's exactly the boundary E2 measures.
 > Typed turns against the live API itself work fine — that's `e2_queue_lab.py`.
+
+> 🔇 **Call opens but total silence?** Two causes, no error message for either:
+> **you haven't spoken yet** — on a fresh session she won't go first — or the
+> browser never actually got the mic (check the address-bar mic icon; a muted
+> mic fails silently on both sides). Bonus wrinkle: if the session already
+> holds earlier messages, `run_live` *replays them* into the new connection and
+> she may greet you off those — that's session replay, the same mechanism you'll
+> measure in E4 Act 1.
 
 > The dev UI is doing everything `backend/main.py` does by hand: capturing
 > mic PCM, pushing it into a `LiveRequestQueue`, playing the audio events back.
