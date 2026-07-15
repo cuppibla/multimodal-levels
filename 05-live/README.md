@@ -335,6 +335,13 @@ when a persistent backend takes over. That backend is exactly
 [Level 6](../06-memory)'s one-line swap to `VertexAiMemoryBankService` — which
 also upgrades keyword matching to semantic retrieval and adds LLM curation.
 
+And the cleanest way to keep the two services straight: a **session service is
+a filing cabinet** — it returns *this* conversation, fetched by id, so it can
+continue (that's Act 1). A **memory service is an index** — you explicitly file
+finished conversations into it, and it answers a *query* across all of them
+(that's Act 4). Same pluggable-service pattern on the `Runner`; completely
+different question answered.
+
 *`exercises/_labkit.py` is shared lab hygiene (env loading + silencing known-cosmetic
 teardown noise when a script breaks out of `run_live` mid-stream). It's not part of
 any lesson. Generated files are scratch output — safe to delete.*
