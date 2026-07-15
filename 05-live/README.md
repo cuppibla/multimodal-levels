@@ -326,10 +326,14 @@ Follow the four acts in the output:
 The ladder, bottom to top: **socket** (E2b — dies with the connection) →
 **session** (survives reconnect) → **persistent session service**
 (`DatabaseSessionService` / `VertexAiSessionService` — survives restart) →
-**memory service** (survives everything, searchable across sessions). Act 4
-uses `InMemoryMemoryService` so the lab runs free and offline-ish; in
-production you swap that one line for `VertexAiMemoryBankService` — which is
-exactly [Level 6](../06-memory), where NOVA gets her real Memory Bank.
+**memory service** (searchable **across sessions** — that's the top rung's
+superpower). One precision worth being pedantic about: what the memory *layer*
+survives is a property of its **backend**, not the interface. Act 4's
+`InMemoryMemoryService` still dies with the process (it's an in-process dict —
+same death as Act 3's session service); it earns "survives everything" only
+when a persistent backend takes over. That backend is exactly
+[Level 6](../06-memory)'s one-line swap to `VertexAiMemoryBankService` — which
+also upgrades keyword matching to semantic retrieval and adds LLM curation.
 
 *`exercises/_labkit.py` is shared lab hygiene (env loading + silencing known-cosmetic
 teardown noise when a script breaks out of `run_live` mid-stream). It's not part of

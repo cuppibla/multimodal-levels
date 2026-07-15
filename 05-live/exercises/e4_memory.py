@@ -152,8 +152,10 @@ async def main() -> None:
 
     print("\nThe ladder you just climbed:")
     print("  socket (E2b: dies with connection) → session (survives reconnect) →")
-    print("  persistent session service (survives restart) → memory service (survives EVERYTHING,")
-    print("  searchable across sessions). Level 6 swaps in Memory Bank and NOVA finally remembers you.\n")
+    print("  persistent session service (survives restart) → memory service (searchable ACROSS")
+    print("  sessions — the top rung's superpower). Honesty note: this lab's InMemoryMemoryService")
+    print("  still dies with the process; 'survives everything' arrives when a persistent backend")
+    print("  takes over. Level 6 swaps in Memory Bank and NOVA finally remembers you.\n")
 
 
 if __name__ == "__main__":
