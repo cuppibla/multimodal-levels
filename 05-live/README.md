@@ -29,10 +29,10 @@ Part 1 of the tutorial; Part 2 (deploying it, three ways) is the **🚀 Ship it*
 **Step 0 — prerequisites.** A GCP project with billing + ADC
 (`gcloud auth application-default login`), Vertex AI API enabled, Node 20+, and a mic + camera.
 
-**Step 1 — install and build the SPA (one-time).**
+**Step 1 — install and build the SPA (one-time).** Copy the env template, then
+edit `.env` and set `GOOGLE_CLOUD_PROJECT`:
 
 ```bash
-# copy the env template, then edit it: set GOOGLE_CLOUD_PROJECT
 cp .env.example .env
 uv sync
 cd frontend && npm install && npm run build && cd ..
@@ -43,7 +43,6 @@ cd frontend && npm install && npm run build && cd ..
 **Step 2 — start the backend (SPA + WebSocket bridge, one origin).**
 
 ```bash
-# → http://localhost:8500
 uv run --directory backend python main.py --port 8500
 ```
 
@@ -89,11 +88,17 @@ terminal.
 | **E3** | `exercises/e3_stall_clinic.py` | why a slow tool **kills the conversation** — and 3 cures, measured | ~10 min |
 | **E4** | `exercises/e4_memory.py` | what a live session **remembers** — socket → session → restart → long-term | ~10 min |
 
-Setup is the same as Run-it-locally (`.env` with your project, `uv sync`). Then:
+Setup is the same as Run-it-locally (`.env` with your project, `uv sync`).
+Every exercise runs from the level root the same way, e.g.:
 
 ```bash
-uv run python exercises/e2_queue_lab.py      # any exercise, from the level root
+uv run python exercises/e2_queue_lab.py
 ```
+
+> ✂️ All command blocks in this README are comment-free on purpose — pasting
+> `# comments` into a default interactive zsh throws
+> `export: not valid in this context` / `unknown file attribute` errors.
+> (If you want paste-able comments in your own shell: `setopt interactive_comments`.)
 
 ### E1 — NOVA in the ADK dev UI (`adk web`)
 
@@ -148,11 +153,15 @@ Open **http://localhost:8600**, pick `nova_live`, and:
 
 ### E2 — the queue contract (ADK) vs a bare socket (raw SDK)
 
-**E2a** (`e2_queue_lab.py`): two typed turns through `LiveRequestQueue`, every
-event timestamped — headless, so the shape of a live turn is finally visible.
+**E2a** (`e2_queue_lab.py`) answers one question: **with no browser and no mic
+in the way, what IS a live conversation, in code?** Not memory, not tools —
+just the wire contract: what your app pushes *up* (the queue's three verbs) and
+what rains back *down* (the event stream). Two typed turns, every event
+timestamped. It's the dress rehearsal for reading `backend/main.py` — the real
+app is these same twenty lines with a mic bolted on.
 
 ```bash
-uv run python exercises/e2_queue_lab.py      # from the 05-live/ root
+uv run python exercises/e2_queue_lab.py
 ```
 
 1. **Watch the first turn stream in.** After `⌨️ send_content`, words trickle in
@@ -180,8 +189,11 @@ uv run python exercises/e2_queue_lab.py      # from the 05-live/ root
 > `═══ channel closed · total voice audio received: N bytes ═══` and a
 > four-line "what you just proved" recap.
 
-**E2b** (`e2_raw_sdk.py`): the same conversation on `client.aio.live.connect()`
-— the raw API that ADK wraps.
+**E2b** (`e2_raw_sdk.py`) answers the follow-up: **if ADK disappeared, what
+would you be holding?** A socket. Same conversation, on
+`client.aio.live.connect()` — the raw API that ADK wraps. (The name-forgetting
+demo here is *not* the memory lesson — that's E4's job — it's the evidence for
+how little the bare socket does for you.)
 
 ```bash
 uv run python exercises/e2_raw_sdk.py
@@ -220,9 +232,11 @@ Measured on `gemini-live-2.5-flash-native-audio` (your numbers will wobble ±1 s
 | **C** · callback bypass | 0.05 s | **0.6 s** | `before_tool_callback` returns an instant ack → she speaks NOW; real work finishes in the background and the result is **injected via `queue.send_content`** |
 | **D** · streaming tool | 0.05 s | **0.6 s** | the ADK-native cure: an async **generator** that `yield`s progress; she narrates *during* the scan (experimental, live-only) |
 
+Run all four back-to-back (~2 min), or a single one with `--variant`:
+
 ```bash
-uv run python exercises/e3_stall_clinic.py              # all four (~2 min)
-uv run python exercises/e3_stall_clinic.py --variant c  # just the bypass
+uv run python exercises/e3_stall_clinic.py
+uv run python exercises/e3_stall_clinic.py --variant c
 ```
 
 Read each variant's log the same way — the stall always starts at
@@ -304,6 +318,10 @@ Follow the four acts in the output:
    **→ what you learn:** long-term memory is a **separate layer above
    sessions** — you file finished conversations into a memory service, and the
    model *searches* them mid-turn with the `load_memory` tool.
+   ⚠️ **This is NOT Memory Bank yet** — the lab deliberately uses
+   `InMemoryMemoryService` so it runs free and offline-ish. The *architecture*
+   (file → search → recall) is identical; [Level 6](../06-memory) swaps that
+   one line for `VertexAiMemoryBankService` and NOVA gets her real Memory Bank.
 
 The ladder, bottom to top: **socket** (E2b — dies with the connection) →
 **session** (survives reconnect) → **persistent session service**
@@ -380,12 +398,12 @@ memory. Scale out with `--max-instances`, not up.
 Right when real product traffic arrives: static assets are cheap and global on a CDN; the
 backend scales on *streams only*.
 
+Build, ship the SPA to a CDN (or any static host), then deploy the WS backend
+with the same flags as Path A:
+
 ```bash
 cd frontend && npm run build
-# SPA → CDN (or any static host)
 firebase deploy --only hosting
-
-# WS backend, same flags as A
 gcloud run deploy nova-ws --source . --region us-central1 --allow-unauthenticated \
   --no-cpu-throttling --timeout 3600 --memory 1Gi
 ```
