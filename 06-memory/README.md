@@ -29,12 +29,11 @@ Real ADK + **Vertex AI Agent Engine** integration — no mocks. One Agent Engine
 Part 1 of the tutorial; Part 2 (deploying with memory, both hosts) is the **🚀 Ship it**
 section below.
 
-**Step 0 — prerequisites.**
+**Step 0 — prerequisites.** ADC login, then copy the env template and edit it:
+set `GOOGLE_CLOUD_PROJECT` (+ location `us-central1`):
 
 ```bash
-# ADC:
 gcloud auth application-default login
-# copy the env template, then edit it: set GOOGLE_CLOUD_PROJECT (+ location us-central1)
 cp .env.example .env
 uv sync
 ```
@@ -94,10 +93,16 @@ Then the finale on the REAL managed stack: [`chat.py`](chat.py) `session-a` /
 `session-b` (the Run-it-locally steps above) — Memory Bank + durable `user:` state
 on a live Agent Engine.
 
+`uv sync` already includes the `[db]` extra E1 needs. Every exercise runs from
+the level root the same way, e.g.:
+
 ```bash
-uv sync                                   # includes the [db] extra for E1
 uv run python exercises/e1_amnesia_ladder.py
 ```
+
+> ✂️ Command blocks in this README are comment-free on purpose — pasting
+> `# comments` into a default interactive zsh throws
+> `export: not valid in this context` / `unknown file attribute` errors.
 
 ### E1 — the amnesia ladder
 
@@ -119,17 +124,37 @@ check-in tool writes **two facts on purpose**: `last_topic` (no prefix) and
 
 ### E2 — four kinds of knowing
 
-The CoALA taxonomy with a probe per kind, one rescue-ops conversation:
+**The question it answers: when someone says "the agent should remember", WHICH
+of the four kinds do they mean?** One rescue-ops conversation, then four probes —
+each answerable only by the right kind of memory (the CoALA taxonomy, runnable).
 
-- **working** — "what error code did I just mention?" → answered from
-  `Session.events`, no store, no search. Working memory IS the context window.
-- **episodic** — new session: "what happened with the recycler last time?" →
-  `add_session_to_memory` + `load_memory` recall the *experience*.
-- **semantic** — "how do I like to be briefed?" → a distilled *fact*
-  ("one step at a time"), independent of when it was learned.
-- **procedural** — static half: the instruction + tools you gave it. Learned
-  half: a lesson injected into `{user:lesson?}` → *"Check the intake filter
-  first. It is part of a learned procedure."* Where lessons come from is E5.
+```bash
+uv run python exercises/e2_four_kinds.py
+```
+
+1. **Session A plants the experience** (error 42, fixed by a filter swap,
+   "brief me one step at a time") — then **probe 1 · working**: *"what error
+   code did I mention a moment ago?"* Answered with no store and no search.
+   **→ what you learn:** working memory IS the context window — `Session.events`
+   + state, re-rendered into the prompt every turn. Nothing was "remembered";
+   it's simply still in view.
+2. **Watch `💾 add_session_to_memory(A)`, then probe 2 · episodic** — a NEW
+   session asks *"what happened with the recycler last time?"* and the agent
+   calls `load_memory` and retells the event.
+   **→ what you learn:** episodic memory is a **specific past experience**,
+   reachable from a session with zero copied history — end-of-call filing plus
+   mid-call search, the same two moves as Level 5's E4.
+3. **Probe 3 · semantic** — *"how do I like to be briefed?"* Same store, but
+   what comes back is the distilled fact ("one step at a time"), not the scene.
+   **→ what you learn:** the store is one; the *kind* of knowing is in what you
+   ask back. A fact outlives the episode it was learned in.
+4. **Probe 4 · procedural** — session C is created with
+   `state={"user:lesson": "check the intake filter BEFORE the pump"}`, the
+   instruction template `{user:lesson?}` injects it, and she follows the route
+   without re-deriving it.
+   **→ what you learn:** procedural memory = instruction + tools (the static
+   half) plus **learned lessons injected as state** (the earned half). Where
+   lessons come from is E5's whole plot.
 
 > Honesty note: locally, episodic + semantic share one `InMemoryMemoryService` —
 > they differ by what you ask back. **Memory Bank actually consolidates**:
@@ -137,62 +162,107 @@ The CoALA taxonomy with a probe per kind, one rescue-ops conversation:
 
 ### E3 — "you don't want close-ish"
 
-Same mission facts into both kinds of store, then two adversarial questions:
+**The question it answers: SQL or vectors?** Adversarially, in both directions,
+with the same mission facts in both kinds of store.
 
-**Direction 1 — facts rot in a semantic store.** Day 1: "supplies: 3 days".
-Day 2: "supplies: 1 day". `search_memory("how many days of supplies?")` returns
-**BOTH** — there is no *update* in a similarity store, only more entries.
-Meanwhile `user:supplies_days` was overwritten in place: exactly `'1'`.
-A balance, a date, an inventory count must never be a guess.
+```bash
+uv run python exercises/e3_not_a_vector_store.py
+```
 
-**Direction 2 — understanding never surfaces from an exact lookup.** *"Will she
-stay calm under pressure?"* matches **no key** in the profile — but semantic
-search finds *"pressure situations make her freeze"* from a log that never
-contained the word "calm".
-
-**The rule this earns:** exact & updatable → structured (`user:` state / SQL) ·
-fuzzy & accumulated → semantic (Memory Bank) · raw perception → neither
-(extract the meaning, store the file as an **Artifact**). Production agents run
-**both, routed by shape**.
+1. **Setup — the same life, recorded twice.** Two day-logs go onto the semantic
+   shelf (append-only); the exact profile gets `user:supplies_days` overwritten
+   in place, 3 → 1.
+   **→ what you learn:** the two stores make **opposite promises** the moment
+   data changes — one accumulates versions, one keeps exactly the current value.
+2. **Direction 1 — ask both: "how many days of supplies?"** The semantic store
+   returns **BOTH** logs; the profile returns exactly `'1'`. Then the
+   quartermaster agent — given only the semantic store — is forced to answer
+   "one number": read its answer against the two logs it saw.
+   **→ what you learn:** there is no *update* in a similarity store, only more
+   entries — whatever the model answers is an **arbitration, not a lookup**. A
+   balance, a date, an inventory count must never work this way.
+3. **Direction 2 — ask both: "will she stay calm under pressure?"** The profile
+   lookup prints `NO KEY MATCHES`; semantic search finds *"pressure situations
+   make her freeze"* from a log that never contained the word "calm".
+   **→ what you learn:** a key/value profile answers only the questions you
+   predicted when you designed the schema. Understanding surfaces by
+   **similarity** — you can't schema your way to it.
+4. **Read the verdict block** — the rule this lab earns: exact & updatable →
+   structured (`user:` state / SQL) · fuzzy & accumulated → semantic (Memory
+   Bank) · raw perception → neither (extract the meaning, store the file as an
+   **Artifact**).
+   **→ what you learn:** it's never SQL *or* vectors — production agents run
+   **both, routed by the shape of the data**.
 
 ### E4 — working memory (take-home)
 
-The opposite problem: a long chat poisons its own context window.
+**The question it answers: what do you do when the problem isn't forgetting —
+it's that a long chat poisons its own context window?** Three parts, one run.
 
-- **Compaction** — `EventsCompactionConfig(compaction_interval=3, overlap_size=1)`
-  on the `App`: after 6 turns of shift chatter the verified session held 14 raw
-  events **+ 2 compaction events** whose summaries now stand in for the folded
-  spans. The log keeps everything; the model's working memory gets the summary.
-- **Rewind** — `runner.rewind_async(rewind_before_invocation_id=…)`: set course
-  for Alpha → "scrap that, through the debris field" → rewind → *"We are
-  currently headed for waypoint Alpha."* Not edited — **unhappened** (state
-  deltas roll back too).
-- **Cache** — `ContextCacheConfig`, named honestly: *not memory*. Memory asks
-  "what do I remember?"; cache asks "what can I **afford** to keep in mind?"
+```bash
+uv run python exercises/e4_working_memory.py
+```
+
+1. **Part 1 · compaction.** Six turns of shift chatter, then read the count line:
+   the verified session held 14 raw events **+ 2 compaction events**, and the
+   printed `🗜` summary now stands in for the folded span
+   (`EventsCompactionConfig(compaction_interval=3, overlap_size=1)` on the `App`).
+   **→ what you learn:** the session log is an **audit trail** — it keeps every
+   raw event; only the model's *working* view gets the summary. Compaction
+   spends one summary to buy back a window.
+2. **Part 2 · rewind.** Set course for Alpha → "scrap that, through the debris
+   field" → `runner.rewind_async(rewind_before_invocation_id=…)` → ask again:
+   *"We are currently headed for waypoint Alpha."*
+   **→ what you learn:** the bad turn isn't edited, it's **unhappened** — state
+   deltas from the rewound turns roll back too. That's the difference between
+   an unsend button and a cover-up.
+3. **Part 3 · cache.** Nothing to observe at lab scale — on purpose.
+   **→ what you learn:** `ContextCacheConfig` is the rung that is **not
+   memory**: memory asks "what do I remember?"; cache asks "what can I
+   **afford** to keep in mind without re-paying every turn?" In a live voice
+   loop (Level 5) it's what makes a resident persona + catalog affordable.
+
+The closing line is the level's thesis in one sentence: **the window is a
+budget, not a landfill** — fold the old, unhappen the bad, afford the big.
 
 ### E5 — the dream ⭐
 
-The blog architecture (*"Anthropic gave agents Dreams — build your own on
-Google Cloud"*), local and end-to-end. Verified run:
+**The question it answers: can an agent get *better at its job* — not just
+remember its users?** The blog architecture (*"Anthropic gave agents Dreams —
+build your own on Google Cloud"*), local and end-to-end.
 
-1. **Earn it** — ticket #1 ("airlock panel won't respond") resolved the hard
-   way: `reboot_interface` (manual's first-line fix, fails) →
-   `check_power_coupling` (root cause). The harness records a **trajectory** —
-   actions + **outcome** + root cause — into `_dream_store.json`, `processed: false`.
-2. **The dream** — an offline pass (in production: a **Cloud Run Job** on
-   Cloud Scheduler) asks Gemini for ONE reusable lesson: *"For unresponsive
-   electronic systems, first check power coupling before attempting software
-   reboots…"* — embedded (`gemini-embedding-001`, 3072 dims), stored with scope
-   + source, trajectory marked processed.
-3. **Wake up** — ticket #2 ("cargo-bay door controls frozen", different words,
-   same shape) recalls the lesson by cosine similarity (0.64) and A/Bs it:
+```bash
+uv run python exercises/e5_the_dream.py
+```
+
+1. **Act 1 · earn it.** Ticket #1 ("airlock panel won't respond") is resolved
+   the hard way: `reboot_interface` (the manual's first-line fix — fails) →
+   `check_power_coupling` (root cause). Watch what the harness records: a
+   **trajectory** — actions + outcome + root cause — into `_dream_store.json`
+   with `processed: false`.
+   **→ what you learn:** agents don't learn from transcripts; they learn from
+   **outcome-stamped action sequences**. The store isn't a diary — it's the
+   dream job's work queue.
+2. **Act 2 · the dream.** An offline pass finds the unprocessed trajectory and
+   asks Gemini for ONE reusable lesson (*"for unresponsive electronic systems,
+   check the power coupling before attempting software reboots"*), embeds it
+   (`gemini-embedding-001`, 3072 dims), stores it with scope + source, and marks
+   the trajectory processed.
+   **→ what you learn:** reflection is a **batch job, not a chat feature** — no
+   user is waiting while the agent thinks about its life. In production this
+   pass is a Cloud Run Job on Cloud Scheduler.
+3. **Act 3 · wake up.** Ticket #2 ("cargo-bay door controls frozen") — different
+   words, same *shape* — recalls the lesson by cosine similarity (≈0.64) and
+   A/Bs it, and the receipt table prints:
 
    | | first move | tool calls |
    |---|---|---|
    | A · no lesson | `reboot_interface` | 2 |
    | B · with lesson | `check_power_coupling` | **1** |
 
-   Same model, same tools. **It didn't learn the answer — it learned the route.**
+   **→ what you learn:** same model, same tools, measurably better first move.
+   **It didn't learn the answer — it learned the route.** And the recall was by
+   meaning: ticket #2 never mentions airlocks or panels.
 
 Swap the JSON file for **Firestore** (structured docs + native vector search),
 schedule the dream, and merge USER facts (Memory Bank) + JOB lessons in one
@@ -213,12 +283,13 @@ engine once, point any host at it, prove a fresh process still remembers.
 
 ### Step 1 · PROVISION — create the engine (once, like creating a database)
 
+Copy then edit `.env` (`GOOGLE_CLOUD_PROJECT` + `GOOGLE_CLOUD_LOCATION=us-central1`),
+then provision — it prints `AGENT_ENGINE_ID=…` → put that in `.env` too:
+
 ```bash
-# copy, then edit .env — GOOGLE_CLOUD_PROJECT + GOOGLE_CLOUD_LOCATION=us-central1
 cp .env.example .env
 uv sync
 uv run python setup_engine.py
-# → prints AGENT_ENGINE_ID=1234567890123456789  → put it in .env
 ```
 
 This is *infrastructure provisioning*, not deployment — the engine holds both stores
@@ -235,6 +306,9 @@ reach it**. No key files — ADC everywhere.
 ([`server.py`](server.py): `/chat` + the explicit `/end` flush), the [`Dockerfile`](Dockerfile)
 ships agent + server:
 
+The service authenticates as its service account, so the last two lines grant it
+Vertex access:
+
 ```bash
 PROJECT=$(gcloud config get-value project)
 
@@ -242,7 +316,6 @@ gcloud run deploy memory-agent \
   --source . --region us-central1 --allow-unauthenticated \
   --set-env-vars GOOGLE_CLOUD_PROJECT=$PROJECT,GOOGLE_CLOUD_LOCATION=us-central1,AGENT_ENGINE_ID=YOUR_ENGINE_ID
 
-# the service authenticates as its service account — give it Vertex access:
 SA=$(gcloud run services describe memory-agent --region us-central1 --format 'value(spec.template.spec.serviceAccountName)')
 gcloud projects add-iam-policy-binding $PROJECT --member serviceAccount:$SA --role roles/aiplatform.user
 ```
@@ -271,11 +344,13 @@ told your laptop. Memory ≠ process, demonstrated in one breath.
 
 ### Step 3 · PROVE — the deterministic receipt
 
+The reply recalls the exact facts (`user:` state) AND the curated patterns
+(Memory Bank):
+
 ```bash
 curl -X POST https://memory-agent-680476413759.us-central1.run.app/chat \
   -H "Content-Type: application/json" \
   -d '{"user_id":"vega-7","text":"What do you remember about me?"}'
-# → recalls the exact facts (user: state) AND the curated patterns (Memory Bank)
 ```
 
 `POST /end {user_id, session_id}` flushes a finished session to the bank (WRITE = curation:
