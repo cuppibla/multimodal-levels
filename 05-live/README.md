@@ -101,19 +101,36 @@ Before you build a single line of frontend, ADK will hand you one. The folder
 `exercises/e1_adk_web/nova_live/` is a complete live agent — the same NOVA persona and
 `report_digit` tool as the main app.
 
+The `SSL_CERT_FILE` export is required for voice/video in the dev UI:
+
 ```bash
 cd exercises/e1_adk_web
-export SSL_CERT_FILE=$(uv run python -m certifi)   # required for voice/video in the dev UI
+export SSL_CERT_FILE=$(uv run python -m certifi)
 uv run adk web --port 8600
 ```
 
 Open **http://localhost:8600**, pick `nova_live`, and:
 
-1. **Type** to her first — normal turn-taking, watch the Events tab.
-2. Press the **mic** — now you're on `run_live`: talk over her mid-sentence
-   (barge-in), ask her to check `ship_status`, watch the tool fire server-side.
-3. Open the **Events** tab and find what a voice turn leaves behind — you'll
-   meet those same events headless in E2.
+1. **Press the 📞 call button** (next to the message box) — the live channel
+   (`run_live`) opens and she greets you in voice on her own.
+   **→ what you learn:** `adk web` is already a complete live frontend — mic
+   capture, playback, the WebSocket bridge — before you write any UI.
+2. **Talk.** Interrupt her mid-sentence, then ask her to check `ship_status`
+   and watch the tool fire in your terminal.
+   **→ what you learn:** barge-in and server-side tool calls are *protocol
+   features* of the live channel, not frontend tricks you have to build.
+3. Open the **Events** tab and inspect what the voice turn left behind —
+   transcriptions, tool calls, `turn_complete`.
+   **→ what you learn:** a voice conversation is made of ordinary, inspectable
+   ADK events — the same ones you'll read headless in E2.
+
+> ⚠️ **Don't type — call.** The chat box sends typed messages through
+> `generateContent`, and `gemini-live-2.5-flash-native-audio` is a
+> **live-only** model, so typing gets
+> `400 INVALID_ARGUMENT … not supported in the generateContent API` — even
+> while a call is active (verified on ADK 2.4.0). That error is not your setup;
+> it's the gap between the two APIs, and it's exactly the boundary E2 measures.
+> Typed turns against the live API itself work fine — that's `e2_queue_lab.py`.
 
 > The dev UI is doing everything `backend/main.py` does by hand: capturing
 > mic PCM, pushing it into a `LiveRequestQueue`, playing the audio events back.
@@ -121,16 +138,58 @@ Open **http://localhost:8600**, pick `nova_live`, and:
 
 ### E2 — the queue contract (ADK) vs a bare socket (raw SDK)
 
-**E2a** (`e2_queue_lab.py`): two typed turns through `LiveRequestQueue`,
-every event timestamped. Watch the three verbs — `send_content` (discrete
-turns), `send_realtime` (what the mic would use), `close()` — and watch words
-arrive as *transcription events* while the voice arrives as *PCM bytes*.
+**E2a** (`e2_queue_lab.py`): two typed turns through `LiveRequestQueue`, every
+event timestamped — headless, so the shape of a live turn is finally visible.
+
+```bash
+uv run python exercises/e2_queue_lab.py      # from the 05-live/ root
+```
+
+1. **Watch the first turn stream in.** After `⌨️ send_content`, words trickle in
+   as `🗣 transcript (partial)` lines while an audio byte-counter climbs.
+   **→ what you learn:** a live reply is not a response object — it's **two
+   parallel streams**: the words arrive as transcription events, the voice
+   arrives separately as PCM bytes, and your app reads both as they flow.
+2. **Find `✔ turn_complete`.** Only when that event lands does the lab push
+   turn 2 into the queue.
+   **→ what you learn:** turn-taking on a live channel is **event-driven** —
+   "the model is done" is an event you react to, not a return value you await.
+3. **Read the closing banner.** Total PCM ÷ 48,000 ≈ seconds of NOVA's voice
+   you never played.
+   **→ what you learn:** the audio flowed whether or not anyone played it —
+   playback is the *frontend's* job, and that's most of what this level's
+   browser app adds on top of this script.
+4. **Recap the upstream side.** Everything the lab ever "said" to her used just
+   three verbs: `send_content` (discrete typed turns) · `send_realtime` (what a
+   mic would use) · `close()`.
+   **→ what you learn:** the entire upstream API surface of a live agent is
+   **three verbs** — everything the browser app does later maps onto them.
+
+> **What to expect:** `═══ live channel open ═══`, a dozen-ish timestamped
+> events across two turns, then
+> `═══ channel closed · total voice audio received: N bytes ═══` and a
+> four-line "what you just proved" recap.
 
 **E2b** (`e2_raw_sdk.py`): the same conversation on `client.aio.live.connect()`
-— the raw API that ADK wraps. Act 1: the socket remembers your name. Act 2:
-reconnect, and it never met you. **A raw live socket's memory IS the
-connection.** Everything else — session history, tool execution, resumption —
-is yours to build. (Or ADK's. That's the sales pitch, measured.)
+— the raw API that ADK wraps.
+
+```bash
+uv run python exercises/e2_raw_sdk.py
+```
+
+1. **Act 1 — one socket, two turns.** The script tells her a name, then asks it
+   back: ✅ she knows.
+   **→ what you learn:** a raw socket *does* have memory — its context window —
+   for exactly as long as the connection stays open.
+2. **Act 2 — reconnect, ask again.** A fresh `connect()` and she's never met
+   you: ❌.
+   **→ what you learn:** **a raw live socket's memory IS the connection.**
+   Nothing persisted it; with the bare SDK there is no session to come back to.
+3. **Read the recap — the jobs you just inherited:** session history, tool
+   execution, reconnect/resumption, callbacks, multi-agent routing.
+   **→ what you learn:** this is precisely what ADK's `Runner` +
+   `LiveRequestQueue` (E2a) wrap around this same socket. That's the sales
+   pitch, measured — and how NOVA survives a reconnect is E4's whole plot.
 
 ### E3 — the stall clinic ⭐
 
@@ -155,6 +214,35 @@ Measured on `gemini-live-2.5-flash-native-audio` (your numbers will wobble ±1 s
 uv run python exercises/e3_stall_clinic.py              # all four (~2 min)
 uv run python exercises/e3_stall_clinic.py --variant c  # just the bypass
 ```
+
+Read each variant's log the same way — the stall always starts at
+`⚙️ model calls scan_asteroid_field(…)`:
+
+1. **Variant A** — after the `⚙️` line, *nothing* moves for ~6 s. Not dramatic
+   pacing: the process is frozen.
+   **→ what you learn:** a plain `def` tool blocks the **whole asyncio loop** —
+   mic relay, keepalive and barge-in are dead, not just quiet. The user hears
+   a crashed app.
+2. **Variant B** — timestamps keep ticking, but no `🗣` until the tool returns.
+   **→ what you learn:** **`async` fixes the loop, not the conversation** — the
+   model still waits for the result before speaking. Dead air with a perfectly
+   healthy event loop. If you remember one row, remember this one.
+3. **Variant C** — `📦 tool → model` fires almost instantly (the callback's
+   "scan started" ack) and she speaks NOW; the real result lands seconds later
+   via `queue.send_content`.
+   **→ what you learn:** the production cure — **answer the model immediately,
+   inject the slow result as a later event**. The queue isn't just for mic
+   audio; it's your injection port into a running conversation.
+4. **Variant D** — `🗣` lines interleave with the scan: she narrates *while*
+   the tool is still yielding.
+   **→ what you learn:** a **streaming tool** (async generator) lets the model
+   talk during the work — the ADK-native cure, live-only and experimental.
+5. **Finish at the `═══ clinic results ═══` table** — two clocks per variant,
+   against the reference numbers above (±1 s is normal).
+   **→ what you learn:** always measure **both clocks** — loop-freeze tells you
+   whether your *app* froze; dead-air tells you what the *user* actually felt.
+   B's row (loop 0 s, dead-air 6 s) is why "we made it async" doesn't close
+   the bug.
 
 Two lessons we learned building this, left in on purpose:
 
@@ -182,6 +270,30 @@ Same question — *"NOVA, what's my name?"* — after four kinds of break:
 ```bash
 uv run python exercises/e4_memory.py
 ```
+
+Follow the four acts in the output:
+
+1. **Act 1 — hang up, call back.** Same session id, brand-new connection:
+   ✅ she still knows your name.
+   **→ what you learn:** with ADK, memory moves up a rung — `run_live` replays
+   the session's events into the new socket, so memory belongs to the
+   **session**, not the connection. This is exactly what E2b's raw socket
+   could NOT do.
+2. **Act 2 — dump the session.** The lab prints what actually persisted: the
+   *words* survived, the PCM audio didn't.
+   **→ what you learn:** persistence is a **choice, not a given** —
+   transcriptions and tool calls become events by default; keeping the audio
+   itself is an opt-in (`RunConfig(save_live_audio=True)`).
+3. **Act 3 — restart the process.** A second `InMemorySessionService` stands in
+   for a crashed server: ❌ amnesia.
+   **→ what you learn:** *InMemory* means in memory — sessions die with the
+   process. Surviving a restart needs a **persistent session service**
+   (`DatabaseSessionService` / `VertexAiSessionService`).
+4. **Act 4 — end of call → memory → recall.** `💾 add_session_to_memory` files
+   the finished call; on the next call, ✅ she finds you.
+   **→ what you learn:** long-term memory is a **separate layer above
+   sessions** — you file finished conversations into a memory service, and the
+   model *searches* them mid-turn with the `load_memory` tool.
 
 The ladder, bottom to top: **socket** (E2b — dies with the connection) →
 **session** (survives reconnect) → **persistent session service**
